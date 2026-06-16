@@ -602,9 +602,29 @@ function renderMindmap(){
   items.forEach((it,i)=>{ const angle=(Math.PI*2*i/items.length)-Math.PI/2; const x=cx+Math.cos(angle)*radius; const y=cy+Math.sin(angle)*radius; nodes.push(`<button class="node ${it.type}" style="left:${x}%;top:${y}%" type="button" data-mind="${esc(it.label)}">${esc(it.label)}</button>`); });
   map.innerHTML=nodes.join(''); $('#mindBack').disabled=mindLevel===0; $('#mindTitle').textContent = mindLevel===0 ? '전체 키워드' : mindPath.join(' › ');
 }
-function simulateRun(){
+async function simulateRun(){
+  const kw = getFinalQuery();
+  if(!kw){ showToast('먼저 새 리서치 만들기에서 키워드를 선택해주세요.'); return; }
+
+  const btn = $('#simulateRun');
+  btn.disabled = true; btn.innerHTML = '실행 중...';
   let pct=0; $('#runStatus').textContent='n8n 워크플로우 실행 중...'; $('#runProgress').style.width='0%';
-  const timer=setInterval(()=>{ pct+=20; $('#runProgress').style.width=pct+'%'; if(pct>=100){clearInterval(timer); $('#runStatus').textContent='완료: 검색 결과 10건 수집, 본문 8건 추출 성공';} },350);
+  const timer=setInterval(()=>{ if(pct<85){ pct+=15; $('#runProgress').style.width=pct+'%'; } },300);
+
+  saveSearchHistory(kw);
+  await generateResultsFor(kw);
+
+  clearInterval(timer);
+  $('#runProgress').style.width='100%';
+  const successCount = resultDocs.filter(d=>d.status==='success').length;
+  $('#runStatus').textContent = successCount>0
+    ? `완료: 검색 결과 ${resultDocs.length}건 수집, 본문 ${successCount}건 추출 성공`
+    : '완료: 결과를 가져오지 못했습니다. n8n 연동 상태를 확인해주세요.';
+
+  btn.disabled = false; btn.innerHTML = '워크플로우 실행';
+
+  showToast('리서치 결과 페이지로 이동합니다.');
+  setTimeout(()=>{ showPage('results'); renderResults(kw); }, 600);
 }
 function initSubscribeCats(){ $('#subscribeCats').innerHTML=[...new Set(DATA.core.map(r=>r.d1))].map((d1,i)=>`<label class="chip"><input type="checkbox" ${i<3?'checked':''} /> ${esc(d1)}</label>`).join(''); }
 
