@@ -664,29 +664,52 @@ function renderDashboard(){
 }
 
 // ══════════════════════════════════════════
-// 리서치 결과 (검색 키워드 기반 동적 생성)
+// 리서치 결과 (n8n/Tavily 실제 검색 연동)
 // ══════════════════════════════════════════
 let resultDocs = [];
 let currentResultKw = '';
-const RESULT_SOURCES = ['example.co.kr','example.com','gov.example','news.naver.com','itners-research.kr'];
-function generateResultsFor(kw){
+
+function generateFallbackResults(kw){
+  return [{
+    title: `${kw} 검색 결과를 가져오지 못했습니다`,
+    desc: 'n8n 연동이 안 되어 있거나 워크플로우가 비활성 상태일 수 있어요.',
+    source: '연동 필요',
+    score: 0,
+    status: 'fail',
+    body: `"${kw}" 검색 결과를 가져오지 못했습니다.\n\n가능한 원인:\n• 계정 설정에 뉴스 기사 검색 Webhook이 입력되지 않음\n• n8n 워크플로우가 비활성(Inactive) 상태\n• Tavily API 키가 만료되었거나 호출 한도 초과\n\n계정 설정에서 뉴스 기사 검색 Webhook 주소를 확인해주세요.`
+  }];
+}
+
+async function generateResultsFor(kw){
   currentResultKw = kw;
-  const templates = [
-    {suffix:'사례 분석', desc:'국내 기업의 적용 사례와 운영 방식을 정리한 자료', score:0.92, status:'success'},
-    {suffix:'최신 동향 리포트', desc:'최근 6개월간의 주요 변화와 시장 반응 요약', score:0.88, status:'success'},
-    {suffix:'정책·제도 자료', desc:'관련 규제 및 정책 변화에 대한 공공 자료', score:0.76, status:'fail'}
-  ];
-  resultDocs = templates.map((t,i)=>({
-    title: `${kw} ${t.suffix}`,
-    desc: t.desc,
-    source: RESULT_SOURCES[i % RESULT_SOURCES.length],
-    score: t.score,
-    status: t.status,
-    body: `■ ${kw} ${t.suffix}\n\n${t.desc}.\n\n${kw} 관련 동향은 최근 빠르게 변화하고 있으며, 이트너스 입장에서 선제적인 모니터링이 필요한 시점입니다.`
-  }));
+  $('#resultsSubtitle').textContent = `"${kw}" 검색 중...`;
+  $('#resultsBody').innerHTML = `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px"><span class="streaming-dot"></span>Tavily에서 "${esc(kw)}" 관련 자료를 가져오는 중입니다...</td></tr>`;
+
+  try {
+    const resp = await fetch(N8N_NEWS_SEARCH_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ keyword: kw })
+    });
+    if(!resp.ok) throw new Error('n8n 응답 오류');
+    const data = await resp.json();
+    const articles = data.articles || [];
+    if(!articles.length) throw new Error('빈 응답');
+
+    resultDocs = articles.map(a=>({
+      title: a.title,
+      desc: a.snippet || '',
+      source: a.source || '출처 미확인',
+      url: a.url || '',
+      score: 0.85,
+      status: 'success',
+      body: `${a.title}\n\n${a.snippet || ''}\n\n출처: ${a.url || a.source}`
+    }));
+  } catch(e){
+    resultDocs = generateFallbackResults(kw);
+  }
 }
 function renderResults(kw){
-  $('#resultsSubtitle').textContent = kw ? `"${kw}" 검색 결과 — Tavily MCP 검색 결과와 AI 요약입니다.` : 'Tavily MCP 검색 결과와 AI 요약을 리스트로 확인합니다.';
+  $('#resultsSubtitle').textContent = kw ? `"${kw}" 검색 결과 — Tavily 검색 결과입니다.` : 'Tavily 검색 결과를 리스트로 확인합니다.';
   $('#resultsBody').innerHTML = resultDocs.map((d,i)=>`
     <tr><td style="cursor:pointer" onclick="openDocModal(${i},'result')"><b>${esc(d.title)}</b><br><small style="color:var(--muted)">${esc(d.desc)}</small></td>
     <td>${esc(d.source)}</td><td><span class="badge ${d.score>=0.85?'green':'orange'}">${d.score.toFixed(2)}</span></td>
@@ -699,11 +722,10 @@ function saveResultDoc(i){
   savedDocs.unshift({ title:d.title, body:d.body, type:'리서치 결과', badge:'blue' });
   persist(); showToast('저장되었습니다.');
 }
-function retryResultDoc(i){
-  const d = resultDocs[i]; if(!d) return;
-  d.status = 'success'; d.score = 0.81;
-  renderResults($('#resultsSubtitle').textContent.match(/"([^"]+)"/)?.[1] || '');
-  showToast('재수집이 완료되었습니다.');
+async function retryResultDoc(i){
+  showToast('다시 검색 중입니다...');
+  await generateResultsFor(currentResultKw);
+  renderResults(currentResultKw);
 }
 function saveAllResults(){
   if(resultDocs.length===0){ showToast('저장할 결과가 없습니다.'); return; }
@@ -725,13 +747,13 @@ function closeDocModal(){ $('#docModalOverlay').style.display = 'none'; }
 
 
 // ══════════════════════════════════════════
-// 전역 검색 → AI 인사이트로 연결
+// 전역 검색 → 리서치 결과로 연결
 // ══════════════════════════════════════════
-function doGlobalSearch(kw){
+async function doGlobalSearch(kw){
   if(!kw) return;
   saveSearchHistory(kw);
-  generateResultsFor(kw);
   showPage('results');
+  await generateResultsFor(kw);
   renderResults(kw);
 }
 
@@ -1197,11 +1219,11 @@ function bindEvents(){
   $('#saveSubscribeBtn')?.addEventListener('click', ()=>{ showToast('수신 설정이 저장되었습니다.'); });
 }
 
-function init(){
+async function init(){
   renderCore(); renderExt(); updateSelection(); setStep(0); updatePayload(); initPool(); initSubscribeCats(); bindEvents();
-  generateResultsFor('외국인 임직원 리텐션');
-  renderResults('외국인 임직원 리텐션');
   renderDashboard();
+  await generateResultsFor('외국인 임직원 리텐션');
+  renderResults('외국인 임직원 리텐션');
 }
 document.addEventListener('DOMContentLoaded', init);
 </script>
