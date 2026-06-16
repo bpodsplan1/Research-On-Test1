@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Research On — 이트너스 리서치 자동화 허브</title>
+<style>
+:root{--bg:#f4f7fb;--surface:#fff;--ink:#172033;--muted:#697386;--line:#e5eaf2;--primary:#2563eb;--primary2:#1d4ed8;--soft:#eaf1ff;--green:#0f766e;--greenSoft:#e6fffb;--orange:#f97316;--orangeSoft:#fff7ed;--purple:#7c3aed;--purpleSoft:#f3e8ff;--red:#dc2626;--redSoft:#fee2e2;--shadow:0 16px 40px rgba(15,23,42,.08);--radius:22px}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(37,99,235,.14),transparent 27%),radial-gradient(circle at top right,rgba(15,118,110,.1),transparent 32%),var(--bg);color:var(--ink);line-height:1.55} button,input,select,textarea{font:inherit} button{cursor:pointer} a{color:inherit;text-decoration:none}
+.app{display:grid;grid-template-columns:292px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-right:1px solid var(--line);padding:24px 18px;display:flex;flex-direction:column;gap:20px;overflow:auto}.brand{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:4px 8px 18px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#1d4ed8,#0f766e);font-weight:900}.brand h1{font-size:17px;margin:0;line-height:1.1}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.nav-section{margin-top:4px}.nav-title{font-size:12px;font-weight:900;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;padding:0 10px 8px}.nav-item{width:100%;border:0;background:transparent;color:#475569;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:14px;font-size:14px;font-weight:800;text-align:left;transition:.16s}.nav-item:hover{background:#f1f5f9;color:var(--primary);transform:translateX(2px)}.nav-item.active{background:linear-gradient(135deg,#eaf1ff,#fff);color:var(--primary2);box-shadow:inset 0 0 0 1px rgba(37,99,235,.15)}.nav-icon{width:26px;height:26px;display:grid;place-items:center;border-radius:10px;background:#eef2ff}.sidebar-footer{margin-top:auto;background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;border-radius:20px;padding:16px;box-shadow:var(--shadow);cursor:pointer;position:relative}.sidebar-footer strong{display:block;font-size:14px}.sidebar-footer span{display:block;font-size:12px;opacity:.82;margin-top:4px}
+.user-popup{position:absolute;bottom:calc(100% + 8px);left:0;right:0;background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:8px;display:none;flex-direction:column;gap:2px;z-index:50}.user-popup.open{display:flex}.user-popup button{width:100%;text-align:left;border:0;background:transparent;padding:10px 12px;border-radius:10px;font-size:13px;font-weight:800;color:#334155;display:flex;align-items:center;gap:8px}.user-popup button:hover{background:#f1f5f9}.user-popup button.danger{color:var(--red)}
+.main{padding:24px 28px 48px;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px;width:100%}.mobile-menu{display:none;border:1px solid var(--line);background:#fff;border-radius:14px;height:44px;padding:0 12px;font-weight:900}.search{flex:1;max-width:680px;position:relative}.search input{width:100%;height:48px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.86);padding:0 18px 0 46px;outline:none;box-shadow:0 8px 28px rgba(15,23,42,.04)}.search:before{content:"⌕";position:absolute;left:17px;top:6px;color:#94a3b8;font-size:27px;pointer-events:none}.user-chip{display:flex;align-items:center;gap:11px;padding:9px 12px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(15,23,42,.05);min-width:210px;margin-left:auto}.avatar{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-weight:900}.user-chip b{display:block;font-size:14px}.user-chip small{display:block;color:var(--muted);font-size:12px}
+.page{display:none;animation:fade .18s ease}.page.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.hero{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 52%,#0f766e 100%);color:#fff;padding:34px;box-shadow:0 24px 70px rgba(15,23,42,.22);margin-bottom:22px}.hero:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.12);right:-80px;top:-90px}.hero>*{position:relative;z-index:1}.hero h2{margin:8px 0 10px;font-size:34px;line-height:1.2;letter-spacing:-.04em}.hero p{margin:0 0 20px;color:rgba(255,255,255,.86);max-width:760px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.15);font-size:13px;font-weight:900}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border-radius:13px;border:0;font-weight:900;background:#fff;color:#334155;white-space:nowrap}.btn.primary{background:#fff;color:var(--primary2)}.btn.dark{background:#0f172a;color:#fff}.btn.soft{background:var(--soft);color:var(--primary2)}.btn.green{background:var(--greenSoft);color:var(--green)}.btn.orange{background:var(--orangeSoft);color:#c2410c}.btn.red{background:var(--redSoft);color:var(--red)}.btn.line{background:#fff;border:1px solid var(--line);color:#334155}.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.grid{display:grid;gap:18px}.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.split{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}.card{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 12px 32px rgba(15,23,42,.055)}.metric{min-height:132px}.metric .label{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;font-weight:900}.metric .num{font-size:34px;font-weight:950;letter-spacing:-.05em;margin:18px 0 4px}.metric .desc{margin:0;color:var(--muted);font-size:13px}.section-head,.page-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:26px 0 12px}.page-title{align-items:center;margin:0 0 18px}.section-head h3,.page-title h2{margin:0;letter-spacing:-.035em}.page-title h2{font-size:30px}.section-head p,.page-title p{margin:5px 0 0;color:var(--muted);font-size:14px}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;white-space:nowrap}.badge.blue{background:var(--soft);color:var(--primary2)}.badge.green{background:var(--greenSoft);color:var(--green)}.badge.orange{background:var(--orangeSoft);color:#c2410c}.badge.purple{background:var(--purpleSoft);color:var(--purple)}.badge.gray{background:#f1f5f9;color:#475569}.badge.red{background:var(--redSoft);color:var(--red)}
+.table-card{padding:0;overflow:hidden}table{width:100%;border-collapse:collapse;background:#fff}th,td{text-align:left;padding:15px 18px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}th{background:#f8fafc;color:#64748b;font-size:12px;text-transform:uppercase;letter-spacing:.05em}tr:last-child td{border-bottom:0}
+.form{display:grid;gap:16px}.field label{display:block;margin-bottom:7px;font-size:13px;font-weight:900;color:#334155}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 14px;color:var(--ink);outline:none}textarea{min-height:120px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(37,99,235,.55);box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+.tabbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}.tab{border:1px solid var(--line);background:#fff;color:#475569;border-radius:999px;padding:10px 15px;font-weight:900}.tab.active{background:var(--soft);color:var(--primary2);border-color:rgba(37,99,235,.25)}.mode-panel,.builder-step{display:none}.mode-panel.active,.builder-step.active{display:block}
+.builder-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}.builder-progress{display:flex;gap:8px;margin:0 0 16px}.step-dot{flex:1;padding:10px 12px;border-radius:14px;background:#f8fafc;border:1px solid var(--line);font-size:13px;font-weight:900;color:#64748b;text-align:center}.step-dot.active{background:var(--soft);color:var(--primary2);border-color:rgba(37,99,235,.25)}.builder-actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}.sticky-panel{position:sticky;top:24px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;background:#fff;border:1px solid var(--line);border-radius:999px;font-size:13px;font-weight:900;margin:4px;color:#0f172a}.chip:hover{border-color:rgba(37,99,235,.55);box-shadow:0 0 0 3px rgba(37,99,235,.08)}.chip.selected{background:var(--soft);border-color:rgba(37,99,235,.4);color:var(--primary2)}.chip .x{border:0;background:transparent;color:#64748b;padding:0;font-weight:900}
+.core-toolbar{display:flex;gap:10px;align-items:center;margin-bottom:14px}.core-toolbar input{flex:1}.core-category{border:1px solid var(--line);background:#fff;border-radius:22px;padding:16px;margin-bottom:14px}.core-category-head{display:flex;justify-content:space-between;align-items:center;gap:10px;cursor:pointer}.core-category-head h4{margin:0;font-size:18px}.core-category-body{display:none;margin-top:14px}.core-category.open .core-category-body{display:block}.depth2-box{border:1px solid var(--line);border-radius:18px;margin:10px 0;overflow:hidden;background:#fbfdff}.depth2-head{display:flex;justify-content:space-between;align-items:center;padding:13px 15px;font-weight:900;background:#f8fafc;cursor:pointer}.depth2-body{display:none;padding:12px 15px}.depth2-box.open .depth2-body{display:block}.depth3-row{padding:10px 0;border-top:1px solid var(--line)}.depth3-row:first-child{border-top:0}.depth3-title{font-weight:900;color:#334155;margin-bottom:6px}
+.exp-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.exp-box{border:1px solid var(--line);background:#fbfdff;border-radius:18px;padding:14px}.exp-box h4{margin:0 0 8px;font-size:15px}.selection-tags{min-height:76px;padding:10px;border:1px dashed #cbd5e1;border-radius:16px;background:#f8fafc}.final-query{min-height:76px;background:#0f172a;color:#e5e7eb;border-radius:16px;padding:15px;font-weight:800;word-break:keep-all}.payload{background:#111827;color:#e5e7eb;border-radius:18px;padding:16px;font:13px/1.55 Consolas,monospace;white-space:pre-wrap;overflow:auto;max-height:400px}
+.list{display:flex;flex-direction:column;gap:12px}.list-item{display:flex;gap:14px;padding:16px;border:1px solid var(--line);background:#fff;border-radius:18px;cursor:pointer;transition:.16s}.list-item:hover{border-color:rgba(37,99,235,.4);transform:translateY(-1px)}.list-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:var(--soft);color:var(--primary2);font-weight:900;flex:0 0 auto}.list-item h4{margin:0 0 5px}.list-item p{margin:0;color:var(--muted);font-size:13px}.empty-state{text-align:center;padding:34px;border:1px dashed #cbd5e1;background:rgba(248,250,252,.75);border-radius:22px;color:var(--muted)}.empty-state h3{margin:0 0 6px;color:#0f172a}
+.pool-view{display:none}.pool-view.active{display:block}.pool-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}.pool-col{border:1px solid var(--line);border-radius:20px;background:#fff;padding:14px;min-height:360px}.pool-item{width:100%;display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line);background:#f8fafc;border-radius:14px;padding:11px 12px;margin:8px 0;font-weight:900;text-align:left}.pool-item.active{background:var(--soft);border-color:rgba(37,99,235,.35);color:var(--primary2)}.mindmap{position:relative;height:560px;border:1px solid var(--line);border-radius:24px;background:radial-gradient(circle at center,#fff 0,#f8fafc 68%);overflow:hidden}.node{position:absolute;border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 13px;font-weight:900;box-shadow:0 8px 20px rgba(15,23,42,.06);transform:translate(-50%,-50%);white-space:nowrap}.node.center{left:50%;top:50%;width:128px;height:128px;display:grid;place-items:center;background:linear-gradient(135deg,#1d4ed8,#0f766e);color:#fff;font-size:18px;border:0;white-space:normal;text-align:center;padding:8px}.node.depth1{color:var(--primary2)}.node.depth2{color:var(--green)}.node.depth3{color:#7c3aed}.mind-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.newsletter-preview{border:1px solid var(--line);border-radius:24px;overflow:hidden;background:#fff;box-shadow:var(--shadow)}.newsletter-cover{padding:26px;background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff}.newsletter-body{padding:24px}.insight-box{border-left:5px solid var(--green);background:var(--greenSoft);padding:15px;border-radius:16px;margin-top:14px}.progress{height:9px;border-radius:999px;background:#e2e8f0;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#0f766e);transition:width .3s}
+.streaming-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--primary);animation:pulse 1s infinite;margin-right:6px}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.toast{position:fixed;bottom:24px;right:24px;background:#0f172a;color:#fff;padding:13px 20px;border-radius:14px;font-size:13px;font-weight:800;display:none;z-index:999;box-shadow:var(--shadow)}.toast.show{display:block;animation:fade .2s}
+.tag-input-area{display:flex;flex-wrap:wrap;gap:6px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:8px 10px;min-height:48px;align-items:center}.tag-input-area input{border:0;flex:1;min-width:120px;padding:6px}.tag-pill{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--primary2);padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800}.tag-pill .rm{cursor:pointer;font-weight:900}
+.hist-stat-row{display:flex;gap:6px}.hist-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);background:#fff;border-radius:18px;cursor:pointer;transition:.16s}.hist-row:hover{border-color:rgba(37,99,235,.4)}.hist-row .freq-bar{height:5px;border-radius:999px;background:#e2e8f0;overflow:hidden;margin-top:6px;width:160px}.hist-row .freq-bar span{display:block;height:100%;background:var(--primary)}
+@media(max-width:1100px){.cols-4{grid-template-columns:repeat(2,1fr)}.cols-3,.cols-2,.split,.builder-layout,.exp-grid,.pool-cols{grid-template-columns:1fr}.sticky-panel{position:static}}@media(max-width:840px){.app{grid-template-columns:1fr}.sidebar{display:none;position:fixed;z-index:30;width:292px;left:0;top:0}.sidebar.open{display:flex}.main{padding:18px}.mobile-menu{display:inline-flex;align-items:center}.topbar{align-items:stretch;flex-wrap:wrap}.search{order:3;max-width:none;flex-basis:100%}.user-chip{margin-left:auto;min-width:0}.hero h2{font-size:28px}.cols-4,.cols-3,.cols-2{grid-template-columns:1fr}.page-title{align-items:flex-start;flex-direction:column}th:nth-child(4),td:nth-child(4){display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><div class="logo">RO</div><div><h1>Research On</h1><p>이트너스 AI 리서치 허브</p></div></div>
+  <nav>
+    <div class="nav-section"><div class="nav-title">리서치 허브</div>
+      <button class="nav-item active" data-page="dashboard" type="button"><span class="nav-icon">🏠</span>내 대시보드</button>
+      <button class="nav-item" data-page="new-research" type="button"><span class="nav-icon">✨</span>새 리서치 만들기</button>
+      <button class="nav-item" data-page="keywords" type="button"><span class="nav-icon">🔎</span>키워드 관리</button>
+      <button class="nav-item" data-page="pool" type="button"><span class="nav-icon">🧩</span>키워드 Pool 탐색</button>
+      <button class="nav-item" data-page="insight" type="button"><span class="nav-icon">💡</span>AI 인사이트</button>
+      <button class="nav-item" data-page="newssum" type="button"><span class="nav-icon">📑</span>뉴스 기사 요약</button>
+      <button class="nav-item" data-page="guide" type="button"><span class="nav-icon">🧭</span>인사이트 가이드</button>
+      <button class="nav-item" data-page="run" type="button"><span class="nav-icon">⚡</span>수동 리서치 실행</button>
+      <button class="nav-item" data-page="results" type="button"><span class="nav-icon">📚</span>리서치 결과</button>
+      <button class="nav-item" data-page="saved" type="button"><span class="nav-icon">⭐</span>저장 자료함</button>
+      <button class="nav-item" data-page="history" type="button"><span class="nav-icon">🕘</span>검색 히스토리</button>
+    </div>
+    <div class="nav-section"><div class="nav-title">뉴스레터 허브</div>
+      <button class="nav-item" data-page="newsletter" type="button"><span class="nav-icon">📰</span>뉴스레터 보기</button>
+      <button class="nav-item" data-page="archive" type="button"><span class="nav-icon">🗂️</span>뉴스레터 아카이브</button>
+      <button class="nav-item" data-page="subscribe" type="button"><span class="nav-icon">📬</span>수신 설정</button>
+    </div>
+    <div class="nav-section"><div class="nav-title">운영·설정</div>
+      <button class="nav-item" data-page="account" type="button"><span class="nav-icon">👤</span>내 계정 설정</button>
+    </div>
+  </nav>
+  <div class="sidebar-footer" id="sidebarFooter">
+    <strong id="footerName">이트너스 사용자</strong><span id="footerStatus">로그인 중 · 클릭하여 메뉴 보기</span>
+    <div class="user-popup" id="userPopup">
+      <button type="button" data-page="account"><span>👤</span>내 계정 설정</button>
+      <button type="button" data-page="history"><span>🕘</span>검색 히스토리</button>
+      <button type="button" data-page="saved"><span>⭐</span>저장 자료함</button>
+      <button type="button" class="danger" id="logoutBtn"><span>🚪</span>로그아웃</button>
+    </div>
+  </div>
+</aside>
+<main class="main">
+  <div class="topbar"><button class="mobile-menu" id="mobileMenu" type="button">☰ 메뉴</button><div class="search"><input id="globalSearch" placeholder="키워드, 리서치 결과, 뉴스레터를 검색하세요" /></div><div class="user-chip" id="topUserChip" style="cursor:pointer"><div class="avatar">U</div><div><b>이트너스 사용자</b><small>Research User · Standard</small></div></div></div>
+<section class="page active" id="dashboard">
+  <div class="hero"><span class="eyebrow">AI Research Automation</span><h2>키워드 조합으로 리서치를 실행합니다</h2><p>핵심 키워드를 먼저 고르고, 전방·후방 확장 키워드를 단계별로 붙여 검색어를 생성하세요. AI 인사이트와 뉴스 요약까지 한 곳에서 처리합니다.</p><button class="btn primary" data-go="new-research" type="button">새 리서치 만들기</button></div>
+  <div class="grid cols-4">
+    <div class="card metric"><div class="label">내 키워드 세트 <span class="badge blue">Active</span></div><div class="num" id="statKeywordSets">0</div><p class="desc">현재 등록된 세트</p></div>
+    <div class="card metric"><div class="label">검색 히스토리 <span class="badge green">Today</span></div><div class="num" id="statSearchToday">0</div><p class="desc">오늘 실행한 검색</p></div>
+    <div class="card metric"><div class="label">저장 자료 <span class="badge purple">Library</span></div><div class="num" id="statSavedDocs">0</div><p class="desc">기사·요약·인사이트</p></div>
+    <div class="card metric"><div class="label">관심 키워드 <span class="badge orange">구독중</span></div><div class="num" id="statSubscribed">0</div><p class="desc">알림 받는 키워드</p></div>
+  </div>
+  <div class="split">
+    <div>
+      <div class="section-head"><div><h3>최근 검색 히스토리</h3><p>최근 실행된 검색과 결과 건수를 확인합니다.</p></div><button class="btn line" data-go="history" type="button">전체 보기</button></div>
+      <div class="card table-card"><table><thead><tr><th>검색 키워드</th><th>시각</th><th>결과 건수</th></tr></thead><tbody id="dashHistBody"></tbody></table></div>
+    </div>
+    <div>
+      <div class="section-head"><div><h3>빠른 실행</h3><p>자주 쓰는 작업으로 바로 이동합니다.</p></div></div>
+      <div class="list">
+        <div class="list-item" data-go="new-research"><div class="list-icon">✨</div><div><h4>새 리서치 만들기</h4><p>핵심 키워드와 확장 키워드를 조합해 검색 조건을 생성합니다.</p></div></div>
+        <div class="list-item" data-go="insight"><div class="list-icon">💡</div><div><h4>AI 인사이트 받기</h4><p>키워드를 검색하면 AI가 핵심 동향을 바로 요약합니다.</p></div></div>
+        <div class="list-item" data-go="newssum"><div class="list-icon">📑</div><div><h4>뉴스 기사 요약</h4><p>기사 링크를 붙여넣으면 3~5문장으로 정리해드립니다.</p></div></div>
+        <div class="list-item" data-go="pool"><div class="list-icon">🧩</div><div><h4>키워드 Pool 탐색</h4><p>리스트형 또는 마인드맵형으로 전체 키워드를 탐색합니다.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="page" id="new-research">
+  <div class="page-title"><div><h2>새 리서치 만들기</h2><p>간편·상세·고급 옵션 중 원하는 방식으로 검색 조건을 만듭니다.</p></div><span class="badge blue">Tavily MCP</span></div>
+  <div class="tabbar"><button class="tab active" data-mode="simple" type="button">1. 간편 모드</button><button class="tab" data-mode="detail" type="button">2. 상세 모드</button><button class="tab" data-mode="advanced" type="button">3. 고급 옵션</button></div>
+
+  <div class="mode-panel active" id="mode-simple">
+    <div class="split">
+      <div class="card">
+        <h3>자연어로 리서치 요청</h3>
+        <p style="color:var(--muted)">문장으로 요청하면 AI가 핵심 키워드와 확장 키워드를 자동으로 분해합니다.</p>
+        <textarea id="simplePrompt">최근 3년 동안 국내 대기업의 외국인 임직원 리텐션 프로그램 사례를 찾아줘. 가능하면 보고서나 뉴스 중심이면 좋겠어.</textarea>
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn dark" id="aiSuggest" type="button">AI 키워드 조합 생성</button><button class="btn line" data-mode-go="detail" type="button">상세 모드에서 직접 조정</button></div>
+      </div>
+      <div class="card">
+        <h3>AI 변환 예시</h3>
+        <div class="list">
+          <div class="list-item"><div class="list-icon">Core</div><div><h4>핵심 키워드</h4><p>리텐션, 온보딩</p></div></div>
+          <div class="list-item"><div class="list-icon">Front</div><div><h4>전방 확장</h4><p>국내, 대기업, 외국인 임직원, 지난 3년</p></div></div>
+          <div class="list-item"><div class="list-icon">Back</div><div><h4>후방 확장</h4><p>사례, 보고서, 뉴스</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mode-panel" id="mode-detail">
+    <div class="builder-layout">
+      <div>
+        <div class="builder-progress">
+          <div class="step-dot active" data-step-dot="0">1 핵심 키워드</div>
+          <div class="step-dot" data-step-dot="1">2 전방 확장</div>
+          <div class="step-dot" data-step-dot="2">3 후방 확장</div>
+        </div>
+        <div class="card builder-step active" data-step="0">
+          <h3>1. 핵심 키워드 선택 <span class="badge blue" id="coreCountBadge">100개</span></h3>
+          <p style="color:var(--muted)">1-Depth → 2-Depth → 3-Depth별로 전체 핵심 키워드를 펼쳐서 선택합니다.</p>
+          <div class="core-toolbar"><input id="coreSearch" placeholder="핵심 키워드 검색: 예) 온보딩, AI 에이전트, 기숙사" /><button class="btn line" id="expandAll" type="button">전체 펼치기</button><button class="btn line" id="collapseAll" type="button">전체 접기</button></div>
+          <div id="coreList"></div>
+        </div>
+        <div class="card builder-step" data-step="1">
+          <h3>2. 전방 확장 키워드 선택 <span class="badge orange">Front</span></h3>
+          <p style="color:var(--muted)">검색 대상, 범위, 산업, 시점을 앞쪽에 붙여 검색 범위를 좁힙니다.</p>
+          <div class="exp-grid" id="frontList"></div>
+        </div>
+        <div class="card builder-step" data-step="2">
+          <h3>3. 후방 확장 키워드 선택 <span class="badge purple">Back</span></h3>
+          <p style="color:var(--muted)">동향, 사례, 보고서, 뉴스 등 결과의 성격을 뒤쪽에서 지정합니다.</p>
+          <div class="exp-grid" id="backList"></div>
+        </div>
+        <div class="builder-actions"><button class="btn line" id="prevStep" type="button">← 이전</button><div style="display:flex;gap:10px"><button class="btn red" id="resetAll" type="button">전체 리셋</button><button class="btn dark" id="nextStep" type="button">다음 →</button></div></div>
+      </div>
+      <aside class="card sticky-panel">
+        <h3>최종 조합</h3>
+        <p style="color:var(--muted);font-size:13px">선택한 키워드는 아래에서 개별 해제할 수 있습니다.</p>
+        <div class="selection-tags" id="selectedTags"></div>
+        <h4>최종 검색어</h4>
+        <div class="final-query" id="finalQuery">선택한 키워드가 여기에 표시됩니다.</div>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn soft" id="copyQuery" type="button">검색어 복사</button><button class="btn green" data-mode-go="advanced" type="button">고급 옵션으로 이동</button></div>
+      </aside>
+    </div>
+  </div>
+
+  <div class="mode-panel" id="mode-advanced">
+    <div class="split">
+      <div class="card">
+        <h3>Tavily MCP 상세 옵션</h3>
+        <div class="form">
+          <div class="field"><label>검색 깊이 (search_depth)</label><select id="searchDepth"><option value="basic">basic (기본값)</option><option value="ultra-fast">ultra-fast</option><option value="fast">fast</option><option value="advanced">advanced</option></select></div>
+          <div class="grid cols-2">
+            <div class="field"><label>검색 시작일</label><input type="date" id="startDate" /></div>
+            <div class="field"><label>검색 종료일</label><input type="date" id="endDate" /></div>
+          </div>
+          <div class="grid cols-2">
+            <div class="field"><label>검색 결과 개수 (max_results)</label><select id="maxResults"><option value="5">5개 (기본값)</option><option value="10">10개</option><option value="20">20개</option></select></div>
+            <div class="field"><label>검색 국가 (country)</label><select id="country"><option value="">선택 안 함</option><option value="south korea">south korea</option><option value="united states">united states</option><option value="japan">japan</option></select></div>
+          </div>
+          <div class="field"><label>포함할 사이트 (include_domains)</label><div class="tag-input-area" id="includeDomArea"><input id="includeDomInput" placeholder="예: samsung.com 입력 후 Enter" /></div></div>
+          <div class="field"><label>제외할 사이트 (exclude_domains)</label><div class="tag-input-area" id="excludeDomArea"><input id="excludeDomInput" placeholder="예: reddit.com 입력 후 Enter" /></div></div>
+          <div class="grid cols-2">
+            <label><input type="checkbox" id="includeImages" /> 이미지 포함 (include_images)</label>
+            <label><input type="checkbox" id="includeImgDesc" /> 이미지 설명 포함</label>
+            <label><input type="checkbox" id="includeRaw" /> 본문 전체 포함 (include_raw_content)</label>
+          </div>
+          <div class="field"><label>AI 분석 가이드 (insight_guide)</label><textarea id="insightGuide" style="min-height:70px" placeholder="예: 인사총무 담당자가 참고할 수 있게 요약"></textarea></div>
+          <div class="field"><label>제외 키워드 (exclude_keywords)</label><input id="excludeKeywords" placeholder="예: 광고, 홍보, 스폰서" /></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>n8n Webhook Payload</h3>
+        <div class="payload" id="payloadPreview"></div>
+        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+          <button class="btn soft" id="copyPayload" type="button">JSON 복사</button>
+          <button class="btn dark" data-go="run" type="button">수동 리서치 실행 화면으로 이동</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="page" id="keywords">
+  <div class="page-title"><div><h2>키워드 관리</h2><p>저장한 키워드 세트와 관심 키워드를 관리합니다.</p></div><button class="btn dark" id="newSetBtn" data-go="new-research" type="button">새 키워드 세트 만들기</button></div>
+  <div class="split">
+    <div class="card table-card">
+      <table><thead><tr><th>세트명</th><th>핵심 키워드</th><th>확장 키워드</th><th>작업</th></tr></thead><tbody id="keywordSetsBody"></tbody></table>
+    </div>
+    <div class="card">
+      <h3>관심 키워드</h3>
+      <p style="color:var(--muted)">키워드 상세나 검색 결과에서 추가한 관심 키워드입니다. 클릭하면 바로 재검색됩니다.</p>
+      <div id="subscribedList" style="margin-top:10px"></div>
+      <div class="insight-box" style="margin-top:16px">권장 구조: 전방 확장 키워드 + 핵심 키워드 + 후방 확장 키워드</div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="pool">
+  <div class="page-title"><div><h2>키워드 Pool 탐색</h2><p>전체 키워드를 리스트형 또는 마인드맵형으로 탐색합니다.</p></div><span class="badge green" id="poolCountBadge">100 Keywords</span></div>
+  <div class="tabbar"><button class="tab active" data-pool-view="list" type="button">리스트형</button><button class="tab" data-pool-view="mind" type="button">마인드맵형</button></div>
+  <div class="pool-view active" id="pool-list">
+    <div class="pool-cols">
+      <div class="pool-col"><h3>1-Depth</h3><div id="poolDepth1"></div></div>
+      <div class="pool-col"><h3>2-Depth</h3><div id="poolDepth2" class="empty-state">1-Depth를 선택하세요.</div></div>
+      <div class="pool-col"><h3>3-Depth / 키워드</h3><div id="poolDepth3" class="empty-state">2-Depth를 선택하세요.</div></div>
+    </div>
+  </div>
+  <div class="pool-view" id="pool-mind">
+    <div class="mind-toolbar"><div><strong id="mindTitle">전체 키워드</strong><p style="margin:4px 0 0;color:var(--muted);font-size:13px">노드를 클릭하면 해당 방향으로 확장됩니다.</p></div><button class="btn line" id="mindBack" type="button" disabled>← 돌아가기</button></div>
+    <div class="mindmap" id="mindmap"></div>
+  </div>
+</section>
+<section class="page" id="insight">
+  <div class="page-title"><div><h2>AI 인사이트</h2><p>키워드를 검색하면 AI가 핵심 동향, 주목 포인트, 시사점을 정리해드립니다.</p></div><span class="badge purple"><span class="streaming-dot" style="display:none"></span>AI Powered</span></div>
+  <div class="card">
+    <h3>키워드로 인사이트 받기</h3>
+    <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+      <input id="insightKwInput" placeholder="예: SaaS, 개인정보보호법, 삼성전자" style="flex:1;min-width:220px" />
+      <button class="btn dark" id="insightGenBtn" type="button">AI 인사이트 생성</button>
+    </div>
+    <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px" id="insightQuickChips"></div>
+  </div>
+  <div class="section-head"><div><h3>생성된 인사이트</h3><p>최근 생성한 인사이트가 최신순으로 표시됩니다.</p></div></div>
+  <div id="insightResultList" class="list"></div>
+</section>
+<section class="page" id="newssum">
+  <div class="page-title"><div><h2>뉴스 기사 요약</h2><p>키워드를 검색하면 관련 기사를 모아드려요. 요약받고 싶은 기사를 클릭하면 AI가 3~5문장으로 정리합니다.</p></div><span class="badge blue">News Summary</span></div>
+
+  <div class="card">
+    <h3>키워드로 기사 검색</h3>
+    <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+      <input id="nsKwInput" type="text" placeholder="예: SaaS, 개인정보보호법, 삼성전자" style="flex:1;min-width:220px" />
+      <button class="btn dark" id="nsSearchBtn" type="button">기사 검색</button>
+    </div>
+    <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px" id="nsQuickChips"></div>
+  </div>
+
+  <div class="section-head" id="nsArticleListHead" style="display:none"><div><h3>검색된 기사</h3><p id="nsArticleListSub"></p></div></div>
+  <div id="nsArticleList" class="list"></div>
+
+  <div class="card" id="nsResultCard" style="display:none;margin-top:18px">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+      <h3 style="margin:0">요약 결과</h3>
+      <div style="display:flex;gap:8px"><button class="btn soft" id="nsCopyBtn" type="button">복사</button><button class="btn green" id="nsSaveBtn" type="button">저장</button></div>
+    </div>
+    <p id="nsResultBody" style="margin-top:14px;color:#334155"></p>
+    <p style="font-size:12px;color:var(--muted);margin-top:10px" id="nsResultUrl"></p>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h3 style="font-size:15px">URL을 직접 알고 있나요?</h3>
+    <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">
+      <input id="nsUrlInput" type="url" placeholder="뉴스 기사 URL을 붙여넣으세요  예) https://news.naver.com/..." style="flex:1;min-width:240px" />
+      <button class="btn line" id="nsBtn" type="button">바로 요약하기</button>
+    </div>
+  </div>
+
+  <div class="section-head"><div><h3>최근 요약 기록</h3><p>최근 10건까지 기록됩니다.</p></div><button class="btn line" id="nsClearBtn" type="button" style="display:none">전체 삭제</button></div>
+  <div id="nsHistoryList" class="list"></div>
+</section>
+<section class="page" id="guide">
+  <div class="page-title"><div><h2>인사이트 가이드</h2><p>AI가 어떤 관점으로 요약·분석할지 기준을 설정합니다.</p></div><button class="btn dark" id="saveGuideBtn" type="button">가이드 저장</button></div>
+  <div class="split">
+    <div class="card">
+      <h3>내 분석 관점 설정</h3>
+      <div class="form">
+        <div class="field"><label>가이드명</label><input id="guideName" value="외국인 임직원 지원 실무 적용 관점" /></div>
+        <div class="field"><label>분석 관점</label><textarea id="guideText">단순 뉴스 요약이 아니라, 우리 조직의 외국인 임직원 정착지원 서비스에 실제 적용 가능한 사례와 운영 리스크 중심으로 분석해줘.</textarea></div>
+        <div class="field"><label>보고서 톤</label><select id="guideTone"><option>실무 보고서형</option><option>임원 보고형</option><option>뉴스레터형</option></select></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>추천 가이드</h3>
+      <div class="list">
+        <div class="list-item" data-guide-preset="biz"><div class="list-icon">PM</div><div><h4>사업 적용 가능성 중심</h4><p>시장 동향을 자사 서비스 확장 관점으로 정리합니다.</p></div></div>
+        <div class="list-item" data-guide-preset="hr"><div class="list-icon">HR</div><div><h4>임직원 경험 중심</h4><p>온보딩, 리텐션, 커뮤니티 형성 요소를 강조합니다.</p></div></div>
+        <div class="list-item" data-guide-preset="risk"><div class="list-icon">Risk</div><div><h4>리스크·컴플라이언스 중심</h4><p>개인정보, 보안, 법규 리스크를 함께 검토합니다.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="run">
+  <div class="page-title"><div><h2>수동 리서치 실행</h2><p>생성된 검색 조건으로 n8n 워크플로우를 즉시 실행합니다.</p></div><span class="badge orange">Manual Run</span></div>
+  <div class="split">
+    <div class="card">
+      <h3>실행 전 확인</h3>
+      <div class="list">
+        <div class="list-item"><div class="list-icon">1</div><div><h4>검색 쿼리</h4><p id="runQuery">새 리서치 만들기에서 선택한 최종 검색어가 연결됩니다.</p></div></div>
+        <div class="list-item"><div class="list-icon">2</div><div><h4>Tavily 옵션</h4><p id="runOptions">고급 옵션에서 설정한 값이 표시됩니다.</p></div></div>
+        <div class="list-item"><div class="list-icon">3</div><div><h4>후속 처리</h4><p>검색 결과 저장 → AI 요약 → 뉴스레터 초안 생성</p></div></div>
+      </div>
+      <button class="btn dark" style="margin-top:14px" id="simulateRun" type="button">워크플로우 실행</button>
+    </div>
+    <div class="card">
+      <h3>실행 상태</h3>
+      <p style="color:var(--muted)">n8n 워크플로우 실행 진행률입니다.</p>
+      <div class="progress"><span id="runProgress" style="width:0%"></span></div>
+      <p id="runStatus" style="font-weight:900;margin-top:12px">대기 중</p>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="results">
+  <div class="page-title"><div><h2>리서치 결과</h2><p id="resultsSubtitle">Tavily MCP 검색 결과와 AI 요약을 리스트로 확인합니다.</p></div><div style="display:flex;gap:8px"><button class="btn soft" id="goInsightBtn" type="button">AI 인사이트 보기</button><button class="btn line" id="saveAllResultsBtn" type="button">선택 결과 모두 저장</button></div></div>
+  <div class="card table-card">
+    <table><thead><tr><th>제목</th><th>출처</th><th>관련성</th><th>본문</th><th>작업</th></tr></thead>
+    <tbody id="resultsBody"></tbody></table>
+  </div>
+</section>
+
+<section class="page" id="saved">
+  <div class="page-title"><div><h2>저장 자료함</h2><p>저장한 기사, 요약, AI 인사이트를 모아봅니다.</p></div><span class="badge purple" id="savedCountBadge">0 Saved</span></div>
+  <div class="grid cols-3" id="savedGrid"></div>
+</section>
+
+<div class="empty-state" id="docModalOverlay" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:200;border:0;border-radius:0;padding:40px 20px;align-items:flex-start;justify-content:center;overflow:auto">
+  <div class="card" style="max-width:560px;width:100%;margin-top:40px;text-align:left;color:var(--ink)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <h3 id="docModalTitle" style="margin:0">자료 제목</h3>
+      <button class="btn line" id="docModalClose" type="button" style="flex-shrink:0">닫기</button>
+    </div>
+    <div id="docModalMeta" style="margin:10px 0"></div>
+    <p id="docModalBody" style="white-space:pre-line;color:#334155"></p>
+  </div>
+</div>
+<section class="page" id="history">
+  <div class="page-title"><div><h2>검색 히스토리</h2><p>검색할 때마다 자동으로 기록되며, Google Sheets와 실시간 동기화됩니다.</p></div>
+    <div style="display:flex;gap:8px"><button class="btn line" id="sheetsLoadBtn" type="button">Sheets 동기화</button><button class="btn soft" id="exportSheetsBtn" type="button">전체 내보내기</button><button class="btn red" id="clearHistBtn" type="button">전체 삭제</button></div>
+  </div>
+  <div id="sheetsStatus" style="display:none;margin-bottom:16px"></div>
+  <div class="grid cols-3">
+    <div class="card metric"><div class="label">전체 검색</div><div class="num" id="histTotalCount">0</div></div>
+    <div class="card metric"><div class="label">오늘 검색</div><div class="num" id="histTodayCount">0</div></div>
+    <div class="card metric"><div class="label">가장 많이 검색</div><div class="num" id="histTopKw" style="font-size:22px">—</div></div>
+  </div>
+  <div class="tabbar" style="margin-top:18px">
+    <button class="tab active" data-hist-filter="all" type="button">전체</button>
+    <button class="tab" data-hist-filter="today" type="button">오늘</button>
+    <button class="tab" data-hist-filter="week" type="button">이번 주</button>
+    <button class="tab" data-hist-filter="month" type="button">이번 달</button>
+  </div>
+  <div id="histList" style="display:flex;flex-direction:column;gap:10px"></div>
+</section>
+
+<section class="page" id="newsletter">
+  <div class="page-title"><div><h2>뉴스레터 보기</h2><p>AI가 생성한 뉴스레터 초안을 검토합니다.</p></div><button class="btn dark" id="publishNewsletterBtn" type="button">발행 요청</button></div>
+  <div class="newsletter-preview">
+    <div class="newsletter-cover"><span class="badge blue">Weekly Insight</span><h2>외국인 임직원 정착지원 리서치 브리프</h2><p>온보딩, 리텐션, 생활지원 사례를 중심으로 정리한 이번 주 인사이트입니다.</p></div>
+    <div class="newsletter-body"><h3>핵심 요약</h3><p>최근 기업형 글로벌 인력지원은 단순 행정 지원을 넘어 가족 정착, 커뮤니티 형성, 디지털 셀프서비스로 확장되는 흐름을 보입니다.</p><div class="insight-box"><b>실무 시사점</b><br>외국인 임직원 문의 유형 데이터를 축적해 FAQ, 체크리스트, 자동 응대 흐름으로 전환하는 것이 우선 과제로 보입니다.</div></div>
+  </div>
+</section>
+
+<section class="page" id="archive">
+  <div class="page-title"><div><h2>뉴스레터 아카이브</h2><p>이전에 발행한 뉴스레터를 조회합니다.</p></div></div>
+  <div class="card table-card">
+    <table><thead><tr><th>발행일</th><th>제목</th><th>카테고리</th><th>상태</th></tr></thead>
+    <tbody id="archiveBody">
+      <tr class="archive-row" data-title="AI Agent와 업무자동화 동향" data-date="2026-06-07"><td>2026-06-07</td><td>AI Agent와 업무자동화 동향</td><td>기술·AI·데이터</td><td><span class="badge green">발행완료</span></td></tr>
+      <tr class="archive-row" data-title="글로벌 인력지원 서비스 사례" data-date="2026-05-31"><td>2026-05-31</td><td>글로벌 인력지원 서비스 사례</td><td>글로벌 인력지원</td><td><span class="badge green">발행완료</span></td></tr>
+      <tr class="archive-row" data-title="총무·오피스 운영 트렌드" data-date="2026-05-24"><td>2026-05-24</td><td>총무·오피스 운영 트렌드</td><td>총무·오피스 운영</td><td><span class="badge gray">보관</span></td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+<section class="page" id="subscribe">
+  <div class="page-title"><div><h2>수신 설정</h2><p>관심 카테고리와 뉴스레터 수신 주기를 설정합니다.</p></div><button class="btn dark" id="saveSubscribeBtn" type="button">설정 저장</button></div>
+  <div class="split">
+    <div class="card"><h3>관심 카테고리</h3><div id="subscribeCats"></div></div>
+    <div class="card">
+      <h3>수신 옵션</h3>
+      <div class="form">
+        <div class="field"><label>수신 주기</label><select><option>매주 월요일 오전</option><option>매일 오전</option><option>매월 첫째 주</option></select></div>
+        <div class="field"><label>수신 언어</label><select><option>한국어</option><option>영어</option><option>한국어+영어</option></select></div>
+        <label><input type="checkbox" checked /> 중요 리서치 발생 시 즉시 알림</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="account">
+  <div class="page-title"><div><h2>내 계정 설정</h2><p>프로필, 기본 검색 옵션, n8n 연동 주소를 관리합니다.</p></div><button class="btn dark" id="saveAccountBtn" type="button">저장</button></div>
+  <div class="split">
+    <div class="card">
+      <h3>프로필</h3>
+      <div class="form">
+        <div class="field"><label>이름</label><input id="acctName" value="이트너스 사용자" /></div>
+        <div class="field"><label>부서/역할</label><input id="acctDept" value="리서치팀" /></div>
+        <div class="field"><label>기본 인사이트 톤</label><select><option>실무 보고서형</option><option>임원 보고형</option><option>간단 뉴스레터형</option></select></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>n8n 연동 설정</h3>
+      <p style="color:var(--muted);font-size:13px">검색·인사이트·뉴스 요약·히스토리 기능이 연결될 n8n Webhook 주소입니다.</p>
+      <div class="form">
+        <div class="field"><label>AI 인사이트 Webhook</label><input id="cfgInsightUrl" placeholder="https://n8n.mokai.kr/webhook/research-on/search" /></div>
+        <div class="field"><label>뉴스 기사 검색 Webhook</label><input id="cfgNewsSearchUrl" placeholder="https://n8n.mokai.kr/webhook/news-search" /></div>
+        <div class="field"><label>뉴스 요약 Webhook</label><input id="cfgNewsUrl" placeholder="https://n8n.mokai.kr/webhook/news-summary" /></div>
+        <div class="field"><label>검색 히스토리 Webhook</label><input id="cfgHistoryUrl" placeholder="https://n8n.mokai.kr/webhook/research-on/history" /></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+// ══════════════════════════════════════════
+// ★ n8n Webhook URL 설정 — 계정 설정 페이지에서도 변경 가능 ★
+// ══════════════════════════════════════════
+let N8N_INSIGHT_URL = localStorage.getItem('ro_insight_url') || 'https://n8n.mokai.kr/webhook/research-on/search';
+let N8N_NEWS_URL = localStorage.getItem('ro_news_url') || 'https://여기에-n8n-주소를-붙여넣으세요/webhook/news-summary';
+let N8N_NEWS_SEARCH_URL = localStorage.getItem('ro_news_search_url') || 'https://여기에-n8n-주소를-붙여넣으세요/webhook/news-search';
+let N8N_HISTORY_URL = localStorage.getItem('ro_history_url') || 'https://여기에-n8n-주소를-붙여넣으세요/webhook/research-on/history';
+
+const DATA = {"core": [{"d1": "글로벌 인력지원", "d2": "비자·체류 지원", "d3": "체류·비자 제도지원", "keyword": "K-Tech Pass", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "비자·체류 지원", "d3": "체류·비자 제도지원", "keyword": "영주권", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "비자·체류 지원", "d3": "체류·비자 제도지원", "keyword": "출입국 디지털화", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "정착·생활 지원", "d3": "생활·가족 정착지원", "keyword": "온보딩", "job": "GHD, 채용"}, {"d1": "글로벌 인력지원", "d2": "정착·생활 지원", "d3": "생활·가족 정착지원", "keyword": "다문화가정", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "정착·생활 지원", "d3": "생활·가족 정착지원", "keyword": "주택 임대", "job": "GHD, 사택관리"}, {"d1": "글로벌 인력지원", "d2": "커뮤니티·리텐션", "d3": "생활·가족 정착지원", "keyword": "리텐션", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "행정·문서 지원", "d3": "공증·행정대행 지원", "keyword": "아포스티유", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "행정·문서 지원", "d3": "공증·행정대행 지원", "keyword": "공증", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "행정·문서 지원", "d3": "공증·행정대행 지원", "keyword": "행정대행", "job": "GHD"}, {"d1": "기술·AI·데이터", "d2": "AI 운영·거버넌스", "d3": "AI 통제·검증체계", "keyword": "AI 거버넌스", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 운영·거버넌스", "d3": "AI 통제·검증체계", "keyword": "휴먼인더루프", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "내부망·온프레미스 운영", "keyword": "온프레미스", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "AI 시스템 아키첵처", "keyword": "시스템", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "AI 시스템 아키첵처", "keyword": "아키텍처", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "AI 플랫폼 운영", "keyword": "플랫폼", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 에이전트 활용기술", "keyword": "AI 에이전트", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 에이전트 활용기술", "keyword": "에이전틱 AI", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 워크플로우·오케스트레이션", "keyword": "AI 오케스트레이션", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 워크플로우·오케스트레이션", "keyword": "하네스 엔지니어링", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "지식관리·검색기술", "d3": "검색증강 생성기술", "keyword": "RAG", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "지식관리·검색기술", "d3": "지식모델링·검색기반 기술", "keyword": "온톨로지", "job": "공통"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "사업장 보안관리", "keyword": "물리보안", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "사업장 보안관리", "keyword": "출입보안", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "출입·신분증 관리", "keyword": "사원증", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "출입·신분증 관리", "keyword": "출입증", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "정보보호 관리", "d3": "개인정보 보호관리", "keyword": "개인정보보호", "job": "공통"}, {"d1": "보안·리스크·컴플라이언스", "d2": "정보보호 관리", "d3": "보안정책·거버넌스", "keyword": "기업보안", "job": "공통"}, {"d1": "보안·리스크·컴플라이언스", "d2": "정보보호 관리", "d3": "보안정책·거버넌스", "keyword": "보안 거버넌스", "job": "공통"}, {"d1": "산업·시장 인텔리전스", "d2": "반도체 기술·제품동향", "d3": "메모리·AI반도체 동향", "keyword": "HBM", "job": "공통"}, {"d1": "산업·시장 인텔리전스", "d2": "반도체 산업동향", "d3": "글로벌 시장동향", "keyword": "수출 규제", "job": "공통"}, {"d1": "산업·시장 인텔리전스", "d2": "첨단기술 트렌드", "d3": "AI·로보틱스 기술동향", "keyword": "Physical AI", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "EHS 관리체계", "d3": "EHS 운영관리", "keyword": "EHS", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "EHS 관리체계", "d3": "EHS 운영관리", "keyword": "환경안전", "job": "교육운영"}, {"d1": "안전보건환경(EHS)", "d2": "교육·인식제고", "d3": "법정·안전교육 운영", "keyword": "안전교육", "job": "교육운영"}, {"d1": "안전보건환경(EHS)", "d2": "비상대응·예방관리", "d3": "화재·비상대응 관리", "keyword": "비상대응", "job": "교육운영"}, {"d1": "안전보건환경(EHS)", "d2": "비상대응·예방관리", "d3": "화재·비상대응 관리", "keyword": "화재예방", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 법규대응", "d3": "법정 의무·규제 대응", "keyword": "산업안전보건법", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 법규대응", "d3": "법정 의무·규제 대응", "keyword": "중대재해처벌법", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 운영", "d3": "안전·보건 관리", "keyword": "보건관리", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 운영", "d3": "안전·보건 관리", "keyword": "안전관리", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "위험관리·예방활동", "d3": "위험성 평가관리", "keyword": "위험성평가", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "강사·콘텐츠 운영", "keyword": "강사", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "디지털·AI 역량교육", "keyword": "AI 교육", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "온라인 학습플랫폼 운영", "keyword": "교육플랫폼", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "온라인 학습플랫폼 운영", "keyword": "온라인 교육", "job": "공통"}, {"d1": "인사·조직", "d2": "근무제도·복무", "d3": "근무제도 운영", "keyword": "유연 근무제", "job": "공통"}, {"d1": "인사·조직", "d2": "근무제도·복무", "d3": "휴직·휴가 제도운영", "keyword": "육아휴직", "job": "공통"}, {"d1": "인사·조직", "d2": "근무제도·복무", "d3": "휴직·휴가 제도운영", "keyword": "출산휴가", "job": "공통"}, {"d1": "인사·조직", "d2": "글로벌 HR 운영", "d3": "해외근무자 지원", "keyword": "주재원", "job": "GHD, 복리후생"}, {"d1": "인사·조직", "d2": "노무·근로관계", "d3": "노동관계 법·제도 대응", "keyword": "노란봉투법", "job": "공통"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "급여·세무·사회보험 지원", "keyword": "4대 보험", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "급여·세무·사회보험 지원", "keyword": "연말정산", "job": "GHD"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "개인연금", "job": "공통"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "선택적 복지", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "의료비", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "휴양소", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "난임", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "복지몰", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "복지 포인트", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "총보상 전략", "keyword": "직원 경험", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "총보상 전략", "keyword": "총보상", "job": "복리후생"}, {"d1": "인사·조직", "d2": "인력 운영", "d3": "비정규직 인력운영", "keyword": "계약직", "job": "공통"}, {"d1": "인사·조직", "d2": "조직문화·변화관리", "d3": "조직문화 운영", "keyword": "조직문화", "job": "공통"}, {"d1": "인사·조직", "d2": "채용·온보딩", "d3": "면접·선발 운영", "keyword": "면접장", "job": "채용"}, {"d1": "인사·조직", "d2": "채용·온보딩", "d3": "입사 전 절차관리", "keyword": "채용 검진", "job": "채용"}, {"d1": "인사·조직", "d2": "채용·온보딩", "d3": "입사자 온보딩 지원", "keyword": "웰컴키트", "job": "채용"}, {"d1": "총무·오피스 운영", "d2": "부동산·임대관리", "d3": "임대·거점 관리", "keyword": "임대관리", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "시설·공간 운영", "d3": "시설 운영관리", "keyword": "시설관리", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "시설·공간 운영", "d3": "시설 운영관리", "keyword": "시설운영", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "공유오피스", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "사무환경", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "스마트오피스", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "하이브리드워크", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "자산·비품관리", "d3": "비품·소모품 관리", "keyword": "비품관리", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "오피스 물류 운영", "d3": "사내 문서·물품 배송", "keyword": "사내이사", "job": "사내물류"}, {"d1": "총무·오피스 운영", "d2": "오피스 물류 운영", "d3": "사내 문서·물품 배송", "keyword": "무인택배함", "job": "사내물류"}, {"d1": "총무·오피스 운영", "d2": "오피스 물류 운영", "d3": "사내 문서·물품 배송", "keyword": "키오스크", "job": "사내물류"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "세미나", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "컨퍼런스", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "박람회", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "행사", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "프로그램", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "재무제표", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "매출", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "실적", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "분기실적", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "사업 확장", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "투자", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "신사업", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "해외진출", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "리스크", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "시장·산업 동향", "keyword": "시장 점유율", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "시장·산업 동향", "keyword": "경쟁사", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "정책·제도", "keyword": "정책", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "정책·제도", "keyword": "제도", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "도급", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "운영 방식", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "운영 매뉴얼", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "대행", "job": "공통"}], "ext": {"target": ["삼성전자", "SK하이닉스", "주요 대기업", "대기업", "중견기업", "스타트업", "공공기관", "지자체", "외국계 기업", "글로벌 기업", "대학교", "협력사", "외국인", "외국인 근로자", "외국인 임직원", "산학장학생", "인턴", "저연차 사원", "보직자", "임원"], "scope": ["국내", "해외", "글로벌", "사내", "사외", "서울", "수도권", "경기", "수원", "용인", "평택", "화성", "천안", "온양", "판교", "미국", "중국", "일본", "대만", "베트남"], "industry": ["반도체", "제조업", "IT", "바이오", "교육 서비스", "BPO", "아웃소싱"], "time": ["2024", "2025", "2026", "최신", "최근 3개월", "지난 3년", "과거 5년"], "intent": ["동향", "트렌드", "사례", "시장 조사", "산업 분석", "분석", "비교", "비용", "후기", "효과", "만족도", "개선", "이슈 모니터링", "운영", "지원"], "content": ["인사이트", "보도자료", "PDF", "보고서", "뉴스", "정부 자료", "논문", "블로그", "공고", "입찰공고"]}};
+
+const $ = (sel, root=document) => root.querySelector(sel);
+const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+const selected = {core:[], front:[], back:[]};
+let step = 0;
+let currentPage = 'dashboard';
+let poolD1 = null;
+let poolD2 = null;
+let mindLevel = 0;
+let mindPath = [];
+const frontKeys = [['target','대상 키워드'],['scope','범위 키워드'],['industry','산업 키워드'],['time','시점 키워드']];
+const backKeys = [['intent','의도 키워드'],['content','콘텐츠 유형 키워드']];
+
+function esc(s){ return String(s).replace(/[&<>'"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+function groupCore(rows){
+  const obj={};
+  rows.forEach(r=>{
+    obj[r.d1] ??= {count:0, d2:{}};
+    obj[r.d1].count++;
+    obj[r.d1].d2[r.d2] ??= {count:0, d3:{}};
+    obj[r.d1].d2[r.d2].count++;
+    obj[r.d1].d2[r.d2].d3[r.d3] ??= [];
+    obj[r.d1].d2[r.d2].d3[r.d3].push(r.keyword);
+  });
+  return obj;
+}
+function showToast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2600); }
+
+// ── 페이지 전환 ──
+function showPage(id){
+  const target = document.getElementById(id); if(!target) return;
+  $$('.page').forEach(p=>p.classList.toggle('active', p.id===id));
+  $$('.nav-item[data-page]').forEach(b=>b.classList.toggle('active', b.dataset.page===id));
+  currentPage=id; $('#sidebar')?.classList.remove('open');
+  closeUserPopup();
+  if(id==='run'){ $('#runQuery').textContent = getFinalQuery() || '새 리서치 만들기에서 선택한 최종 검색어가 연결됩니다.'; updateRunOptions(); }
+  if(id==='dashboard') renderDashboard();
+  if(id==='keywords') renderKeywordsPage();
+  if(id==='insight') renderInsightPage();
+  if(id==='newssum') renderNewsSumPage();
+  if(id==='history') renderHistoryPage();
+  if(id==='saved') renderSavedPage();
+  if(id==='account') renderAccountPage();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function switchMode(mode){
+  $$('.tab[data-mode]').forEach(t=>t.classList.toggle('active', t.dataset.mode===mode));
+  $$('.mode-panel').forEach(p=>p.classList.toggle('active', p.id==='mode-'+mode));
+  updatePayload();
+}
+function setStep(n){
+  step = Math.max(0, Math.min(2, n));
+  $$('.builder-step').forEach(p=>p.classList.toggle('active', Number(p.dataset.step)===step));
+  $$('.step-dot').forEach(d=>d.classList.toggle('active', Number(d.dataset.stepDot)===step));
+  $('#prevStep').disabled = step===0;
+  $('#nextStep').textContent = step===2 ? '고급 옵션으로 이동 →' : '다음 →';
+}
+function toggleValue(group, value){
+  const arr = selected[group]; const i = arr.indexOf(value);
+  if(i>=0) arr.splice(i,1); else arr.push(value);
+  updateSelection(); renderCore(); renderExt(); updatePayload();
+}
+function removeValue(group, value){
+  const arr=selected[group]; const i=arr.indexOf(value); if(i>=0) arr.splice(i,1);
+  updateSelection(); renderCore(); renderExt(); updatePayload();
+}
+function getFinalQuery(){ return [...selected.front, ...selected.core, ...selected.back].join(' '); }
+function updateSelection(){
+  const tagBox=$('#selectedTags'); const items=[];
+  [['front','Front'],['core','Core'],['back','Back']].forEach(([g,label])=>selected[g].forEach(v=>items.push(`<span class="chip selected">${label} · ${esc(v)} <button class="x" type="button" data-remove="${g}" data-value="${esc(v)}">×</button></span>`)));
+  tagBox.innerHTML = items.length ? items.join('') : '<span style="color:#94a3b8;font-weight:800">아직 선택한 키워드가 없습니다.</span>';
+  $('#finalQuery').textContent = getFinalQuery() || '선택한 키워드가 여기에 표시됩니다.';
+}
+function renderCore(){
+  const q = ($('#coreSearch')?.value || '').trim().toLowerCase();
+  const rows = DATA.core.filter(r => !q || [r.d1,r.d2,r.d3,r.keyword].join(' ').toLowerCase().includes(q));
+  const g = groupCore(rows);
+  const html = Object.entries(g).map(([d1,d1v])=>{
+    const d2Html = Object.entries(d1v.d2).map(([d2,d2v])=>{
+      const d3Html = Object.entries(d2v.d3).map(([d3,kws])=>`<div class="depth3-row"><div class="depth3-title">${esc(d3)} <span class="badge gray">${kws.length}개</span></div><div>${kws.map(kw=>`<button class="chip ${selected.core.includes(kw)?'selected':''}" type="button" data-core="${esc(kw)}">${esc(kw)}</button>`).join('')}</div></div>`).join('');
+      return `<div class="depth2-box"><div class="depth2-head"><span>${esc(d2)}</span><span class="badge gray">${d2v.count}개</span></div><div class="depth2-body">${d3Html}</div></div>`;
+    }).join('');
+    return `<div class="core-category"><div class="core-category-head"><h4>${esc(d1)}</h4><span class="badge blue">전체 ${d1v.count}개</span></div><div class="core-category-body">${d2Html}</div></div>`;
+  }).join('');
+  $('#coreList').innerHTML = html || '<div class="empty-state"><h3>검색 결과 없음</h3><p>다른 키워드로 검색해보세요.</p></div>';
+}
+function renderExt(){
+  const front = frontKeys.map(([key,title])=>`<div class="exp-box"><h4>${title}</h4>${DATA.ext[key].map(v=>`<button class="chip ${selected.front.includes(v)?'selected':''}" type="button" data-front="${esc(v)}">${esc(v)}</button>`).join('')}</div>`).join('');
+  const back = backKeys.map(([key,title])=>`<div class="exp-box"><h4>${title}</h4>${DATA.ext[key].map(v=>`<button class="chip ${selected.back.includes(v)?'selected':''}" type="button" data-back="${esc(v)}">${esc(v)}</button>`).join('')}</div>`).join('');
+  $('#frontList').innerHTML = front; $('#backList').innerHTML = back;
+}
+let includeDomains = [];
+let excludeDomains = [];
+function renderDomTags(containerId, arr){
+  const container = $('#'+containerId); const input = container.querySelector('input');
+  container.querySelectorAll('.tag-pill').forEach(e=>e.remove());
+  arr.forEach((d,i)=>{
+    const tag = document.createElement('span'); tag.className='tag-pill';
+    tag.innerHTML = esc(d) + ' <span class="rm">×</span>';
+    tag.querySelector('.rm').addEventListener('click', ()=>{ arr.splice(i,1); renderDomTags(containerId, arr); updatePayload(); });
+    container.insertBefore(tag, input);
+  });
+}
+function buildTavilyPayload(){
+  const query = getFinalQuery();
+  const depth = $('#searchDepth')?.value || 'basic';
+  const maxResults = parseInt($('#maxResults')?.value || '5', 10);
+  const startDate = $('#startDate')?.value || '';
+  const endDate = $('#endDate')?.value || '';
+  const country = $('#country')?.value || '';
+  const includeImages = !!$('#includeImages')?.checked;
+  const includeImgDesc = !!$('#includeImgDesc')?.checked;
+  const includeRaw = !!$('#includeRaw')?.checked;
+  const insightGuide = ($('#insightGuide')?.value || '').trim();
+  const excludeKeywords = ($('#excludeKeywords')?.value || '').trim();
+
+  const tavily_params = { query: query || '키워드를 선택해주세요' };
+  if(depth !== 'basic') tavily_params.search_depth = depth;
+  tavily_params.max_results = maxResults;
+  if(startDate) tavily_params.start_date = startDate;
+  if(endDate) tavily_params.end_date = endDate;
+  if(country) tavily_params.country = country;
+  if(includeDomains.length) tavily_params.include_domains = [...includeDomains];
+  if(excludeDomains.length) tavily_params.exclude_domains = [...excludeDomains];
+  if(includeImages) tavily_params.include_images = true;
+  if(includeImages && includeImgDesc) tavily_params.include_image_descriptions = true;
+  if(includeRaw) tavily_params.include_raw_content = true;
+
+  const payload = { keyword: query || '키워드를 선택해주세요', tavily_params };
+  if(insightGuide) payload.insight_guide = insightGuide;
+  if(excludeKeywords) payload.exclude_keywords = excludeKeywords;
+  payload.requested_at = new Date().toISOString();
+  return payload;
+}
+function updatePayload(){
+  const el=$('#payloadPreview'); if(el) el.textContent = JSON.stringify(buildTavilyPayload(),null,2);
+}
+function updateRunOptions(){
+  const p = buildTavilyPayload();
+  const el = $('#runOptions'); if(!el) return;
+  const tp = p.tavily_params;
+  const parts = [tp.search_depth||'basic', `max ${tp.max_results}`];
+  if(tp.country) parts.push(tp.country);
+  if(tp.include_raw_content) parts.push('raw content 포함');
+  el.textContent = parts.join(' · ');
+}
+function initPool(){
+  const g=groupCore(DATA.core);
+  $('#poolDepth1').innerHTML = Object.keys(g).map(d1=>`<button class="pool-item" type="button" data-pool-d1="${esc(d1)}"><span>${esc(d1)}</span><span>${g[d1].count}</span></button>`).join('');
+  $('#poolCountBadge').textContent = DATA.core.length + ' Keywords';
+  renderMindmap();
+}
+function renderPoolD2(){
+  const g=groupCore(DATA.core); if(!poolD1) return;
+  $$('.pool-item[data-pool-d1]').forEach(b=>b.classList.toggle('active', b.dataset.poolD1===poolD1));
+  $('#poolDepth2').className=''; $('#poolDepth2').innerHTML=Object.entries(g[poolD1].d2).map(([d2,v])=>`<button class="pool-item" type="button" data-pool-d2="${esc(d2)}"><span>${esc(d2)}</span><span>${v.count}</span></button>`).join('');
+  $('#poolDepth3').className='empty-state'; $('#poolDepth3').textContent='2-Depth를 선택하세요.';
+}
+function renderPoolD3(){
+  const g=groupCore(DATA.core); if(!poolD1||!poolD2) return;
+  $$('.pool-item[data-pool-d2]').forEach(b=>b.classList.toggle('active', b.dataset.poolD2===poolD2));
+  const d3s=g[poolD1].d2[poolD2].d3;
+  $('#poolDepth3').className=''; $('#poolDepth3').innerHTML=Object.entries(d3s).map(([d3,kws])=>`<div class="depth3-row"><div class="depth3-title">${esc(d3)} <span class="badge gray">${kws.length}개</span></div>${kws.map(kw=>`<button class="chip" type="button" data-pool-kw="${esc(kw)}">${esc(kw)}</button>`).join('')}</div>`).join('');
+}
+function renderMindmap(){
+  const map=$('#mindmap'); if(!map) return;
+  const g=groupCore(DATA.core); let nodes=[];
+  const center = mindLevel===0 ? '키워드' : mindPath[mindPath.length-1];
+  nodes.push(`<button class="node center" type="button">${esc(center)}</button>`);
+  let items=[];
+  if(mindLevel===0) items=Object.keys(g).map(x=>({label:x, type:'depth1'}));
+  if(mindLevel===1) items=Object.keys(g[mindPath[0]].d2).map(x=>({label:x, type:'depth2'}));
+  if(mindLevel===2) items=Object.keys(g[mindPath[0]].d2[mindPath[1]].d3).map(x=>({label:x, type:'depth3'}));
+  if(mindLevel===3) items=g[mindPath[0]].d2[mindPath[1]].d3[mindPath[2]].map(x=>({label:x, type:'keyword'}));
+  const cx=50, cy=50, radius = mindLevel===3 ? 38 : 40;
+  items.forEach((it,i)=>{ const angle=(Math.PI*2*i/items.length)-Math.PI/2; const x=cx+Math.cos(angle)*radius; const y=cy+Math.sin(angle)*radius; nodes.push(`<button class="node ${it.type}" style="left:${x}%;top:${y}%" type="button" data-mind="${esc(it.label)}">${esc(it.label)}</button>`); });
+  map.innerHTML=nodes.join(''); $('#mindBack').disabled=mindLevel===0; $('#mindTitle').textContent = mindLevel===0 ? '전체 키워드' : mindPath.join(' › ');
+}
+function simulateRun(){
+  let pct=0; $('#runStatus').textContent='n8n 워크플로우 실행 중...'; $('#runProgress').style.width='0%';
+  const timer=setInterval(()=>{ pct+=20; $('#runProgress').style.width=pct+'%'; if(pct>=100){clearInterval(timer); $('#runStatus').textContent='완료: 검색 결과 10건 수집, 본문 8건 추출 성공';} },350);
+}
+function initSubscribeCats(){ $('#subscribeCats').innerHTML=[...new Set(DATA.core.map(r=>r.d1))].map((d1,i)=>`<label class="chip"><input type="checkbox" ${i<3?'checked':''} /> ${esc(d1)}</label>`).join(''); }
+
+// ══════════════════════════════════════════
+// 관심 키워드 / 저장 자료 / 키워드 세트
+// ══════════════════════════════════════════
+let subscribedKws = JSON.parse(localStorage.getItem('ro_subscribed')||'[]');
+let savedDocs = JSON.parse(localStorage.getItem('ro_saved')||'[]');
+let keywordSets = JSON.parse(localStorage.getItem('ro_sets')||'null') || [
+  {name:'외국인 임직원 정착지원', core:['온보딩','리텐션'], ext:['국내','대기업','사례','뉴스']},
+  {name:'AI 자동화 트렌드', core:['AI 에이전트','RAG'], ext:['글로벌','보고서','인사이트']}
+];
+function persist(){
+  localStorage.setItem('ro_subscribed', JSON.stringify(subscribedKws));
+  localStorage.setItem('ro_saved', JSON.stringify(savedDocs));
+  localStorage.setItem('ro_sets', JSON.stringify(keywordSets));
+}
+function toggleSubscribe(kw){
+  const i = subscribedKws.indexOf(kw);
+  if(i>=0){ subscribedKws.splice(i,1); showToast(`"${kw}" 관심 키워드에서 제거되었습니다.`); }
+  else { subscribedKws.push(kw); showToast(`"${kw}" 관심 키워드에 추가되었습니다.`); }
+  persist(); renderKeywordsPage(); renderDashboard();
+}
+function renderKeywordsPage(){
+  $('#keywordSetsBody').innerHTML = keywordSets.map((s,i)=>`
+    <tr><td style="cursor:pointer" onclick="searchKeywordSet(${i})"><b>${esc(s.name)}</b></td><td>${s.core.map(esc).join(', ')}</td><td>${s.ext.map(esc).join(', ')}</td>
+    <td><button class="btn soft" type="button" onclick="searchKeywordSet(${i})">검색</button> <button class="btn line" type="button" onclick="deleteKeywordSet(${i})">삭제</button></td></tr>
+  `).join('') || '<tr><td colspan="4" style="color:var(--muted)">등록된 세트가 없습니다.</td></tr>';
+  $('#subscribedList').innerHTML = subscribedKws.length
+    ? subscribedKws.map(kw=>`<span class="chip selected" style="cursor:pointer" onclick="doGlobalSearch('${esc(kw)}')">${esc(kw)} <button class="x" type="button" onclick="event.stopPropagation();toggleSubscribe('${esc(kw)}')">×</button></span>`).join('')
+    : '<p style="color:var(--muted);font-size:13px">아직 관심 키워드가 없어요.</p>';
+}
+function searchKeywordSet(i){
+  const s = keywordSets[i]; if(!s) return;
+  const q = [...s.ext.slice(0,2), ...s.core, ...s.ext.slice(2)].join(' ');
+  doGlobalSearch(q);
+}
+function deleteKeywordSet(i){ keywordSets.splice(i,1); persist(); renderKeywordsPage(); showToast('키워드 세트가 삭제되었습니다.'); }
+function renderSavedPage(){
+  $('#savedCountBadge').textContent = savedDocs.length + ' Saved';
+  $('#savedGrid').innerHTML = savedDocs.length ? savedDocs.map((d,i)=>`
+    <div class="card" style="cursor:pointer" onclick="openDocModal(${i},'saved')"><span class="badge ${d.badge||'blue'}">${esc(d.type||'자료')}</span><h3>${esc(d.title)}</h3><p style="color:var(--muted)">${esc((d.body||'').slice(0,80))}${(d.body||'').length>80?'...':''}</p>
+    <button class="btn line" type="button" onclick="event.stopPropagation();deleteSavedDoc(${i})">삭제</button></div>
+  `).join('') : '<div class="empty-state"><h3>저장한 자료가 없어요</h3><p>AI 인사이트나 뉴스 요약에서 저장해보세요.</p></div>';
+}
+function deleteSavedDoc(i){ savedDocs.splice(i,1); persist(); renderSavedPage(); showToast('자료가 삭제되었습니다.'); }
+
+function renderDashboard(){
+  $('#statKeywordSets').textContent = keywordSets.length;
+  $('#statSavedDocs').textContent = savedDocs.length;
+  $('#statSubscribed').textContent = subscribedKws.length;
+  const today = new Date().toLocaleDateString('ko-KR');
+  $('#statSearchToday').textContent = searchHistory.filter(h=>h.date===today).length;
+  $('#dashHistBody').innerHTML = searchHistory.slice(0,5).map(h=>`
+    <tr class="dash-hist-row" data-kw="${esc(h.kw)}" style="cursor:pointer"><td><b>${esc(h.kw)}</b></td><td>${esc(h.date)} ${esc(h.time)}</td><td><span class="badge blue">${h.count}건</span></td></tr>
+  `).join('') || '<tr><td colspan="3" style="color:var(--muted)">검색 기록이 없습니다.</td></tr>';
+}
+
+// ══════════════════════════════════════════
+// 리서치 결과 (검색 키워드 기반 동적 생성)
+// ══════════════════════════════════════════
+let resultDocs = [];
+let currentResultKw = '';
+const RESULT_SOURCES = ['example.co.kr','example.com','gov.example','news.naver.com','itners-research.kr'];
+function generateResultsFor(kw){
+  currentResultKw = kw;
+  const templates = [
+    {suffix:'사례 분석', desc:'국내 기업의 적용 사례와 운영 방식을 정리한 자료', score:0.92, status:'success'},
+    {suffix:'최신 동향 리포트', desc:'최근 6개월간의 주요 변화와 시장 반응 요약', score:0.88, status:'success'},
+    {suffix:'정책·제도 자료', desc:'관련 규제 및 정책 변화에 대한 공공 자료', score:0.76, status:'fail'}
+  ];
+  resultDocs = templates.map((t,i)=>({
+    title: `${kw} ${t.suffix}`,
+    desc: t.desc,
+    source: RESULT_SOURCES[i % RESULT_SOURCES.length],
+    score: t.score,
+    status: t.status,
+    body: `■ ${kw} ${t.suffix}\n\n${t.desc}.\n\n${kw} 관련 동향은 최근 빠르게 변화하고 있으며, 이트너스 입장에서 선제적인 모니터링이 필요한 시점입니다.`
+  }));
+}
+function renderResults(kw){
+  $('#resultsSubtitle').textContent = kw ? `"${kw}" 검색 결과 — Tavily MCP 검색 결과와 AI 요약입니다.` : 'Tavily MCP 검색 결과와 AI 요약을 리스트로 확인합니다.';
+  $('#resultsBody').innerHTML = resultDocs.map((d,i)=>`
+    <tr><td style="cursor:pointer" onclick="openDocModal(${i},'result')"><b>${esc(d.title)}</b><br><small style="color:var(--muted)">${esc(d.desc)}</small></td>
+    <td>${esc(d.source)}</td><td><span class="badge ${d.score>=0.85?'green':'orange'}">${d.score.toFixed(2)}</span></td>
+    <td>${d.status==='success'?'<span class="badge blue">수집 성공</span>':'<span class="badge red">재수집 필요</span>'}</td>
+    <td>${d.status==='success'?`<button class="btn soft" type="button" onclick="saveResultDoc(${i})">저장</button>`:`<button class="btn line" type="button" onclick="retryResultDoc(${i})">재수집</button>`}</td></tr>
+  `).join('');
+}
+function saveResultDoc(i){
+  const d = resultDocs[i]; if(!d) return;
+  savedDocs.unshift({ title:d.title, body:d.body, type:'리서치 결과', badge:'blue' });
+  persist(); showToast('저장되었습니다.');
+}
+function retryResultDoc(i){
+  const d = resultDocs[i]; if(!d) return;
+  d.status = 'success'; d.score = 0.81;
+  renderResults($('#resultsSubtitle').textContent.match(/"([^"]+)"/)?.[1] || '');
+  showToast('재수집이 완료되었습니다.');
+}
+function saveAllResults(){
+  if(resultDocs.length===0){ showToast('저장할 결과가 없습니다.'); return; }
+  let n=0;
+  resultDocs.forEach(d=>{ if(d.status==='success'){ savedDocs.unshift({title:d.title, body:d.body, type:'리서치 결과', badge:'blue'}); n++; } });
+  persist(); showToast(`${n}건이 저장되었습니다.`);
+}
+function openDocModal(i, kind){
+  let doc;
+  if(kind==='result') doc = resultDocs[i];
+  if(kind==='saved') doc = savedDocs[i];
+  if(!doc) return;
+  $('#docModalTitle').textContent = doc.title;
+  $('#docModalMeta').innerHTML = `<span class="badge ${doc.badge||'blue'}">${esc(doc.type||'자료')}</span>`;
+  $('#docModalBody').textContent = doc.body || doc.desc || '';
+  $('#docModalOverlay').style.display = 'flex';
+}
+function closeDocModal(){ $('#docModalOverlay').style.display = 'none'; }
+
+
+// ══════════════════════════════════════════
+// 전역 검색 → AI 인사이트로 연결
+// ══════════════════════════════════════════
+function doGlobalSearch(kw){
+  if(!kw) return;
+  saveSearchHistory(kw);
+  generateResultsFor(kw);
+  showPage('results');
+  renderResults(kw);
+}
+
+// ══════════════════════════════════════════
+// AI 인사이트
+// ══════════════════════════════════════════
+let insightResults = JSON.parse(localStorage.getItem('ro_insights')||'[]');
+const INSIGHT_QUICK = ['SaaS','Physical AI','BPO','개인정보보호법','AI 에이전트','리텐션'];
+
+function renderInsightPage(){
+  $('#insightQuickChips').innerHTML = '<span style="font-size:12px;color:var(--muted);align-self:center;margin-right:4px">추천:</span>' +
+    INSIGHT_QUICK.map(k=>`<button class="chip" type="button" onclick="quickInsight('${esc(k)}')">${esc(k)}</button>`).join('');
+  renderInsightResultList();
+}
+function quickInsight(kw){ $('#insightKwInput').value = kw; generateInsight(kw); }
+function renderInsightResultList(){
+  const list = $('#insightResultList');
+  list.innerHTML = insightResults.length ? insightResults.map((r,i)=>`
+    <div class="list-item" style="cursor:default" onclick="event.stopPropagation()">
+      <div class="list-icon">${esc(r.kw.slice(0,2))}</div>
+      <div style="flex:1">
+        <h4>${esc(r.kw)} <span class="badge gray" style="margin-left:6px">${esc(r.date)}</span></h4>
+        <p style="white-space:pre-line">${esc(r.text)}</p>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="btn soft" type="button" onclick="copyInsight(${i})">복사</button>
+          <button class="btn green" type="button" onclick="saveInsight(${i})">저장</button>
+        </div>
+      </div>
+    </div>
+  `).join('') : '<div class="empty-state"><h3>아직 생성한 인사이트가 없어요</h3><p>키워드를 입력하고 AI 인사이트 생성 버튼을 눌러보세요.</p></div>';
+}
+function generateFallbackInsight(kw){
+  return `■ 핵심 동향\n${kw} 관련 논의가 최근 활발해지고 있으며, 국내 기업들의 관심도가 높아지는 추세입니다.\n\n■ 주목 포인트\n• 관련 기업의 투자·파트너십 확대 움직임\n• 제도·정책 변화에 따른 대응 필요성 증가\n\n■ 시사점\n${kw} 트렌드를 선제적으로 파악해 이트너스 서비스 방향에 반영할 시점입니다.`;
+}
+async function generateInsight(kwArg){
+  const kw = (kwArg || $('#insightKwInput').value || '').trim();
+  if(!kw){ showToast('키워드를 입력해주세요.'); return; }
+  const btn = $('#insightGenBtn');
+  btn.disabled = true; btn.innerHTML = '<span class="streaming-dot"></span>생성 중...';
+  saveSearchHistory(kw);
+
+  let text = '';
+  try {
+    const resp = await fetch(N8N_INSIGHT_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ keyword: kw })
+    });
+    if(!resp.ok) throw new Error('n8n 응답 오류');
+    const data = await resp.json();
+    text = data.insight || data.text || data.output || '';
+    if(!text) throw new Error('빈 응답');
+  } catch(e){
+    text = generateFallbackInsight(kw);
+  }
+
+  insightResults.unshift({ kw, text, date: new Date().toLocaleDateString('ko-KR') });
+  if(insightResults.length > 20) insightResults.pop();
+  localStorage.setItem('ro_insights', JSON.stringify(insightResults));
+  renderInsightResultList();
+  btn.disabled = false; btn.innerHTML = 'AI 인사이트 생성';
+}
+function copyInsight(i){
+  const r = insightResults[i]; if(!r) return;
+  navigator.clipboard?.writeText(r.text).then(()=>showToast('복사되었습니다.')).catch(()=>showToast('복사 완료'));
+}
+function saveInsight(i){
+  const r = insightResults[i]; if(!r) return;
+  savedDocs.unshift({ title:`[AI 인사이트] ${r.kw}`, body:r.text, type:'인사이트', badge:'purple' });
+  persist(); showToast('저장되었습니다.');
+}
+
+// ══════════════════════════════════════════
+// 뉴스 기사 요약 (n8n 연동)
+// ══════════════════════════════════════════
+let nsHistory = JSON.parse(localStorage.getItem('ro_ns_history')||'[]');
+let currentNsSummary = '';
+let currentNsUrl = '';
+let nsArticles = [];
+const NS_QUICK = ['SaaS','Physical AI','BPO','개인정보보호법','AI 에이전트','리텐션'];
+
+function renderNewsSumPage(){
+  $('#nsQuickChips').innerHTML = '<span style="font-size:12px;color:var(--muted);align-self:center;margin-right:4px">추천:</span>' +
+    NS_QUICK.map(k=>`<button class="chip" type="button" onclick="quickNsSearch('${esc(k)}')">${esc(k)}</button>`).join('');
+  renderNsHistory();
+}
+function quickNsSearch(kw){ $('#nsKwInput').value = kw; searchNewsArticles(kw); }
+
+function generateFallbackArticles(kw){
+  const templates = [
+    {suffix:'관련 최신 기사', source:'news.naver.com'},
+    {suffix:'동향 분석 보도', source:'biz.chosun.com'},
+    {suffix:'정책 변화 소식', source:'hani.co.kr'}
+  ];
+  return templates.map((t,i)=>({
+    title: `${kw} ${t.suffix}`,
+    url: `https://${t.source}/article/${1000+i}`,
+    source: t.source,
+    snippet: `${kw} 관련 최근 보도 내용을 요약하면, 업계 전반의 관심이 높아지고 있으며 관련 기업들의 대응이 이어지고 있다는 내용입니다.`,
+    publishedDate: ''
+  }));
+}
+async function searchNewsArticles(kwArg){
+  const kw = (kwArg || $('#nsKwInput').value || '').trim();
+  if(!kw){ showToast('키워드를 입력해주세요.'); return; }
+  $('#nsKwInput').value = kw;
+
+  const btn = $('#nsSearchBtn'); btn.disabled = true; btn.innerHTML = '<span class="streaming-dot"></span>검색 중...';
+  $('#nsArticleListHead').style.display = 'block';
+  $('#nsArticleListSub').textContent = `"${kw}" 검색 중...`;
+  $('#nsArticleList').innerHTML = '<div class="empty-state"><h3><span class="streaming-dot"></span>기사를 찾고 있습니다</h3></div>';
+  $('#nsResultCard').style.display = 'none';
+
+  try {
+    const resp = await fetch(N8N_NEWS_SEARCH_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ keyword: kw })
+    });
+    if(!resp.ok) throw new Error('n8n 오류');
+    const data = await resp.json();
+    nsArticles = data.articles || [];
+    if(!nsArticles.length) throw new Error('빈 응답');
+  } catch(e){
+    nsArticles = generateFallbackArticles(kw);
+  }
+
+  saveSearchHistory(kw);
+  $('#nsArticleListSub').textContent = `"${kw}" 관련 기사 ${nsArticles.length}건을 찾았어요. 클릭하면 요약합니다.`;
+  $('#nsArticleList').innerHTML = nsArticles.map((a,i)=>`
+    <div class="list-item" onclick="summarizeArticle(${i})"><div class="list-icon">📰</div>
+    <div><h4>${esc(a.title)} <span class="badge gray" style="margin-left:6px">${esc(a.source)}</span></h4><p>${esc(a.snippet||'')}</p></div></div>
+  `).join('');
+
+  btn.disabled = false; btn.innerHTML = '기사 검색';
+}
+function summarizeArticle(i){
+  const a = nsArticles[i]; if(!a) return;
+  summarizeNews(a.url, a.title);
+}
+async function summarizeNews(urlArg, titleArg){
+  const input = $('#nsUrlInput');
+  const url = (urlArg || input.value.trim());
+  if(!url){ showToast('뉴스 기사 URL을 입력해주세요.'); return; }
+  if(!url.startsWith('http')){ showToast('올바른 URL 형식으로 입력해주세요.'); return; }
+
+  const btn = $('#nsBtn'); const origBtnText = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<span class="streaming-dot"></span>요약 중...';
+  $('#nsResultCard').style.display = 'block';
+  $('#nsResultBody').textContent = 'AI가 기사를 읽고 요약하는 중입니다...';
+  $('#nsResultUrl').textContent = url;
+  $('#nsResultCard').scrollIntoView({behavior:'smooth', block:'center'});
+
+  let summary = '';
+  try {
+    const resp = await fetch(N8N_NEWS_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ '뉴스 링크': url })
+    });
+    if(!resp.ok) throw new Error('n8n 오류');
+    const data = await resp.json();
+    summary = data.text || data.output || data.summary || data.result || (Array.isArray(data)&&(data[0]?.text||data[0]?.output)) || '';
+    if(!summary) throw new Error('빈 응답');
+  } catch(e){
+    const fallbackTitle = titleArg || url;
+    summary = `요약을 가져오지 못했습니다. (제목: ${fallbackTitle})\n\n가능한 원인:\n• n8n Webhook URL이 설정되지 않았거나 워크플로우가 비활성 상태\n• 해당 기사가 크롤링을 차단하는 경우\n• 로그인이 필요한 기사인 경우\n\n계정 설정에서 뉴스 요약 Webhook 주소를 확인해주세요.`;
+  }
+
+  currentNsSummary = summary; currentNsUrl = url;
+  $('#nsResultBody').textContent = summary;
+
+  const hostname = url.match(/https?:\/\/([^/]+)/)?.[1] || url;
+  nsHistory.unshift({ url, hostname, summary, date: new Date().toLocaleDateString('ko-KR') });
+  if(nsHistory.length > 10) nsHistory.pop();
+  localStorage.setItem('ro_ns_history', JSON.stringify(nsHistory));
+  renderNsHistory();
+
+  btn.disabled = false; btn.innerHTML = origBtnText;
+}
+function renderNsHistory(){
+  const list = $('#nsHistoryList'); const clearBtn = $('#nsClearBtn');
+  if(!list) return;
+  if(nsHistory.length === 0){
+    list.innerHTML = '<div class="empty-state"><h3>요약 기록이 없어요</h3><p>키워드를 검색해서 기사를 요약해보세요.</p></div>';
+    if(clearBtn) clearBtn.style.display = 'none';
+    return;
+  }
+  if(clearBtn) clearBtn.style.display = 'inline-flex';
+  list.innerHTML = nsHistory.map((h,i)=>`
+    <div class="list-item" onclick="loadNsHistory(${i})"><div class="list-icon">📰</div>
+    <div><h4>${esc(h.hostname)} <span class="badge gray" style="margin-left:6px">${esc(h.date)}</span></h4><p>${esc(h.summary.slice(0,90))}${h.summary.length>90?'...':''}</p></div></div>
+  `).join('');
+}
+function loadNsHistory(i){
+  const h = nsHistory[i]; if(!h) return;
+  $('#nsUrlInput').value = h.url; currentNsSummary = h.summary; currentNsUrl = h.url;
+  $('#nsResultCard').style.display = 'block';
+  $('#nsResultBody').textContent = h.summary; $('#nsResultUrl').textContent = h.url;
+}
+function clearNsHistory(){ nsHistory = []; localStorage.setItem('ro_ns_history','[]'); renderNsHistory(); $('#nsResultCard').style.display='none'; }
+function copyNsSummary(){ if(!currentNsSummary){showToast('먼저 요약을 실행해주세요.');return;} navigator.clipboard?.writeText(currentNsSummary).then(()=>showToast('복사되었습니다.')).catch(()=>showToast('복사 완료')); }
+function saveNsSummary(){ if(!currentNsSummary){showToast('먼저 요약을 실행해주세요.');return;} savedDocs.unshift({title:'[뉴스 요약] '+(currentNsUrl.match(/https?:\/\/([^/]+)/)?.[1]||currentNsUrl), body:currentNsSummary, type:'뉴스 요약', badge:'blue'}); persist(); showToast('저장되었습니다.'); }
+
+// ══════════════════════════════════════════
+// 검색 히스토리 + Google Sheets 연동
+// ══════════════════════════════════════════
+let searchHistory = JSON.parse(localStorage.getItem('ro_search_history')||'[]');
+let histFilterMode = 'all';
+const HIST_MAX = 50;
+
+function saveSearchHistory(q){
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('ko-KR');
+  const timeStr = now.toLocaleTimeString('ko-KR', {hour:'2-digit',minute:'2-digit'});
+  const idx = searchHistory.findIndex(h=>h.kw===q);
+  if(idx !== -1){
+    const item = {...searchHistory[idx], count:searchHistory[idx].count+1, date:dateStr, time:timeStr};
+    searchHistory.splice(idx,1); searchHistory.unshift(item);
+  } else {
+    searchHistory.unshift({kw:q, date:dateStr, time:timeStr, count:1});
+    if(searchHistory.length > HIST_MAX) searchHistory.pop();
+  }
+  localStorage.setItem('ro_search_history', JSON.stringify(searchHistory));
+  saveHistoryToSheets(q);
+}
+async function saveHistoryToSheets(q){
+  try {
+    await fetch(N8N_HISTORY_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ action:'save', keyword:q, name:$('#footerName')?.textContent||'이트너스 사용자', dept:'리서치팀', userId:'user_01', resultCount:0 })
+    });
+  } catch(e){ console.log('히스토리 저장 실패 (n8n 미연결):', e.message); }
+}
+async function loadHistoryFromSheets(){
+  const btn = $('#sheetsLoadBtn'); if(btn){ btn.disabled=true; btn.innerHTML='<span class="streaming-dot"></span>불러오는 중...'; }
+  try {
+    const resp = await fetch(N8N_HISTORY_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:'load'}) });
+    const data = await resp.json();
+    if(data.success && data.history){
+      data.history.forEach(row=>{
+        if(!row.keyword) return;
+        if(!searchHistory.find(h=>h.kw===row.keyword)){
+          searchHistory.push({kw:row.keyword, date:(row.datetimeStr||'').split(' ')[0]||'', time:(row.datetimeStr||'').split(' ')[1]||'', count:1});
+        }
+      });
+      localStorage.setItem('ro_search_history', JSON.stringify(searchHistory));
+      renderHistoryPage(); renderDashboard();
+      showSheetsStatus('success', `Google Sheets에서 ${data.total}건을 불러왔습니다.`);
+    } else throw new Error('데이터 없음');
+  } catch(e){ showSheetsStatus('error', 'n8n 연결이 필요합니다. 계정 설정에서 Webhook URL을 확인해주세요.'); }
+  if(btn){ btn.disabled=false; btn.innerHTML='Sheets 동기화'; }
+}
+async function exportHistoryToSheets(){
+  if(searchHistory.length===0){ showToast('내보낼 기록이 없습니다.'); return; }
+  showSheetsStatus('loading', `${searchHistory.length}건을 Google Sheets에 저장 중...`);
+  let success=0;
+  for(const h of searchHistory){
+    try{ await fetch(N8N_HISTORY_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'save',keyword:h.kw,name:'이트너스 사용자',dept:'리서치팀',userId:'user_01',resultCount:0})}); success++; }catch(e){}
+  }
+  showSheetsStatus('success', `${success}건이 저장되었습니다.`);
+}
+function showSheetsStatus(type, msg){
+  const el = $('#sheetsStatus'); if(!el) return;
+  const colors = { success:'var(--greenSoft)', error:'var(--redSoft)', loading:'#f8fafc' };
+  const text = { success:'var(--green)', error:'var(--red)', loading:'#475569' };
+  el.style.cssText = `display:block;padding:12px 16px;border-radius:14px;font-size:13px;font-weight:800;background:${colors[type]||colors.loading};color:${text[type]||text.loading}`;
+  el.textContent = msg;
+  if(type !== 'loading') setTimeout(()=>{ el.style.display='none'; }, 4000);
+}
+function getFilteredHistory(){
+  const today = new Date().toLocaleDateString('ko-KR');
+  const weekAgo = new Date(Date.now()-7*864e5).toLocaleDateString('ko-KR');
+  if(histFilterMode==='today') return searchHistory.filter(h=>h.date===today);
+  if(histFilterMode==='week') return searchHistory.filter(h=>h.date>=weekAgo);
+  if(histFilterMode==='month'){ const m = today.slice(0,7); return searchHistory.filter(h=>h.date && h.date.startsWith(m)); }
+  return searchHistory;
+}
+function renderHistoryPage(){
+  const today = new Date().toLocaleDateString('ko-KR');
+  const todayItems = searchHistory.filter(h=>h.date===today);
+  const topItem = [...searchHistory].sort((a,b)=>b.count-a.count)[0];
+  $('#histTotalCount').textContent = searchHistory.length;
+  $('#histTodayCount').textContent = todayItems.length;
+  $('#histTopKw').textContent = topItem ? topItem.kw : '—';
+
+  const filtered = getFilteredHistory();
+  const list = $('#histList');
+  if(filtered.length===0){
+    list.innerHTML = `<div class="empty-state"><h3>검색 기록이 없어요</h3><p>${histFilterMode==='all'?'키워드를 검색하면 여기에 기록됩니다.':'해당 기간의 검색 기록이 없습니다.'}</p></div>`;
+    return;
+  }
+  const maxCount = Math.max(...filtered.map(h=>h.count),1);
+  list.innerHTML = filtered.map(h=>{
+    const pct = Math.round(h.count/maxCount*100);
+    return `<div class="hist-row" onclick="doGlobalSearch('${esc(h.kw)}')">
+      <div style="flex:1"><b>${esc(h.kw)}</b><div style="font-size:12px;color:var(--muted);margin-top:2px">${esc(h.date)} ${esc(h.time)} · ${h.count}회 검색</div>
+      <div class="freq-bar"><span style="width:${pct}%"></span></div></div>
+      <button class="btn line" type="button" onclick="event.stopPropagation();deleteHistByKw('${esc(h.kw)}')">삭제</button>
+    </div>`;
+  }).join('');
+}
+function deleteHistByKw(kw){
+  searchHistory = searchHistory.filter(h=>h.kw!==kw);
+  localStorage.setItem('ro_search_history', JSON.stringify(searchHistory));
+  renderHistoryPage(); renderDashboard();
+  showToast(`"${kw}" 기록이 삭제되었습니다.`);
+}
+function clearAllHistory(){
+  if(searchHistory.length===0){ showToast('삭제할 기록이 없습니다.'); return; }
+  searchHistory = []; localStorage.setItem('ro_search_history','[]');
+  renderHistoryPage(); renderDashboard();
+  showToast('검색 기록이 모두 삭제되었습니다.');
+}
+
+// ══════════════════════════════════════════
+// 계정 설정 (n8n URL 저장)
+// ══════════════════════════════════════════
+function renderAccountPage(){
+  $('#cfgInsightUrl').value = N8N_INSIGHT_URL;
+  $('#cfgNewsSearchUrl').value = N8N_NEWS_SEARCH_URL;
+  $('#cfgNewsUrl').value = N8N_NEWS_URL;
+  $('#cfgHistoryUrl').value = N8N_HISTORY_URL;
+}
+function saveAccountSettings(){
+  N8N_INSIGHT_URL = $('#cfgInsightUrl').value.trim() || N8N_INSIGHT_URL;
+  N8N_NEWS_SEARCH_URL = $('#cfgNewsSearchUrl').value.trim() || N8N_NEWS_SEARCH_URL;
+  N8N_NEWS_URL = $('#cfgNewsUrl').value.trim() || N8N_NEWS_URL;
+  N8N_HISTORY_URL = $('#cfgHistoryUrl').value.trim() || N8N_HISTORY_URL;
+  localStorage.setItem('ro_insight_url', N8N_INSIGHT_URL);
+  localStorage.setItem('ro_news_search_url', N8N_NEWS_SEARCH_URL);
+  localStorage.setItem('ro_news_url', N8N_NEWS_URL);
+  localStorage.setItem('ro_history_url', N8N_HISTORY_URL);
+  $('#footerName').textContent = $('#acctName').value || '이트너스 사용자';
+  showToast('설정이 저장되었습니다.');
+}
+
+// ══════════════════════════════════════════
+// 사용자 메뉴 팝업 (사이드바 하단)
+// ══════════════════════════════════════════
+function toggleUserPopup(e){ e.stopPropagation(); $('#userPopup').classList.toggle('open'); }
+function closeUserPopup(){ $('#userPopup')?.classList.remove('open'); }
+document.addEventListener('click', e=>{
+  if(!e.target.closest('#sidebarFooter')) closeUserPopup();
+});
+function handleLogout(){
+  closeUserPopup();
+  showToast('로그아웃 되었습니다.');
+  $('#footerName').textContent = '로그인이 필요합니다';
+  $('#footerStatus').textContent = '클릭하여 로그인';
+}
+
+// ══════════════════════════════════════════
+// 이벤트 바인딩
+// ══════════════════════════════════════════
+function bindEvents(){
+  $$('.nav-item[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+  $$('[data-go]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.go)));
+  $('#mobileMenu')?.addEventListener('click',()=>$('#sidebar')?.classList.toggle('open'));
+  $$('.tab[data-mode]').forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.mode)));
+  $$('[data-mode-go]').forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.modeGo)));
+  $('#prevStep')?.addEventListener('click',()=>setStep(step-1));
+  $('#nextStep')?.addEventListener('click',()=>{ if(step<2) setStep(step+1); else switchMode('advanced'); });
+  $('#coreSearch')?.addEventListener('input',renderCore);
+  $('#expandAll')?.addEventListener('click',()=>$$('.core-category,.depth2-box').forEach(e=>e.classList.add('open')));
+  $('#collapseAll')?.addEventListener('click',()=>$$('.core-category,.depth2-box').forEach(e=>e.classList.remove('open')));
+  document.addEventListener('click',e=>{
+    const cat=e.target.closest('.core-category-head'); if(cat) cat.closest('.core-category').classList.toggle('open');
+    const d2=e.target.closest('.depth2-head'); if(d2) d2.closest('.depth2-box').classList.toggle('open');
+    const core=e.target.closest('[data-core]'); if(core) toggleValue('core', core.dataset.core);
+    const fr=e.target.closest('[data-front]'); if(fr) toggleValue('front', fr.dataset.front);
+    const ba=e.target.closest('[data-back]'); if(ba) toggleValue('back', ba.dataset.back);
+    const rm=e.target.closest('[data-remove]'); if(rm) removeValue(rm.dataset.remove, rm.dataset.value);
+    const pd1=e.target.closest('[data-pool-d1]'); if(pd1){ poolD1=pd1.dataset.poolD1; poolD2=null; renderPoolD2(); }
+    const pd2=e.target.closest('[data-pool-d2]'); if(pd2){ poolD2=pd2.dataset.poolD2; renderPoolD3(); }
+    const mn=e.target.closest('[data-mind]'); if(mn){ if(mindLevel<3){ mindPath.push(mn.dataset.mind); mindLevel++; renderMindmap(); } else { doGlobalSearch(mn.dataset.mind); } }
+    const pkw=e.target.closest('[data-pool-kw]'); if(pkw){ doGlobalSearch(pkw.dataset.poolKw); }
+    const guidePreset = e.target.closest('[data-guide-preset]');
+    if(guidePreset){
+      const presets = {
+        biz:{name:'사업 적용 가능성 중심', text:'시장 동향을 자사 서비스 확장 관점으로 정리해줘. 신규 사업 기회와 경쟁 환경을 함께 분석해줘.'},
+        hr:{name:'임직원 경험 중심', text:'온보딩, 리텐션, 커뮤니티 형성 요소를 강조해서 분석해줘. 임직원 경험 개선 관점에서 시사점을 제시해줘.'},
+        risk:{name:'리스크·컴플라이언스 중심', text:'개인정보, 보안, 법규 리스크를 함께 검토해서 분석해줘. 컴플라이언스 관점의 체크리스트도 포함해줘.'}
+      };
+      const p = presets[guidePreset.dataset.guidePreset];
+      if(p){ $('#guideName').value = p.name; $('#guideText').value = p.text; showToast('가이드가 적용되었습니다.'); }
+    }
+  });
+  $('#resetAll')?.addEventListener('click',()=>{selected.core=[]; selected.front=[]; selected.back=[]; updateSelection(); renderCore(); renderExt(); updatePayload();});
+  $('#copyQuery')?.addEventListener('click',()=>{navigator.clipboard?.writeText(getFinalQuery()); showToast('검색어가 복사되었습니다.');});
+  $('#copyPayload')?.addEventListener('click',()=>{navigator.clipboard?.writeText(JSON.stringify(buildTavilyPayload(),null,2)); showToast('JSON이 복사되었습니다.');});
+  ['searchDepth','startDate','endDate','maxResults','country','includeImages','includeImgDesc','includeRaw','insightGuide','excludeKeywords'].forEach(id=>$('#'+id)?.addEventListener('input',updatePayload));
+  $('#includeDomInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter' && e.target.value.trim()){ includeDomains.push(e.target.value.trim()); e.target.value=''; renderDomTags('includeDomArea', includeDomains); updatePayload(); }});
+  $('#excludeDomInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter' && e.target.value.trim()){ excludeDomains.push(e.target.value.trim()); e.target.value=''; renderDomTags('excludeDomArea', excludeDomains); updatePayload(); }});
+  $$('.tab[data-pool-view]').forEach(b=>b.addEventListener('click',()=>{ $$('.tab[data-pool-view]').forEach(x=>x.classList.toggle('active',x===b)); $$('.pool-view').forEach(v=>v.classList.toggle('active',v.id==='pool-'+b.dataset.poolView)); }));
+  $('#mindBack')?.addEventListener('click',()=>{ if(mindLevel>0){mindLevel--; mindPath.pop(); renderMindmap();} });
+  $('#simulateRun')?.addEventListener('click',simulateRun);
+  $('#aiSuggest')?.addEventListener('click',()=>{ selected.core=['리텐션','온보딩']; selected.front=['국내','주요 대기업','외국인 임직원','지난 3년']; selected.back=['사례','보고서','뉴스']; updateSelection(); renderCore(); renderExt(); updatePayload(); switchMode('detail'); });
+
+  // 전역 검색
+  $('#globalSearch')?.addEventListener('keydown', e=>{ if(e.key==='Enter' && e.target.value.trim()){ doGlobalSearch(e.target.value.trim()); e.target.value=''; }});
+
+  // AI 인사이트
+  $('#insightGenBtn')?.addEventListener('click', ()=>generateInsight());
+  $('#insightKwInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') generateInsight(); });
+
+  // 뉴스 요약
+  $('#nsSearchBtn')?.addEventListener('click', ()=>searchNewsArticles());
+  $('#nsKwInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') searchNewsArticles(); });
+  $('#nsBtn')?.addEventListener('click', ()=>summarizeNews());
+  $('#nsUrlInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter') summarizeNews(); });
+  $('#nsCopyBtn')?.addEventListener('click', copyNsSummary);
+  $('#nsSaveBtn')?.addEventListener('click', saveNsSummary);
+  $('#nsClearBtn')?.addEventListener('click', clearNsHistory);
+
+  // 검색 히스토리
+  $('#sheetsLoadBtn')?.addEventListener('click', loadHistoryFromSheets);
+  $('#exportSheetsBtn')?.addEventListener('click', exportHistoryToSheets);
+  $('#clearHistBtn')?.addEventListener('click', clearAllHistory);
+  $$('.tab[data-hist-filter]').forEach(b=>b.addEventListener('click', ()=>{ $$('.tab[data-hist-filter]').forEach(x=>x.classList.toggle('active',x===b)); histFilterMode=b.dataset.histFilter; renderHistoryPage(); }));
+
+  // 계정 설정 / 사용자 팝업
+  $('#saveAccountBtn')?.addEventListener('click', saveAccountSettings);
+  $('#sidebarFooter')?.addEventListener('click', e=>{ if(!e.target.closest('button')) toggleUserPopup(e); });
+  $('#userPopup')?.addEventListener('click', e=>{ const b=e.target.closest('[data-page]'); if(b){ closeUserPopup(); showPage(b.dataset.page); } });
+  $('#logoutBtn')?.addEventListener('click', e=>{ e.stopPropagation(); handleLogout(); });
+
+  // 상단 사용자 칩 → 계정 설정
+  $('#topUserChip')?.addEventListener('click', ()=>showPage('account'));
+
+  // 대시보드 히스토리 행 클릭 → 재검색
+  $('#dashHistBody')?.addEventListener('click', e=>{ const r=e.target.closest('.dash-hist-row'); if(r) doGlobalSearch(r.dataset.kw); });
+
+  // 리서치 결과
+  $('#saveAllResultsBtn')?.addEventListener('click', saveAllResults);
+  $('#goInsightBtn')?.addEventListener('click', ()=>{
+    if(!currentResultKw){ showToast('먼저 키워드를 검색해주세요.'); return; }
+    showPage('insight');
+    $('#insightKwInput').value = currentResultKw;
+    generateInsight(currentResultKw);
+  });
+
+  // 문서 상세 모달
+  $('#docModalClose')?.addEventListener('click', closeDocModal);
+  $('#docModalOverlay')?.addEventListener('click', e=>{ if(e.target.id==='docModalOverlay') closeDocModal(); });
+
+  // 새 키워드 세트 만들기 버튼 (고급 옵션 JSON으로부터 세트 자동 생성)
+  $('#newSetBtn')?.addEventListener('click', ()=>{ showToast('새 리서치 만들기에서 키워드를 선택해보세요.'); });
+
+  // 인사이트 가이드 저장
+  $('#saveGuideBtn')?.addEventListener('click', ()=>{
+    const name = $('#guideName').value.trim() || '내 분석 가이드';
+    showToast(`"${name}" 가이드가 저장되었습니다.`);
+  });
+
+  // 뉴스레터 발행 요청
+  $('#publishNewsletterBtn')?.addEventListener('click', ()=>{ showToast('발행 요청이 전송되었습니다. 검토 후 발행됩니다.'); });
+
+  // 아카이브 테이블 행 클릭 → 뉴스레터 보기로 이동
+  $('#archiveBody')?.addEventListener('click', e=>{
+    const row = e.target.closest('.archive-row');
+    if(row){ showPage('newsletter'); showToast(`"${row.dataset.title}" (${row.dataset.date}) 뉴스레터를 불러왔습니다.`); }
+  });
+
+  // 수신 설정 저장
+  $('#saveSubscribeBtn')?.addEventListener('click', ()=>{ showToast('수신 설정이 저장되었습니다.'); });
+}
+
+function init(){
+  renderCore(); renderExt(); updateSelection(); setStep(0); updatePayload(); initPool(); initSubscribeCats(); bindEvents();
+  generateResultsFor('외국인 임직원 리텐션');
+  renderResults('외국인 임직원 리텐션');
+  renderDashboard();
+}
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
