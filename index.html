@@ -353,17 +353,27 @@
         </div>
       </div>
       <button class="btn line" id="saveAllResultsBtn" type="button">선택 결과 모두 저장</button>
+      <button class="btn red" id="deleteSelectedResultsBtn" type="button">선택 결과 삭제</button>
     </div>
   </div>
   <div class="card table-card">
     <table><thead><tr>
       <th style="width:36px"><input type="checkbox" id="selectAllResults" title="전체 선택" /></th>
-      <th>검색 키워드</th><th>기사 제목</th><th>내용 요약</th><th>출처</th><th>관련성</th><th>작업</th>
+      <th>검색 키워드</th><th>검색일</th><th>관련성</th><th>결과 확인</th><th>작업</th>
     </tr></thead>
     <tbody id="resultsBody"></tbody></table>
   </div>
 </section>
 
+<div class="empty-state" id="resultsKwModalOverlay" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:220;border:0;border-radius:0;padding:40px 20px;align-items:flex-start;justify-content:center;overflow:auto">
+  <div class="card" style="max-width:680px;width:100%;margin-top:40px;text-align:left;color:var(--ink)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+      <div><h3 id="resultsKwModalTitle" style="margin:0 0 4px"></h3><p id="resultsKwModalSub" style="color:var(--muted);font-size:13px;margin:0"></p></div>
+      <button class="btn line" id="resultsKwModalClose" type="button" style="flex-shrink:0">닫기</button>
+    </div>
+    <div id="resultsKwModalList" class="list" style="margin-top:16px"></div>
+  </div>
+</div>
 <section class="page" id="saved">
   <div class="page-title"><div><h2>저장 자료함</h2><p>저장한 기사와 요약을 모아봅니다.</p></div><span class="badge purple" id="savedCountBadge">0 Saved</span></div>
   <div class="grid cols-3" id="savedGrid"></div>
@@ -1013,32 +1023,77 @@ function relevanceBadge(score){
   if(score>=0.65) return '<span class="badge orange">중간</span>';
   return '<span class="badge red">낮음</span>';
 }
+function computeKwStats(h){
+  const successDocs = (h.docs||[]).filter(d=>d.status==='success');
+  const count = successDocs.length;
+  const avgScore = count ? successDocs.reduce((s,d)=>s+(d.score||0),0)/count : 0;
+  return { count, avgScore, hasSuccess: count>0 };
+}
+function globalDocIndex(hidx, li){
+  let idx = 0;
+  for(let k=0;k<hidx;k++) idx += (resultHistory[k].docs||[]).length;
+  return idx + li;
+}
 function renderResults(){
   $('#resultsSubtitle').textContent = resultHistory.length ? '지금까지 검색한 모든 키워드의 결과를 한 번에 확인할 수 있습니다.' : '새 리서치 만들기에서 검색했던 키워드별 결과를 언제든지 다시 확인할 수 있습니다.';
   displayedDocs = [];
-  resultHistory.forEach(h=>{ h.docs.forEach(d=>{ displayedDocs.push({...d, kw:h.kw}); }); });
-  $('#resultsBody').innerHTML = displayedDocs.length ? displayedDocs.map((d,i)=>`
-    <tr data-row-kw="${esc(d.kw)}">
-      <td><input type="checkbox" class="result-chk" data-idx="${i}" /></td>
-      <td><span class="badge blue">${esc(d.kw)}</span></td>
-      <td style="cursor:pointer" onclick="openDocModal(${i},'result')"><b>${esc(d.title)}</b></td>
-      <td style="color:var(--muted);font-size:13px">${esc(d.desc)}</td>
-      <td>${esc(d.source)}</td><td>${relevanceBadge(d.score)}</td>
-      <td>${d.status==='success'?`<button class="btn soft" type="button" onclick="saveResultDoc(${i})">저장</button>`:`<button class="btn line" type="button" onclick="retryResultDoc(${i})">재수집</button>`}</td>
-    </tr>
-  `).join('') : '<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:30px">아직 검색한 결과가 없습니다.</td></tr>';
+  resultHistory.forEach((h,hi)=>{ (h.docs||[]).forEach(d=>{ displayedDocs.push({...d, kw:h.kw, hidx:hi}); }); });
+
+  $('#resultsBody').innerHTML = resultHistory.length ? resultHistory.map((h,hi)=>{
+    const { count, avgScore, hasSuccess } = computeKwStats(h);
+    return `<tr data-row-kw="${esc(h.kw)}">
+      <td><input type="checkbox" class="result-chk" data-hidx="${hi}" /></td>
+      <td><span class="badge blue">${esc(h.kw)}</span></td>
+      <td style="color:var(--muted);font-size:13px">${esc(h.date)}</td>
+      <td>${hasSuccess ? relevanceBadge(avgScore) : '<span class="badge red">낮음</span>'}</td>
+      <td><button class="btn soft" type="button" onclick="openResultsKwModal(${hi})">${count>0 ? count+'건 보기' : '결과 확인'}</button></td>
+      <td><button class="btn line" type="button" onclick="retryKwSearch(${hi})">재검색</button></td>
+    </tr>`;
+  }).join('') : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">아직 검색한 결과가 없습니다.</td></tr>';
   updateExportBtnLabel();
+}
+function openResultsKwModal(hidx){
+  const h = resultHistory[hidx]; if(!h) return;
+  $('#resultsKwModalTitle').textContent = h.kw;
+  $('#resultsKwModalSub').textContent = `${h.date}${h.time?' '+h.time:''} · ${(h.docs||[]).length}건`;
+  $('#resultsKwModalList').innerHTML = (h.docs||[]).length ? h.docs.map((d,li)=>{
+    const gi = globalDocIndex(hidx, li);
+    return `<div class="list-item" style="cursor:default" onclick="event.stopPropagation()">
+      <div class="list-icon">📄</div>
+      <div style="flex:1">
+        <h4 style="cursor:pointer" onclick="openDocModal(${gi},'result')">${esc(d.title)}</h4>
+        <p>${esc(d.desc||'')}</p>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;gap:10px;flex-wrap:wrap">
+          <div style="display:flex;align-items:center;gap:8px"><small style="color:var(--muted)">${esc(d.source||'')}</small>${relevanceBadge(d.score||0)}</div>
+          ${d.status==='success'?`<button class="btn soft" type="button" onclick="saveResultDoc(${gi})">저장</button>`:'<span class="badge red">수집 실패</span>'}
+        </div>
+      </div>
+    </div>`;
+  }).join('') : '<div class="empty-state"><h3>결과가 없습니다</h3></div>';
+  $('#resultsKwModalOverlay').style.display = 'flex';
+}
+function closeResultsKwModal(){ $('#resultsKwModalOverlay').style.display = 'none'; }
+async function retryKwSearch(hidx){
+  const h = resultHistory[hidx]; if(!h) return;
+  showToast('다시 검색 중입니다...');
+  const parts = { front:[...(h.front||[])], core:[...(h.core||[])], back:[...(h.back||[])] };
+  await generateResultsFor(h.kw, parts);
+  renderResults();
 }
 function getSelectedDocs(){
   const checked = $$('.result-chk:checked');
   if(!checked.length) return displayedDocs; // 선택 없으면 전체
-  return [...checked].map(c=>displayedDocs[+c.dataset.idx]).filter(Boolean);
+  const hidxSet = new Set([...checked].map(c=>+c.dataset.hidx));
+  return displayedDocs.filter(d=>hidxSet.has(d.hidx));
 }
 function updateExportBtnLabel(){
   const checked = $$('.result-chk:checked');
   const btn = $('#exportResultsBtn');
   if(!btn) return;
-  btn.textContent = checked.length ? `⬇ ${checked.length}건 내보내기 ▾` : '⬇ 내보내기 ▾';
+  if(!checked.length){ btn.textContent = '⬇ 내보내기 ▾'; return; }
+  const hidxSet = new Set([...checked].map(c=>+c.dataset.hidx));
+  const count = displayedDocs.filter(d=>hidxSet.has(d.hidx)).length;
+  btn.textContent = `⬇ ${checked.length}개 키워드(${count}건) 내보내기 ▾`;
 }
 async function saveResultDoc(i){
   const d = displayedDocs[i]; if(!d) return;
@@ -1048,18 +1103,31 @@ async function saveResultDoc(i){
   savedDocs.unshift({ id:data?.id, ...row });
   showToast('저장되었습니다.');
 }
-async function retryResultDoc(i){
-  const d = displayedDocs[i]; if(!d) return;
-  showToast('다시 검색 중입니다...');
-  const prev = resultHistory.find(h=>h.kw===d.kw);
-  const parts = prev ? { front:[...prev.front], core:[...prev.core], back:[...prev.back] } : null;
-  await generateResultsFor(d.kw, parts);
+async function deleteSelectedResults(){
+  const checked = $$('.result-chk:checked');
+  if(!checked.length){ showToast('삭제할 결과를 먼저 선택해주세요.'); return; }
+  if(!confirm(`선택한 ${checked.length}개 키워드의 검색 결과를 삭제하시겠습니까? 되돌릴 수 없습니다.`)) return;
+
+  const uid = await getUid(); if(!uid){ showToast('로그인이 필요합니다.'); return; }
+  const hidxSet = new Set([...checked].map(c=>+c.dataset.hidx));
+  const targets = resultHistory.filter((h,hi)=>hidxSet.has(hi));
+
+  for(const h of targets){
+    if(h.id) await _sb.from('research_history').delete().eq('id', h.id).eq('profile_id', uid);
+  }
+  const targetKws = new Set(targets.map(h=>h.kw));
+  resultHistory = resultHistory.filter(h=>!targetKws.has(h.kw));
+
   renderResults();
+  try{ renderDashboard(); }catch(e){}
+  try{ renderKeywordsPage(); }catch(e){}
+  showToast(`${targets.length}개 키워드의 결과가 삭제되었습니다.`);
 }
 async function saveAllResults(){
-  if(displayedDocs.length===0){ showToast('저장할 결과가 없습니다.'); return; }
+  const selected = getSelectedDocs();
+  if(selected.length===0){ showToast('저장할 결과가 없습니다.'); return; }
   const uid = await getUid(); if(!uid){ showToast('로그인이 필요합니다.'); return; }
-  const rows = displayedDocs.filter(d=>d.status==='success').map(d=>({ profile_id:uid, title:d.title, body:d.body, type:'리서치 결과', badge:'blue' }));
+  const rows = selected.filter(d=>d.status==='success').map(d=>({ profile_id:uid, title:d.title, body:d.body, type:'리서치 결과', badge:'blue' }));
   if(!rows.length){ showToast('저장할 성공 결과가 없습니다.'); return; }
   const { data } = await _sb.from('saved_docs').insert(rows).select();
   (data||[]).reverse().forEach(r=>savedDocs.unshift({ id:r.id, profile_id:uid, title:r.title, body:r.body, type:r.type, badge:r.badge }));
@@ -1447,6 +1515,7 @@ function bindEvents(){
 
   // 리서치 결과
   $('#saveAllResultsBtn')?.addEventListener('click', saveAllResults);
+  $('#deleteSelectedResultsBtn')?.addEventListener('click', deleteSelectedResults);
   $('#selectAllResults')?.addEventListener('change', e=>{
     $$('.result-chk').forEach(c=>{ c.checked=e.target.checked; });
     updateExportBtnLabel();
@@ -1690,6 +1759,8 @@ function bindEvents(){
   // 문서 상세 모달
   $('#docModalClose')?.addEventListener('click', closeDocModal);
   $('#docModalOverlay')?.addEventListener('click', e=>{ if(e.target.id==='docModalOverlay') closeDocModal(); });
+  $('#resultsKwModalClose')?.addEventListener('click', closeResultsKwModal);
+  $('#resultsKwModalOverlay')?.addEventListener('click', e=>{ if(e.target.id==='resultsKwModalOverlay') closeResultsKwModal(); });
 
   // 새 키워드 세트 만들기 버튼 (고급 옵션 JSON으로부터 세트 자동 생성)
   $('#newResearchBtn')?.addEventListener('click', ()=>{ showToast('새 리서치 만들기에서 키워드를 검색해보세요.'); });
