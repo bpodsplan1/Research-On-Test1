@@ -368,7 +368,26 @@
 <section class="page" id="results-detail">
   <button class="btn line" id="resultsDetailBackBtn" type="button" style="margin-bottom:16px">← 리서치 결과로 돌아가기</button>
   <div class="page-title"><div><h2 id="resultsDetailTitle"></h2><p id="resultsDetailSub"></p></div></div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:10px">
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;cursor:pointer">
+      <input type="checkbox" id="selectAllDetail" /> 전체 선택
+    </label>
+    <button class="btn dark" id="generateInsightBtn" type="button">✦ 인사이트 도출</button>
+  </div>
   <div id="resultsDetailList" class="list"></div>
+
+  <div class="section-head" style="margin-top:30px">
+    <div><h3>도출된 인사이트</h3><p>선택한 기사를 기반으로 AI가 생성한 인사이트입니다.</p></div>
+    <div style="position:relative;display:inline-block" id="insightExportWrap">
+      <button class="btn soft" id="insightExportBtn" type="button">⬇ 내보내기 ▾</button>
+      <div id="insightExportMenu" style="display:none;position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:100;overflow:hidden;min-width:160px">
+        <button class="export-menu-item" id="insightExportPdfBtn" type="button">📄 PDF로 저장</button>
+        <button class="export-menu-item" id="insightExportWordBtn" type="button">📝 Word로 저장</button>
+      </div>
+    </div>
+  </div>
+  <div id="insightList" class="list"></div>
 </section>
 <section class="page" id="saved">
   <div class="page-title"><div><h2>저장 자료함</h2><p>저장한 기사와 요약을 모아봅니다.</p></div><span class="badge purple" id="savedCountBadge">0 Saved</span></div>
@@ -452,14 +471,18 @@
           <div><div style="font-size:12px;font-weight:900;color:var(--ink)">뉴스 요약</div><code style="font-size:10px;color:var(--muted)">POST · news-summary</code></div>
           <input id="cfgNewsUrl" placeholder="https://your-webhook-url/news-summary" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
         </div>
-        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;padding:10px 14px;gap:12px">
+        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;border-bottom:1px solid var(--line);padding:10px 14px;gap:12px">
           <div><div style="font-size:12px;font-weight:900;color:var(--ink)">검색 히스토리</div><code style="font-size:10px;color:var(--muted)">POST · history</code></div>
           <input id="cfgHistoryUrl" placeholder="https://your-webhook-url/history" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
         </div>
+        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;padding:10px 14px;gap:12px">
+          <div><div style="font-size:12px;font-weight:900;color:var(--ink)">인사이트 도출 <span class="badge orange" style="font-size:9px;padding:2px 6px;margin-left:4px">추정값</span></div><code style="font-size:10px;color:var(--muted)">POST · research/summarize-selected</code></div>
+          <input id="cfgInsightUrl" placeholder="https://your-n8n-domain/webhook/research/summarize-selected" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
+        </div>
       </div>
       <div style="background:var(--orangeSoft);border-radius:12px;padding:12px 14px;margin-top:10px">
-        <p style="font-size:12px;color:#9a3412;margin:0;font-weight:800">⚠ '뉴스 기사 검색' 주소는 자동으로 채운 추정값입니다</p>
-        <p style="font-size:11px;color:#9a3412;margin:6px 0 0;line-height:1.6">n8n 워크플로우 JSON 파일에는 실제 서버 주소(도메인)가 포함되지 않아 완전 자동 연동은 불가능해요. n8n에서 <b>[Webhook - 리서치 실행 요청]</b> 노드를 열어 <b>Production URL</b>을 복사해 정확한 주소로 교체해주세요. 또한 내보내신 워크플로우가 <b>비활성(Inactive)</b> 상태였으니, n8n 화면 우측 상단의 활성화 스위치를 꼭 켜주세요.</p>
+        <p style="font-size:12px;color:#9a3412;margin:0;font-weight:800">⚠ '뉴스 기사 검색'과 '인사이트 도출' 주소는 자동으로 채운 추정값입니다</p>
+        <p style="font-size:11px;color:#9a3412;margin:6px 0 0;line-height:1.6">n8n 워크플로우 JSON 파일에는 실제 서버 주소(도메인)가 포함되지 않아 완전 자동 연동은 불가능해요. n8n에서 각 <b>Webhook</b> 노드를 열어 <b>Production URL</b>을 복사해 정확한 주소로 교체해주세요. 또한 내보내신 두 워크플로우 모두 <b>비활성(Inactive)</b> 상태였으니, n8n 화면 우측 상단의 활성화 스위치를 꼭 켜주세요.</p>
       </div>
       <p style="font-size:11px;color:var(--muted);margin:10px 0 0">모든 요청은 <code style="background:#f1f5f9;padding:1px 5px;border-radius:4px">POST</code> 방식으로 JSON 본문을 전송합니다.</p>
     </div>
@@ -520,6 +543,7 @@ async function getUid(){
 let N8N_NEWS_URL = localStorage.getItem('ro_news_url') || 'https://여기에-n8n-주소를-붙여넣으세요/webhook/news-summary';
 let N8N_NEWS_SEARCH_URL = localStorage.getItem('ro_news_search_url') || 'https://n8n.mokai.kr/webhook/research/manual';
 let N8N_HISTORY_URL = localStorage.getItem('ro_history_url') || 'https://여기에-n8n-주소를-붙여넣으세요/webhook/research-on/history';
+let N8N_INSIGHT_URL = localStorage.getItem('ro_insight_url') || 'https://n8n.mokai.kr/webhook/research/summarize-selected';
 
 const DATA = {"core": [{"d1": "글로벌 인력지원", "d2": "비자·체류 지원", "d3": "체류·비자 제도지원", "keyword": "K-Tech Pass", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "비자·체류 지원", "d3": "체류·비자 제도지원", "keyword": "영주권", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "비자·체류 지원", "d3": "체류·비자 제도지원", "keyword": "출입국 디지털화", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "정착·생활 지원", "d3": "생활·가족 정착지원", "keyword": "온보딩", "job": "GHD, 채용"}, {"d1": "글로벌 인력지원", "d2": "정착·생활 지원", "d3": "생활·가족 정착지원", "keyword": "다문화가정", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "정착·생활 지원", "d3": "생활·가족 정착지원", "keyword": "주택 임대", "job": "GHD, 사택관리"}, {"d1": "글로벌 인력지원", "d2": "커뮤니티·리텐션", "d3": "생활·가족 정착지원", "keyword": "리텐션", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "행정·문서 지원", "d3": "공증·행정대행 지원", "keyword": "아포스티유", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "행정·문서 지원", "d3": "공증·행정대행 지원", "keyword": "공증", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "행정·문서 지원", "d3": "공증·행정대행 지원", "keyword": "행정대행", "job": "GHD"}, {"d1": "기술·AI·데이터", "d2": "AI 운영·거버넌스", "d3": "AI 통제·검증체계", "keyword": "AI 거버넌스", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 운영·거버넌스", "d3": "AI 통제·검증체계", "keyword": "휴먼인더루프", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "내부망·온프레미스 운영", "keyword": "온프레미스", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "AI 시스템 아키첵처", "keyword": "시스템", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "AI 시스템 아키첵처", "keyword": "아키텍처", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "AI 플랫폼 운영", "keyword": "플랫폼", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 에이전트 활용기술", "keyword": "AI 에이전트", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 에이전트 활용기술", "keyword": "에이전틱 AI", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 워크플로우·오케스트레이션", "keyword": "AI 오케스트레이션", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 워크플로우·오케스트레이션", "keyword": "하네스 엔지니어링", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "지식관리·검색기술", "d3": "검색증강 생성기술", "keyword": "RAG", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "지식관리·검색기술", "d3": "지식모델링·검색기반 기술", "keyword": "온톨로지", "job": "공통"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "사업장 보안관리", "keyword": "물리보안", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "사업장 보안관리", "keyword": "출입보안", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "출입·신분증 관리", "keyword": "사원증", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "출입·신분증 관리", "keyword": "출입증", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "정보보호 관리", "d3": "개인정보 보호관리", "keyword": "개인정보보호", "job": "공통"}, {"d1": "보안·리스크·컴플라이언스", "d2": "정보보호 관리", "d3": "보안정책·거버넌스", "keyword": "기업보안", "job": "공통"}, {"d1": "보안·리스크·컴플라이언스", "d2": "정보보호 관리", "d3": "보안정책·거버넌스", "keyword": "보안 거버넌스", "job": "공통"}, {"d1": "산업·시장 인텔리전스", "d2": "반도체 기술·제품동향", "d3": "메모리·AI반도체 동향", "keyword": "HBM", "job": "공통"}, {"d1": "산업·시장 인텔리전스", "d2": "반도체 산업동향", "d3": "글로벌 시장동향", "keyword": "수출 규제", "job": "공통"}, {"d1": "산업·시장 인텔리전스", "d2": "첨단기술 트렌드", "d3": "AI·로보틱스 기술동향", "keyword": "Physical AI", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "EHS 관리체계", "d3": "EHS 운영관리", "keyword": "EHS", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "EHS 관리체계", "d3": "EHS 운영관리", "keyword": "환경안전", "job": "교육운영"}, {"d1": "안전보건환경(EHS)", "d2": "교육·인식제고", "d3": "법정·안전교육 운영", "keyword": "안전교육", "job": "교육운영"}, {"d1": "안전보건환경(EHS)", "d2": "비상대응·예방관리", "d3": "화재·비상대응 관리", "keyword": "비상대응", "job": "교육운영"}, {"d1": "안전보건환경(EHS)", "d2": "비상대응·예방관리", "d3": "화재·비상대응 관리", "keyword": "화재예방", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 법규대응", "d3": "법정 의무·규제 대응", "keyword": "산업안전보건법", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 법규대응", "d3": "법정 의무·규제 대응", "keyword": "중대재해처벌법", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 운영", "d3": "안전·보건 관리", "keyword": "보건관리", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 운영", "d3": "안전·보건 관리", "keyword": "안전관리", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "위험관리·예방활동", "d3": "위험성 평가관리", "keyword": "위험성평가", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "강사·콘텐츠 운영", "keyword": "강사", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "디지털·AI 역량교육", "keyword": "AI 교육", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "온라인 학습플랫폼 운영", "keyword": "교육플랫폼", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "온라인 학습플랫폼 운영", "keyword": "온라인 교육", "job": "공통"}, {"d1": "인사·조직", "d2": "근무제도·복무", "d3": "근무제도 운영", "keyword": "유연 근무제", "job": "공통"}, {"d1": "인사·조직", "d2": "근무제도·복무", "d3": "휴직·휴가 제도운영", "keyword": "육아휴직", "job": "공통"}, {"d1": "인사·조직", "d2": "근무제도·복무", "d3": "휴직·휴가 제도운영", "keyword": "출산휴가", "job": "공통"}, {"d1": "인사·조직", "d2": "글로벌 HR 운영", "d3": "해외근무자 지원", "keyword": "주재원", "job": "GHD, 복리후생"}, {"d1": "인사·조직", "d2": "노무·근로관계", "d3": "노동관계 법·제도 대응", "keyword": "노란봉투법", "job": "공통"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "급여·세무·사회보험 지원", "keyword": "4대 보험", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "급여·세무·사회보험 지원", "keyword": "연말정산", "job": "GHD"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "개인연금", "job": "공통"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "선택적 복지", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "의료비", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "휴양소", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "난임", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "복지몰", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "복지 포인트", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "총보상 전략", "keyword": "직원 경험", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "총보상 전략", "keyword": "총보상", "job": "복리후생"}, {"d1": "인사·조직", "d2": "인력 운영", "d3": "비정규직 인력운영", "keyword": "계약직", "job": "공통"}, {"d1": "인사·조직", "d2": "조직문화·변화관리", "d3": "조직문화 운영", "keyword": "조직문화", "job": "공통"}, {"d1": "인사·조직", "d2": "채용·온보딩", "d3": "면접·선발 운영", "keyword": "면접장", "job": "채용"}, {"d1": "인사·조직", "d2": "채용·온보딩", "d3": "입사 전 절차관리", "keyword": "채용 검진", "job": "채용"}, {"d1": "인사·조직", "d2": "채용·온보딩", "d3": "입사자 온보딩 지원", "keyword": "웰컴키트", "job": "채용"}, {"d1": "총무·오피스 운영", "d2": "부동산·임대관리", "d3": "임대·거점 관리", "keyword": "임대관리", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "시설·공간 운영", "d3": "시설 운영관리", "keyword": "시설관리", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "시설·공간 운영", "d3": "시설 운영관리", "keyword": "시설운영", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "공유오피스", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "사무환경", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "스마트오피스", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "하이브리드워크", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "자산·비품관리", "d3": "비품·소모품 관리", "keyword": "비품관리", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "오피스 물류 운영", "d3": "사내 문서·물품 배송", "keyword": "사내이사", "job": "사내물류"}, {"d1": "총무·오피스 운영", "d2": "오피스 물류 운영", "d3": "사내 문서·물품 배송", "keyword": "무인택배함", "job": "사내물류"}, {"d1": "총무·오피스 운영", "d2": "오피스 물류 운영", "d3": "사내 문서·물품 배송", "keyword": "키오스크", "job": "사내물류"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "세미나", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "컨퍼런스", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "박람회", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "행사", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "프로그램", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "재무제표", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "매출", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "실적", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "분기실적", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "사업 확장", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "투자", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "신사업", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "해외진출", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "리스크", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "시장·산업 동향", "keyword": "시장 점유율", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "시장·산업 동향", "keyword": "경쟁사", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "정책·제도", "keyword": "정책", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "정책·제도", "keyword": "제도", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "도급", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "운영 방식", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "운영 매뉴얼", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "대행", "job": "공통"}], "ext": {"target": ["삼성전자", "SK하이닉스", "주요 대기업", "대기업", "중견기업", "스타트업", "공공기관", "지자체", "외국계 기업", "글로벌 기업", "대학교", "협력사", "외국인", "외국인 근로자", "외국인 임직원", "산학장학생", "인턴", "저연차 사원", "보직자", "임원"], "scope": ["국내", "해외", "글로벌", "사내", "사외", "서울", "수도권", "경기", "수원", "용인", "평택", "화성", "천안", "온양", "판교", "미국", "중국", "일본", "대만", "베트남"], "industry": ["반도체", "제조업", "IT", "바이오", "교육 서비스", "BPO", "아웃소싱"], "time": ["2024", "2025", "2026", "최신", "최근 3개월", "지난 3년", "과거 5년"], "intent": ["동향", "트렌드", "사례", "시장 조사", "산업 분석", "분석", "비교", "비용", "후기", "효과", "만족도", "개선", "이슈 모니터링", "운영", "지원"], "content": ["인사이트", "보도자료", "PDF", "보고서", "뉴스", "정부 자료", "논문", "블로그", "공고", "입찰공고"]}};
 
@@ -1069,6 +1093,7 @@ function renderResultsDetail(){
   $('#resultsDetailList').innerHTML = (h.docs||[]).length ? h.docs.map((d,li)=>{
     const gi = globalDocIndex(hidx, li);
     return `<div class="list-item" style="cursor:default" onclick="event.stopPropagation()">
+      <input type="checkbox" class="detail-chk" data-gi="${gi}" style="margin-top:4px;flex-shrink:0" />
       <div class="list-icon">📄</div>
       <div style="flex:1">
         <h4 style="cursor:pointer" onclick="openDocModal(${gi},'result')">${esc(d.title)}</h4>
@@ -1080,6 +1105,165 @@ function renderResultsDetail(){
       </div>
     </div>`;
   }).join('') : '<div class="empty-state"><h3>결과가 없습니다</h3></div>';
+  const selectAll = $('#selectAllDetail'); if(selectAll) selectAll.checked = false;
+  renderInsightList();
+}
+function getSelectedDetailDocs(){
+  return $$('.detail-chk:checked').map(c=>displayedDocs[+c.dataset.gi]).filter(Boolean);
+}
+let insightHistory = [];
+async function deriveInsight(){
+  const selected = getSelectedDetailDocs();
+  if(!selected.length){ showToast('인사이트를 도출할 기사를 먼저 선택해주세요.'); return; }
+  const withUrl = selected.filter(d=>d.url);
+  if(!withUrl.length){ showToast('선택한 기사에 원문 URL이 없어 인사이트를 도출할 수 없습니다.'); return; }
+  if(selected.length > 10) showToast('최대 10건까지만 분석에 반영됩니다.');
+
+  const h = currentResultsDetailHidx!==null ? resultHistory[currentResultsDetailHidx] : null;
+  const kw = h?.kw || '';
+  const btn = $('#generateInsightBtn'); const origLabel = btn.innerHTML;
+  btn.disabled = true; btn.innerHTML = '<span class="streaming-dot"></span>인사이트 도출 중...';
+
+  let report;
+  try {
+    const resp = await fetch(N8N_INSIGHT_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        keyword: kw,
+        selected_results: withUrl.slice(0,10).map((d,i)=>({ url:d.url, title:d.title, summary:d.desc, score:d.score, rank:i+1 }))
+      })
+    });
+    const data = await resp.json();
+    if(!resp.ok || data.success===false || !data.display) throw new Error(data.message || '리포트 생성 실패');
+    report = data.display;
+  } catch(e){
+    report = generateFallbackReport(kw, withUrl);
+  }
+
+  insightHistory.unshift({ kw, articleCount: withUrl.length, report, createdAt: new Date() });
+  renderInsightList();
+  btn.disabled = false; btn.innerHTML = origLabel;
+  showToast('인사이트가 도출되었습니다.');
+}
+function generateFallbackReport(kw, docs){
+  return {
+    title: '종합 리서치 리포트',
+    subtitle: `${kw} · 자료 ${docs.length}개 (n8n 미연동 - 예시)`,
+    tabs: [
+      { tab_id:'executive_brief', tab_label:'Executive Brief', type:'executive_brief', content:{
+        one_line_conclusion: 'n8n 인사이트 도출 Webhook이 연동되지 않아 실제 분석 대신 예시가 표시됩니다.',
+        importance: '확인 불가', urgency: '확인 불가',
+        relevance_to_organization: '계정 설정에서 인사이트 도출 Webhook 주소를 확인해주세요.',
+        recommended_owner: [], recommended_action: 'n8n 워크플로우를 활성화하고 다시 시도해주세요.'
+      }},
+      { tab_id:'sources', tab_label:'참고 자료', type:'sources',
+        items: docs.map(d=>({ title:d.title, url:d.url||'', source_type:'기타', summary:d.desc||'', notable_points:[], reliability_note:'' })) }
+    ],
+    recommended_next_search: [],
+    limitations: 'n8n 연동 전이라 실제 AI 분석 결과가 아닙니다.'
+  };
+}
+function reportTabsHtml(report){
+  if(!report || !Array.isArray(report.tabs)) return '';
+  const body = report.tabs.map(tab=>{
+    if(tab.type==='executive_brief'){
+      const c = tab.content||{};
+      return `<div style="margin-bottom:14px">
+        <div style="font-weight:900;font-size:13px;color:var(--primary2);margin-bottom:6px">${esc(tab.tab_label||'')}</div>
+        ${c.one_line_conclusion?`<p style="margin:0 0 6px;font-weight:800">${esc(c.one_line_conclusion)}</p>`:''}
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px">
+          ${c.importance?`<span class="badge orange">중요도 ${esc(c.importance)}</span>`:''}
+          ${c.urgency?`<span class="badge red">${esc(c.urgency)}</span>`:''}
+        </div>
+        ${c.relevance_to_organization?`<p style="margin:0 0 6px;color:var(--muted);font-size:13px">${esc(c.relevance_to_organization)}</p>`:''}
+        ${(c.recommended_owner&&c.recommended_owner.length)?`<p style="margin:0 0 6px;font-size:13px"><b>검토 부서:</b> ${c.recommended_owner.map(esc).join(', ')}</p>`:''}
+        ${c.recommended_action?`<p style="margin:0;font-size:13px"><b>추천 액션:</b> ${esc(c.recommended_action)}</p>`:''}
+      </div>`;
+    }
+    if(tab.type==='sections'){
+      const secs = (tab.sections||[]).map(s=>`
+        <div style="margin-bottom:8px">
+          <div style="font-weight:800;font-size:12px;color:#334155;margin-bottom:4px">${esc(s.title||'')}</div>
+          <ul style="margin:0;padding-left:18px;font-size:13px;color:var(--muted)">${(s.items||[]).map(it=>`<li>${esc(it)}</li>`).join('')}</ul>
+        </div>`).join('');
+      return `<div style="margin-bottom:14px">
+        <div style="font-weight:900;font-size:13px;color:var(--primary2);margin-bottom:6px">${esc(tab.tab_label||'')}</div>
+        ${secs}
+      </div>`;
+    }
+    if(tab.type==='sources'){
+      const items = (tab.items||[]).map(s=>`
+        <div style="border-top:1px solid var(--line);padding-top:8px;margin-top:8px">
+          <div style="font-weight:800;font-size:13px">${esc(s.title||'')}</div>
+          ${s.summary?`<p style="margin:2px 0;font-size:12px;color:var(--muted)">${esc(s.summary)}</p>`:''}
+          ${s.url?`<a href="${esc(s.url)}" target="_blank" rel="noopener" style="font-size:12px;color:var(--primary2)">${esc(s.url)}</a>`:''}
+        </div>`).join('');
+      return `<div style="margin-bottom:14px">
+        <div style="font-weight:900;font-size:13px;color:var(--primary2);margin-bottom:6px">${esc(tab.tab_label||'')}</div>
+        ${items}
+      </div>`;
+    }
+    return '';
+  }).join('');
+  const nextSearch = (report.recommended_next_search&&report.recommended_next_search.length)
+    ? `<p style="margin:0 0 6px;font-size:12px;color:var(--muted)"><b>다음 추천 검색어:</b> ${report.recommended_next_search.map(esc).join(', ')}</p>` : '';
+  const limitations = report.limitations ? `<p style="margin:0;font-size:12px;color:var(--muted)"><b>한계:</b> ${esc(report.limitations)}</p>` : '';
+  return body + nextSearch + limitations;
+}
+function reportTabsWordHtml(report){
+  if(!report || !Array.isArray(report.tabs)) return '';
+  const body = report.tabs.map(tab=>{
+    if(tab.type==='executive_brief'){
+      const c = tab.content||{};
+      return `<p style="font-size:10pt;font-weight:bold;color:#1d4ed8;margin:0 0 4pt">${esc(tab.tab_label||'')}</p>
+        ${c.one_line_conclusion?`<p style="font-size:10pt;font-weight:bold;margin:0 0 4pt">${esc(c.one_line_conclusion)}</p>`:''}
+        ${c.importance||c.urgency?`<p style="font-size:9pt;margin:0 0 4pt">중요도: ${esc(c.importance||'')} &nbsp; 긴급도: ${esc(c.urgency||'')}</p>`:''}
+        ${c.relevance_to_organization?`<p style="font-size:9pt;color:#64748b;margin:0 0 4pt">${esc(c.relevance_to_organization)}</p>`:''}
+        ${c.recommended_action?`<p style="font-size:9pt;margin:0 0 8pt"><b>추천 액션:</b> ${esc(c.recommended_action)}</p>`:''}`;
+    }
+    if(tab.type==='sections'){
+      const secs = (tab.sections||[]).map(s=>`
+        <p style="font-size:9pt;font-weight:bold;margin:6pt 0 2pt">${esc(s.title||'')}</p>
+        <ul style="font-size:9pt;margin:0 0 4pt;padding-left:16pt">${(s.items||[]).map(it=>`<li>${esc(it)}</li>`).join('')}</ul>`).join('');
+      return `<p style="font-size:10pt;font-weight:bold;color:#1d4ed8;margin:8pt 0 4pt">${esc(tab.tab_label||'')}</p>${secs}`;
+    }
+    if(tab.type==='sources'){
+      const items = (tab.items||[]).map(s=>`
+        <p style="font-size:9pt;font-weight:bold;margin:6pt 0 1pt">${esc(s.title||'')}</p>
+        ${s.summary?`<p style="font-size:9pt;color:#64748b;margin:0 0 2pt">${esc(s.summary)}</p>`:''}
+        ${s.url?`<p style="font-size:8pt;color:#1d4ed8;margin:0 0 4pt">${esc(s.url)}</p>`:''}`).join('');
+      return `<p style="font-size:10pt;font-weight:bold;color:#1d4ed8;margin:8pt 0 4pt">${esc(tab.tab_label||'')}</p>${items}`;
+    }
+    return '';
+  }).join('');
+  const nextSearch = (report.recommended_next_search&&report.recommended_next_search.length)
+    ? `<p style="font-size:9pt;margin:6pt 0 0"><b>다음 추천 검색어:</b> ${report.recommended_next_search.map(esc).join(', ')}</p>` : '';
+  const limitations = report.limitations ? `<p style="font-size:9pt;margin:4pt 0 0"><b>한계:</b> ${esc(report.limitations)}</p>` : '';
+  return body + nextSearch + limitations;
+}
+function renderInsightList(){
+  const el = $('#insightList'); if(!el) return;
+  el.innerHTML = insightHistory.length ? insightHistory.map((ins,i)=>`
+    <div class="list-item" style="cursor:default;align-items:flex-start" onclick="event.stopPropagation()">
+      <input type="checkbox" class="insight-chk" data-idx="${i}" style="margin-top:4px;flex-shrink:0" />
+      <div class="list-icon">✦</div>
+      <div style="flex:1">
+        <h4>${esc(ins.report?.subtitle || ins.kw)} <span class="badge gray" style="margin-left:6px;font-weight:800">${esc(ins.createdAt.toLocaleString('ko-KR'))}</span></h4>
+        ${reportTabsHtml(ins.report)}
+      </div>
+    </div>
+  `).join('') : '<div class="empty-state"><h3>아직 도출된 인사이트가 없어요</h3><p>기사를 선택하고 "인사이트 도출" 버튼을 눌러보세요.</p></div>';
+  updateInsightExportLabel();
+}
+function getSelectedInsights(){
+  const checked = $$('.insight-chk:checked');
+  if(!checked.length) return insightHistory;
+  return [...checked].map(c=>insightHistory[+c.dataset.idx]).filter(Boolean);
+}
+function updateInsightExportLabel(){
+  const checked = $$('.insight-chk:checked');
+  const btn = $('#insightExportBtn'); if(!btn) return;
+  btn.textContent = checked.length ? `⬇ ${checked.length}건 내보내기 ▾` : '⬇ 내보내기 ▾';
 }
 async function retryKwSearch(hidx){
   const h = resultHistory[hidx]; if(!h) return;
@@ -1440,14 +1624,17 @@ function renderAccountPage(){
   $('#cfgNewsSearchUrl').value = N8N_NEWS_SEARCH_URL;
   $('#cfgNewsUrl').value = N8N_NEWS_URL;
   $('#cfgHistoryUrl').value = N8N_HISTORY_URL;
+  $('#cfgInsightUrl').value = N8N_INSIGHT_URL;
 }
 function saveAccountSettings(){
   N8N_NEWS_SEARCH_URL = $('#cfgNewsSearchUrl').value.trim() || N8N_NEWS_SEARCH_URL;
   N8N_NEWS_URL = $('#cfgNewsUrl').value.trim() || N8N_NEWS_URL;
   N8N_HISTORY_URL = $('#cfgHistoryUrl').value.trim() || N8N_HISTORY_URL;
+  N8N_INSIGHT_URL = $('#cfgInsightUrl').value.trim() || N8N_INSIGHT_URL;
   localStorage.setItem('ro_news_search_url', N8N_NEWS_SEARCH_URL);
   localStorage.setItem('ro_news_url', N8N_NEWS_URL);
   localStorage.setItem('ro_history_url', N8N_HISTORY_URL);
+  localStorage.setItem('ro_insight_url', N8N_INSIGHT_URL);
   showToast('설정이 저장되었습니다.');
 }
 
@@ -1770,6 +1957,124 @@ function bindEvents(){
 
   // 리서치 결과 상세 페이지
   $('#resultsDetailBackBtn')?.addEventListener('click', ()=>showPage('results'));
+  $('#selectAllDetail')?.addEventListener('change', e=>{
+    $$('.detail-chk').forEach(c=>{ c.checked = e.target.checked; });
+  });
+  $('#generateInsightBtn')?.addEventListener('click', deriveInsight);
+  $('#insightList')?.addEventListener('change', e=>{ if(e.target.classList.contains('insight-chk')) updateInsightExportLabel(); });
+
+  // 인사이트 내보내기 드롭다운
+  $('#insightExportBtn')?.addEventListener('click', e=>{
+    e.stopPropagation();
+    const menu = $('#insightExportMenu');
+    menu.style.display = menu.style.display==='none' ? 'block' : 'none';
+  });
+  document.addEventListener('click', e=>{ if(!$('#insightExportWrap')?.contains(e.target)) { const m=$('#insightExportMenu'); if(m) m.style.display='none'; } });
+
+  $('#insightExportWordBtn')?.addEventListener('click', ()=>{
+    $('#insightExportMenu').style.display='none';
+    const items = getSelectedInsights();
+    if(!items.length){ showToast('내보낼 인사이트가 없습니다.'); return; }
+    const date = new Date().toLocaleDateString('ko-KR');
+    const blocks = items.map((ins,i)=>`
+      <div style="margin-bottom:20pt;padding-bottom:20pt;border-bottom:1pt solid #e2e8f0">
+        <p style="font-size:12pt;font-weight:bold;color:#7c3aed;margin:0 0 4pt">${i+1}. ${esc(ins.report?.subtitle || ins.kw)}</p>
+        <p style="font-size:8pt;color:#64748b;margin:0 0 8pt">${ins.createdAt.toLocaleString('ko-KR')} · 참고 기사 ${ins.articleCount}건</p>
+        ${reportTabsWordHtml(ins.report)}
+      </div>`).join('');
+    const html = `<html xmlns:o='urn:schemas-microsoft-com:office:office'
+      xmlns:w='urn:schemas-microsoft-com:office:word'
+      xmlns='http://www.w3.org/TR/REC-html40'>
+    <head>
+      <meta charset='UTF-8'>
+      <meta name=ProgId content=Word.Document>
+      <!--[if gte mso 9]><xml>
+        <w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument>
+        <o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings>
+      </xml><![endif]-->
+      <style>
+        @page WordSection1 { size: 595pt 842pt; margin: 60pt; }
+        div.WordSection1 { page: WordSection1; }
+        body { font-family: '맑은 고딕', 'Malgun Gothic', sans-serif; font-size: 10pt; color: #0f172a; }
+        h1 { font-size: 15pt; font-weight: bold; margin: 0 0 6pt 0; color: #7c3aed; }
+        p.sub { font-size: 9pt; color: #64748b; margin: 0 0 18pt 0; }
+      </style>
+    </head>
+    <body>
+    <div class="WordSection1">
+      <h1>Research On — 인사이트 도출 결과</h1>
+      <p class="sub">내보낸 날짜: ${date} &nbsp;·&nbsp; 총 ${items.length}건</p>
+      ${blocks}
+    </div>
+    </body></html>`;
+    const blob = new Blob(['\ufeff'+html], {type:'application/msword;charset=utf-8'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = `research-on-인사이트-${date.replace(/\./g,'').trim()}.doc`;
+    a.click(); URL.revokeObjectURL(a.href);
+    showToast('Word 파일로 저장되었습니다.');
+  });
+
+  $('#insightExportPdfBtn')?.addEventListener('click', async ()=>{
+    $('#insightExportMenu').style.display='none';
+    const items = getSelectedInsights();
+    if(!items.length){ showToast('내보낼 인사이트가 없습니다.'); return; }
+    showToast('PDF 생성 중...');
+    try {
+      const loadScript = src => new Promise((res, rej)=>{ const s=document.createElement('script'); s.src=src; s.onload=res; s.onerror=rej; document.head.appendChild(s); });
+      if(!window.html2canvas) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+      if(!window.jspdf) await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+
+      const date = new Date().toLocaleDateString('ko-KR');
+      const wrap = document.createElement('div');
+      wrap.style.cssText = 'position:fixed;left:-9999px;top:0;width:680px;background:#fff;padding:36px;font-family:Malgun Gothic,sans-serif;color:#0f172a';
+      const blocks = items.map((ins,i)=>`
+        <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #e2e8f0">
+          <div style="font-size:14px;font-weight:bold;color:#7c3aed;margin-bottom:4px">${i+1}. ${esc(ins.report?.subtitle || ins.kw)}</div>
+          <div style="font-size:11px;color:#64748b;margin-bottom:8px">${ins.createdAt.toLocaleString('ko-KR')} · 참고 기사 ${ins.articleCount}건</div>
+          ${reportTabsHtml(ins.report)}
+        </div>`).join('');
+      wrap.innerHTML = `
+        <div style="margin-bottom:16px">
+          <div style="font-size:18px;font-weight:bold;color:#7c3aed;margin-bottom:4px">Research On — 인사이트 도출 결과</div>
+          <div style="font-size:11px;color:#64748b">내보낸 날짜: ${date} · 총 ${items.length}건</div>
+        </div>
+        ${blocks}`;
+      document.body.appendChild(wrap);
+
+      const canvas = await html2canvas(wrap, { scale:2, useCORS:true, allowTaint:true, backgroundColor:'#ffffff', logging:false });
+      document.body.removeChild(wrap);
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
+      const pageW = doc.internal.pageSize.getWidth() - 20;
+      const pageH = doc.internal.pageSize.getHeight() - 20;
+
+      let y = 10;
+      let remaining = canvas.height;
+      const sliceH = Math.floor(canvas.width * (pageH / pageW));
+
+      let page = 0;
+      while(remaining > 0){
+        if(page > 0) doc.addPage();
+        const srcY = page * sliceH;
+        const thisSlice = Math.min(sliceH, remaining);
+        const sliceCanvas = document.createElement('canvas');
+        sliceCanvas.width = canvas.width;
+        sliceCanvas.height = thisSlice;
+        sliceCanvas.getContext('2d').drawImage(canvas, 0, srcY, canvas.width, thisSlice, 0, 0, canvas.width, thisSlice);
+        const sliceH_mm = pageW * thisSlice / canvas.width;
+        doc.addImage(sliceCanvas.toDataURL('image/png'), 'PNG', 10, y, pageW, sliceH_mm);
+        remaining -= thisSlice;
+        page++;
+      }
+
+      doc.save(`research-on-인사이트-${date.replace(/\./g,'').trim()}.pdf`);
+      showToast('PDF 파일이 다운로드되었습니다.');
+    } catch(err) {
+      console.error('PDF 생성 오류:', err);
+      showToast('PDF 생성에 실패했습니다. Word 형식으로 저장해보세요.');
+    }
+  });
 
   // 새 키워드 세트 만들기 버튼 (고급 옵션 JSON으로부터 세트 자동 생성)
   $('#newResearchBtn')?.addEventListener('click', ()=>{ showToast('새 리서치 만들기에서 키워드를 검색해보세요.'); });
