@@ -231,9 +231,9 @@
           <div class="field">
             <label>결과 개수 <code style="font-size:10px;background:#f1f5f9;padding:1px 5px;border-radius:4px">max_results</code></label>
             <select id="maxResults">
-              <option value="5">5건 (기본값)</option>
+              <option value="5">5건</option>
               <option value="10">10건</option>
-              <option value="20">20건</option>
+              <option value="20" selected>20건 (기본값)</option>
             </select>
           </div>
           <div class="field">
@@ -365,21 +365,17 @@
   </div>
 </section>
 
-<div class="empty-state" id="resultsKwModalOverlay" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:220;border:0;border-radius:0;padding:40px 20px;align-items:flex-start;justify-content:center;overflow:auto">
-  <div class="card" style="max-width:680px;width:100%;margin-top:40px;text-align:left;color:var(--ink)">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
-      <div><h3 id="resultsKwModalTitle" style="margin:0 0 4px"></h3><p id="resultsKwModalSub" style="color:var(--muted);font-size:13px;margin:0"></p></div>
-      <button class="btn line" id="resultsKwModalClose" type="button" style="flex-shrink:0">닫기</button>
-    </div>
-    <div id="resultsKwModalList" class="list" style="margin-top:16px"></div>
-  </div>
-</div>
+<section class="page" id="results-detail">
+  <button class="btn line" id="resultsDetailBackBtn" type="button" style="margin-bottom:16px">← 리서치 결과로 돌아가기</button>
+  <div class="page-title"><div><h2 id="resultsDetailTitle"></h2><p id="resultsDetailSub"></p></div></div>
+  <div id="resultsDetailList" class="list"></div>
+</section>
 <section class="page" id="saved">
   <div class="page-title"><div><h2>저장 자료함</h2><p>저장한 기사와 요약을 모아봅니다.</p></div><span class="badge purple" id="savedCountBadge">0 Saved</span></div>
   <div class="grid cols-3" id="savedGrid"></div>
 </section>
 
-<div class="empty-state" id="docModalOverlay" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:200;border:0;border-radius:0;padding:40px 20px;align-items:flex-start;justify-content:center;overflow:auto">
+<div class="empty-state" id="docModalOverlay" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:230;border:0;border-radius:0;padding:40px 20px;align-items:flex-start;justify-content:center;overflow:auto">
   <div class="card" style="max-width:560px;width:100%;margin-top:40px;text-align:left;color:var(--ink)">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
       <h3 id="docModalTitle" style="margin:0">자료 제목</h3>
@@ -565,6 +561,7 @@ function showPage(id){
   if(id==='newssum') renderNewsSumPage();
   if(id==='history'){ renderHistoryPage(); renderKeywordsPage(); }
   if(id==='results') renderResultsPage();
+  if(id==='results-detail') renderResultsDetail();
   if(id==='saved') renderSavedPage();
   if(id==='account') renderAccountPage();
   if(id==='admin-approve') loadAdminRequests();
@@ -646,7 +643,7 @@ function toggleExcludeDomainGroup(key){
 function buildTavilyPayload(queryOverride, parts){
   const query = (typeof queryOverride === 'string' && queryOverride.trim()) ? queryOverride.trim() : getFinalQuery();
   const depth = $('#searchDepth')?.value || 'basic';
-  const maxResults = parseInt($('#maxResults')?.value || '5', 10);
+  const maxResults = parseInt($('#maxResults')?.value || '20', 10);
   const startDate = $('#startDate')?.value || '';
   const endDate = $('#endDate')?.value || '';
   const country = $('#country')?.value || '';
@@ -1046,17 +1043,30 @@ function renderResults(){
       <td><span class="badge blue">${esc(h.kw)}</span></td>
       <td style="color:var(--muted);font-size:13px">${esc(h.date)}</td>
       <td>${hasSuccess ? relevanceBadge(avgScore) : '<span class="badge red">낮음</span>'}</td>
-      <td><button class="btn soft" type="button" onclick="openResultsKwModal(${hi})">${count>0 ? count+'건 보기' : '결과 확인'}</button></td>
+      <td><button class="btn soft" type="button" onclick="viewResultsDetail(${hi})">${count>0 ? count+'건 보기' : '결과 확인'}</button></td>
       <td><button class="btn line" type="button" onclick="retryKwSearch(${hi})">재검색</button></td>
     </tr>`;
   }).join('') : '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">아직 검색한 결과가 없습니다.</td></tr>';
   updateExportBtnLabel();
 }
-function openResultsKwModal(hidx){
+let currentResultsDetailHidx = null;
+function viewResultsDetail(hidx){
   const h = resultHistory[hidx]; if(!h) return;
-  $('#resultsKwModalTitle').textContent = h.kw;
-  $('#resultsKwModalSub').textContent = `${h.date}${h.time?' '+h.time:''} · ${(h.docs||[]).length}건`;
-  $('#resultsKwModalList').innerHTML = (h.docs||[]).length ? h.docs.map((d,li)=>{
+  currentResultsDetailHidx = hidx;
+  showPage('results-detail');
+}
+function renderResultsDetail(){
+  const hidx = currentResultsDetailHidx;
+  const h = hidx!==null ? resultHistory[hidx] : null;
+  if(!h){
+    $('#resultsDetailTitle').textContent = '결과를 찾을 수 없습니다';
+    $('#resultsDetailSub').textContent = '';
+    $('#resultsDetailList').innerHTML = '<div class="empty-state"><h3>결과가 없습니다</h3><p>리서치 결과 목록에서 다시 선택해주세요.</p></div>';
+    return;
+  }
+  $('#resultsDetailTitle').textContent = h.kw;
+  $('#resultsDetailSub').textContent = `${h.date}${h.time?' '+h.time:''} · ${(h.docs||[]).length}건`;
+  $('#resultsDetailList').innerHTML = (h.docs||[]).length ? h.docs.map((d,li)=>{
     const gi = globalDocIndex(hidx, li);
     return `<div class="list-item" style="cursor:default" onclick="event.stopPropagation()">
       <div class="list-icon">📄</div>
@@ -1070,9 +1080,7 @@ function openResultsKwModal(hidx){
       </div>
     </div>`;
   }).join('') : '<div class="empty-state"><h3>결과가 없습니다</h3></div>';
-  $('#resultsKwModalOverlay').style.display = 'flex';
 }
-function closeResultsKwModal(){ $('#resultsKwModalOverlay').style.display = 'none'; }
 async function retryKwSearch(hidx){
   const h = resultHistory[hidx]; if(!h) return;
   showToast('다시 검색 중입니다...');
@@ -1759,8 +1767,9 @@ function bindEvents(){
   // 문서 상세 모달
   $('#docModalClose')?.addEventListener('click', closeDocModal);
   $('#docModalOverlay')?.addEventListener('click', e=>{ if(e.target.id==='docModalOverlay') closeDocModal(); });
-  $('#resultsKwModalClose')?.addEventListener('click', closeResultsKwModal);
-  $('#resultsKwModalOverlay')?.addEventListener('click', e=>{ if(e.target.id==='resultsKwModalOverlay') closeResultsKwModal(); });
+
+  // 리서치 결과 상세 페이지
+  $('#resultsDetailBackBtn')?.addEventListener('click', ()=>showPage('results'));
 
   // 새 키워드 세트 만들기 버튼 (고급 옵션 JSON으로부터 세트 자동 생성)
   $('#newResearchBtn')?.addEventListener('click', ()=>{ showToast('새 리서치 만들기에서 키워드를 검색해보세요.'); });
