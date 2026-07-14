@@ -1163,13 +1163,19 @@ function saveAccountSettings(){
 }
 
 // ══════════════════════════════════════════
-// 사용자 메뉴 팝업 — auth 스크립트에서 처리
+// 사용자 메뉴 팝업 (사이드바 하단)
 // ══════════════════════════════════════════
-function toggleUserPopup(e){ e.stopPropagation(); document.getElementById('userPopup').classList.toggle('open'); }
-function closeUserPopup(){ document.getElementById('userPopup')?.classList.remove('open'); }
+function toggleUserPopup(e){ e.stopPropagation(); $('#userPopup').classList.toggle('open'); }
+function closeUserPopup(){ $('#userPopup')?.classList.remove('open'); }
 document.addEventListener('click', e=>{
   if(!e.target.closest('#sidebarFooter')) closeUserPopup();
 });
+function handleLogout(){
+  closeUserPopup();
+  showToast('로그아웃 되었습니다.');
+  $('#footerName').textContent = '로그인이 필요합니다';
+  $('#footerStatus').textContent = '클릭하여 로그인';
+}
 
 // ══════════════════════════════════════════
 // 이벤트 바인딩
@@ -1218,7 +1224,9 @@ function bindEvents(){
 
   // 계정 설정 / 사용자 팝업
   $('#saveAccountBtn')?.addEventListener('click', saveAccountSettings);
-  // 사이드바 팝업은 auth 스크립트에서 처리
+  $('#sidebarFooter')?.addEventListener('click', e=>{ if(!e.target.closest('button')) toggleUserPopup(e); });
+  $('#userPopup')?.addEventListener('click', e=>{ const b=e.target.closest('[data-page]'); if(b){ closeUserPopup(); showPage(b.dataset.page); } });
+  $('#logoutBtn')?.addEventListener('click', e=>{ e.stopPropagation(); handleLogout(); });
 
   // 상단 사용자 칩 → 계정 설정
   $('#topUserChip')?.addEventListener('click', ()=>showPage('account'));
@@ -1526,7 +1534,7 @@ function showAuthStatus(id, type, msg){ const el = document.getElementById(id); 
 function clearAuthStatus(){ document.getElementById('login-status').className='auth-status'; document.getElementById('signup-status').className='auth-status'; }
 function switchAuthTab(tab){ ['login','signup'].forEach(t=>{ document.getElementById('panel-'+t).classList.toggle('active', t===tab); document.getElementById('tab-'+t).classList.toggle('active', t===tab); }); clearAuthStatus(); }
 function toggleUserPopup(e){ e.stopPropagation(); document.getElementById('userPopup').classList.toggle('open'); }
-function closeUserPopup2(){ closeUserPopup(); }
+function closeUserPopup2(){ document.getElementById('userPopup')?.classList.remove('open'); }
 
 async function handleLogin(){
   const userId=document.getElementById('login-id').value.trim(), pw=document.getElementById('login-pw').value;
