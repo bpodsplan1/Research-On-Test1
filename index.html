@@ -7,15 +7,15 @@
 <style>
 :root{--bg:#f4f7fb;--surface:#fff;--ink:#172033;--muted:#697386;--line:#e5eaf2;--primary:#2563eb;--primary2:#1d4ed8;--soft:#eaf1ff;--green:#0f766e;--greenSoft:#e6fffb;--orange:#f97316;--orangeSoft:#fff7ed;--purple:#7c3aed;--purpleSoft:#f3e8ff;--red:#dc2626;--redSoft:#fee2e2;--shadow:0 16px 40px rgba(15,23,42,.08);--radius:22px}
 *{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(37,99,235,.14),transparent 27%),radial-gradient(circle at top right,rgba(15,118,110,.1),transparent 32%),var(--bg);color:var(--ink);line-height:1.55} button,input,select,textarea{font:inherit} button{cursor:pointer} a{color:inherit;text-decoration:none}
-.app{display:grid;grid-template-columns:292px minmax(0,1fr);min-height:100vh}.sidebar{position:sticky;top:0;height:100vh;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-right:1px solid var(--line);padding:24px 18px;display:flex;flex-direction:column;gap:20px;overflow:auto}.brand{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:4px 8px 18px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#1d4ed8,#0f766e);font-weight:900}.brand h1{font-size:17px;margin:0;line-height:1.1}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.nav-section{margin-top:4px}.nav-title{font-size:12px;font-weight:900;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;padding:0 10px 8px}.nav-item{width:100%;border:0;background:transparent;color:#475569;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:14px;font-size:14px;font-weight:800;text-align:left;transition:.16s}.nav-item:hover{background:#f1f5f9;color:var(--primary);transform:translateX(2px)}.nav-item.active{background:linear-gradient(135deg,#eaf1ff,#fff);color:var(--primary2);box-shadow:inset 0 0 0 1px rgba(37,99,235,.15)}.nav-icon{width:26px;height:26px;display:grid;place-items:center;border-radius:10px;background:#eef2ff}.sidebar-footer{margin-top:auto;background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;border-radius:20px;padding:16px;box-shadow:var(--shadow);cursor:pointer;position:relative}.sidebar-footer strong{display:block;font-size:14px}.sidebar-footer span{display:block;font-size:12px;opacity:.82;margin-top:4px}
+.app{display:grid;grid-template-columns:auto minmax(0,1fr);min-height:100vh}.sidebar{width:292px;flex-shrink:0;transition:width .22s ease,padding .22s ease,opacity .16s ease;position:sticky;top:0;height:100vh;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-right:1px solid var(--line);padding:24px 18px;display:flex;flex-direction:column;gap:20px;overflow:auto}.app.sidebar-collapsed .sidebar{width:0;padding:0;border-right:0;opacity:0;overflow:hidden;pointer-events:none}.sidebar-toggle-btn{border:1px solid var(--line);background:#fff;border-radius:14px;height:44px;width:44px;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;flex-shrink:0;transition:.15s}.sidebar-toggle-btn:hover{border-color:rgba(37,99,235,.4);color:var(--primary2)}.brand{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:4px 8px 18px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#1d4ed8,#0f766e);font-weight:900}.brand h1{font-size:17px;margin:0;line-height:1.1}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.nav-section{margin-top:4px}.nav-title{font-size:12px;font-weight:900;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;padding:0 10px 8px}.nav-item{width:100%;border:0;background:transparent;color:#475569;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:14px;font-size:14px;font-weight:800;text-align:left;transition:.16s}.nav-item:hover{background:#f1f5f9;color:var(--primary);transform:translateX(2px)}.nav-item.active{background:linear-gradient(135deg,#eaf1ff,#fff);color:var(--primary2);box-shadow:inset 0 0 0 1px rgba(37,99,235,.15)}.nav-icon{width:26px;height:26px;display:grid;place-items:center;border-radius:10px;background:#eef2ff}.sidebar-footer{margin-top:auto;background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;border-radius:20px;padding:16px;box-shadow:var(--shadow);cursor:pointer;position:relative}.sidebar-footer strong{display:block;font-size:14px}.sidebar-footer span{display:block;font-size:12px;opacity:.82;margin-top:4px}
 .user-popup{position:absolute;bottom:calc(100% + 8px);left:0;right:0;background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:8px;display:none;flex-direction:column;gap:2px;z-index:50}.user-popup.open{display:flex}.user-popup button{width:100%;text-align:left;border:0;background:transparent;padding:10px 12px;border-radius:10px;font-size:13px;font-weight:800;color:#334155;display:flex;align-items:center;gap:8px}.user-popup button:hover{background:#f1f5f9}.user-popup button.danger{color:var(--red)}
-.main{padding:24px 28px 48px;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px;width:100%}.mobile-menu{display:none;border:1px solid var(--line);background:#fff;border-radius:14px;height:44px;padding:0 12px;font-weight:900}.search{flex:1;max-width:680px;position:relative}.search input{width:100%;height:48px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.86);padding:0 18px 0 46px;outline:none;box-shadow:0 8px 28px rgba(15,23,42,.04)}.search:before{content:"⌕";position:absolute;left:17px;top:6px;color:#94a3b8;font-size:27px;pointer-events:none}.user-chip{display:flex;align-items:center;gap:11px;padding:9px 12px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(15,23,42,.05);min-width:210px;margin-left:auto}.avatar{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-weight:900}.user-chip b{display:block;font-size:14px}.user-chip small{display:block;color:var(--muted);font-size:12px}
+.main{padding:24px 28px 48px;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px;width:100%}.search{flex:1;max-width:680px;position:relative}.search input{width:100%;height:48px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.86);padding:0 18px 0 46px;outline:none;box-shadow:0 8px 28px rgba(15,23,42,.04)}.search:before{content:"⌕";position:absolute;left:17px;top:6px;color:#94a3b8;font-size:27px;pointer-events:none}.user-chip{display:flex;align-items:center;gap:11px;padding:9px 12px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(15,23,42,.05);min-width:210px;margin-left:auto}.avatar{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-weight:900}.user-chip b{display:block;font-size:14px}.user-chip small{display:block;color:var(--muted);font-size:12px}
 .page{display:none;animation:fade .18s ease}.page.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.hero{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 52%,#0f766e 100%);color:#fff;padding:34px;box-shadow:0 24px 70px rgba(15,23,42,.22);margin-bottom:22px}.hero:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.12);right:-80px;top:-90px}.hero>*{position:relative;z-index:1}.hero h2{margin:8px 0 10px;font-size:34px;line-height:1.2;letter-spacing:-.04em}.hero p{margin:0 0 20px;color:rgba(255,255,255,.86);max-width:760px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.15);font-size:13px;font-weight:900}.dash-search-wrap{max-width:640px;margin:0 auto;text-align:center;padding:30px 0 16px}.dash-brand{max-width:640px;margin:0 auto;text-align:center;padding:36px 0 0}.dash-brand-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px}.dash-brand-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1d4ed8,#0f766e);display:grid;place-items:center;font-size:18px}.dash-brand-word{font-size:34px;font-weight:950;letter-spacing:-.03em;background:linear-gradient(135deg,#1d4ed8,#0f766e);-webkit-background-clip:text;background-clip:text;color:transparent}.dash-brand p{font-size:13px;color:var(--muted);font-weight:800;margin:0}.dash-search-wrap p{font-size:14px;color:var(--muted);font-weight:800;margin:0 0 14px}.dash-search-box{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:6px 6px 6px 20px;background:#fff;box-shadow:var(--shadow)}.dash-search-box span{font-size:18px;color:#94a3b8}.dash-search-box input{border:0;flex:1;height:44px;font-size:15px}.dash-search-box input:focus{outline:0}.dash-search-box button{border-radius:999px;padding:0 22px;height:44px}.dash-shortcuts{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;padding:6px 0 32px}.dash-shortcut{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;border:0;background:transparent;font:inherit}.dash-shortcut-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:20px;transition:.16s}.dash-shortcut:hover .dash-shortcut-icon{transform:translateY(-2px)}.dash-shortcut span{font-size:12px;color:#475569;font-weight:800}.dash-widget-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}.dash-widget-grid .card{padding:16px 18px}.row-flash{animation:rowflash 1.6s ease}@keyframes rowflash{0%{background:var(--soft)}100%{background:transparent}}.export-menu-item{width:100%;display:flex;align-items:center;gap:8px;padding:11px 16px;font-size:13px;font-weight:800;background:transparent;border:0;text-align:left;cursor:pointer;transition:.12s;color:var(--ink)}.export-menu-item:hover{background:var(--soft)}.ai-insight-box{background:linear-gradient(135deg,#f5f3ff,#eff6ff);border:1px solid #c4b5fd;border-radius:18px;padding:18px 20px;margin-bottom:16px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border-radius:13px;border:0;font-weight:900;background:#fff;color:#334155;white-space:nowrap}.btn.primary{background:#fff;color:var(--primary2)}.btn.dark{background:#0f172a;color:#fff}.btn.soft{background:var(--soft);color:var(--primary2)}.btn.green{background:var(--greenSoft);color:var(--green)}.btn.orange{background:var(--orangeSoft);color:#c2410c}.btn.red{background:var(--redSoft);color:var(--red)}.btn.line{background:#fff;border:1px solid var(--line);color:#334155}.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
 .grid{display:grid;gap:18px}.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.split{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}.card{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 12px 32px rgba(15,23,42,.055)}.metric{min-height:132px}.metric .label{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;font-weight:900}.metric .num{font-size:34px;font-weight:950;letter-spacing:-.05em;margin:18px 0 4px}.metric .desc{margin:0;color:var(--muted);font-size:13px}.section-head,.page-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:26px 0 12px}.page-title{align-items:center;margin:0 0 18px}.section-head h3,.page-title h2{margin:0;letter-spacing:-.035em}.page-title h2{font-size:30px}.section-head p,.page-title p{margin:5px 0 0;color:var(--muted);font-size:14px}
 .badge{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;white-space:nowrap}.badge.blue{background:var(--soft);color:var(--primary2)}.badge.green{background:var(--greenSoft);color:var(--green)}.badge.orange{background:var(--orangeSoft);color:#c2410c}.badge.purple{background:var(--purpleSoft);color:var(--purple)}.badge.gray{background:#f1f5f9;color:#475569}.badge.red{background:var(--redSoft);color:var(--red)}
 .table-card{padding:0;overflow:hidden}table{width:100%;border-collapse:collapse;background:#fff}th,td{text-align:left;padding:15px 18px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:middle}th{background:#f8fafc;color:#64748b;font-size:12px;text-transform:uppercase;letter-spacing:.05em}tr:last-child td{border-bottom:0}
-.form{display:grid;gap:16px}.field label{display:block;margin-bottom:7px;font-size:13px;font-weight:900;color:#334155}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 14px;color:var(--ink);outline:none}textarea{min-height:120px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(37,99,235,.55);box-shadow:0 0 0 4px rgba(37,99,235,.1)}
+.form{display:grid;gap:16px}.field label{display:block;margin-bottom:7px;font-size:13px;font-weight:900;color:#334155}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px 14px;color:var(--ink);outline:none}textarea{min-height:120px;resize:vertical}input:focus,select:focus,textarea:focus{border-color:rgba(37,99,235,.55);box-shadow:0 0 0 4px rgba(37,99,235,.1)}input[type="checkbox"],input[type="radio"]{width:16px;height:16px;flex:0 0 auto;padding:0;border-radius:4px;box-shadow:none;accent-color:var(--primary2);cursor:pointer}
 .tabbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}.tab{border:1px solid var(--line);background:#fff;color:#475569;border-radius:999px;padding:10px 15px;font-weight:900}.tab.active{background:var(--soft);color:var(--primary2);border-color:rgba(37,99,235,.25)}.mode-panel,.builder-step{display:none}.mode-panel.active,.builder-step.active{display:block}
 .builder-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}.builder-progress{display:flex;gap:8px;margin:0 0 16px}.step-dot{flex:1;padding:10px 12px;border-radius:14px;background:#f8fafc;border:1px solid var(--line);font-size:13px;font-weight:900;color:#64748b;text-align:center}.step-dot.active{background:var(--soft);color:var(--primary2);border-color:rgba(37,99,235,.25)}.builder-actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}.sticky-panel{position:sticky;top:24px}
 .chip{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;background:#fff;border:1px solid var(--line);border-radius:999px;font-size:13px;font-weight:900;margin:4px;color:#0f172a}.chip:hover{border-color:rgba(37,99,235,.55);box-shadow:0 0 0 3px rgba(37,99,235,.08)}.chip.selected{background:var(--soft);border-color:rgba(37,99,235,.4);color:var(--primary2)}.chip .x{border:0;background:transparent;color:#64748b;padding:0;font-weight:900}
@@ -27,8 +27,8 @@
 .streaming-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--primary);animation:pulse 1s infinite;margin-right:6px}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 .toast{position:fixed;bottom:24px;right:24px;background:#0f172a;color:#fff;padding:13px 20px;border-radius:14px;font-size:13px;font-weight:800;display:none;z-index:999;box-shadow:var(--shadow)}.toast.show{display:block;animation:fade .2s}
 .tag-input-area{display:flex;flex-wrap:wrap;gap:6px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:8px 10px;min-height:48px;align-items:center}.tag-input-area input{border:0;flex:1;min-width:120px;padding:6px}.tag-pill{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--primary2);padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800}.tag-pill .rm{cursor:pointer;font-weight:900}.domain-group-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#64748b;font-size:13px;font-weight:800;cursor:pointer;transition:.14s}.domain-group-btn:hover{border-color:#cbd5e1;color:#334155}.domain-group-btn.on{background:var(--redSoft);border-color:rgba(220,38,38,.3);color:var(--red)}.domain-group-btn .dg-count{font-size:11px;opacity:.7;font-weight:700}
-.hist-stat-row{display:flex;gap:6px}.hist-row{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);background:#fff;border-radius:18px;cursor:pointer;transition:.16s}.hist-row:hover{border-color:rgba(37,99,235,.4)}.hist-row .freq-bar{height:5px;border-radius:999px;background:#e2e8f0;overflow:hidden;margin-top:6px;width:160px}.hist-row .freq-bar span{display:block;height:100%;background:var(--primary)}
-@media(max-width:1100px){.cols-4{grid-template-columns:repeat(2,1fr)}.cols-3,.cols-2,.split,.builder-layout,.exp-grid,.pool-cols{grid-template-columns:1fr}.sticky-panel{position:static}}@media(max-width:840px){.app{grid-template-columns:1fr}.sidebar{display:none;position:fixed;z-index:30;width:292px;left:0;top:0}.sidebar.open{display:flex}.main{padding:18px}.mobile-menu{display:inline-flex;align-items:center}.topbar{align-items:stretch;flex-wrap:wrap}.search{order:3;max-width:none;flex-basis:100%}.user-chip{margin-left:auto;min-width:0}.hero h2{font-size:28px}.cols-4,.cols-3,.cols-2{grid-template-columns:1fr}.page-title{align-items:flex-start;flex-direction:column}th:nth-child(4),td:nth-child(4){display:none}}
+
+@media(max-width:1100px){.cols-4{grid-template-columns:repeat(2,1fr)}.cols-3,.cols-2,.split,.builder-layout,.exp-grid,.pool-cols{grid-template-columns:1fr}.sticky-panel{position:static}}@media(max-width:840px){.app{grid-template-columns:1fr}.sidebar{display:none;position:fixed;z-index:30;width:292px;left:0;top:0}.sidebar.open{display:flex}.main{padding:18px}.topbar{align-items:stretch;flex-wrap:wrap}.search{order:3;max-width:none;flex-basis:100%}.user-chip{margin-left:auto;min-width:0}.hero h2{font-size:28px}.cols-4,.cols-3,.cols-2{grid-template-columns:1fr}.page-title{align-items:flex-start;flex-direction:column}th:nth-child(4),td:nth-child(4){display:none}}
 
 /* ── Auth 오버레이 ── */
 #auth-overlay{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at top left,rgba(37,99,235,.18),transparent 30%),radial-gradient(circle at bottom right,rgba(15,118,110,.13),transparent 35%),#f4f7fb;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
@@ -101,7 +101,7 @@
 
 <!-- Supabase CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<div class="app">
+<div class="app sidebar-collapsed" id="appRoot">
 <aside class="sidebar" id="sidebar">
   <div class="brand"><div class="logo">RO</div><div><h1>Research On</h1><p>이트너스 AI 리서치 허브</p></div></div>
   <nav>
@@ -109,9 +109,14 @@
       <button class="nav-item active" data-page="dashboard" type="button"><span class="nav-icon">🏠</span>내 대시보드</button>
       <button class="nav-item" data-page="new-research" type="button"><span class="nav-icon">✨</span>새 리서치 만들기</button>
       <button class="nav-item" data-page="results" type="button"><span class="nav-icon">📚</span>리서치 결과</button>
-      <button class="nav-item" data-page="newssum" type="button"><span class="nav-icon">📑</span>뉴스 기사 요약</button>
+      <button class="nav-item" data-page="insight-history" type="button"><span class="nav-icon">✦</span>인사이트 히스토리</button>
+      <button class="nav-item" data-page="newssum" type="button"><span class="nav-icon">📑</span>AI 검색</button>
       <button class="nav-item" data-page="saved" type="button"><span class="nav-icon">⭐</span>저장 자료함</button>
       <button class="nav-item" data-page="history" type="button"><span class="nav-icon">🕘</span>검색 히스토리</button>
+    </div>
+    <div class="nav-section"><div class="nav-title">뉴스레터</div>
+      <button class="nav-item" data-page="newsletter" type="button"><span class="nav-icon">📮</span>뉴스레터</button>
+      <button class="nav-item" data-page="newsletter-subscribe" type="button"><span class="nav-icon">🔔</span>구독 신청</button>
     </div>
     <div class="nav-section"><div class="nav-title">운영·설정</div>
       <button class="nav-item" data-page="account" type="button"><span class="nav-icon">👤</span>내 계정 설정</button>
@@ -129,7 +134,7 @@
   </div>
 </aside>
 <main class="main">
-  <div class="topbar"><button class="mobile-menu" id="mobileMenu" type="button">☰ 메뉴</button><div class="user-chip" id="topUserChip" style="cursor:pointer"><div class="avatar">U</div><div><b>이트너스 사용자</b><small>Research User · Standard</small></div></div></div>
+  <div class="topbar"><button class="sidebar-toggle-btn" id="mobileMenu" type="button" title="사이드바 열기/닫기">☰</button><div class="user-chip" id="topUserChip" style="cursor:pointer"><div class="avatar">U</div><div><b>이트너스 사용자</b><small>Research User · Standard</small></div></div></div>
 <section class="page active" id="dashboard">
   <div class="dash-brand">
     <div class="dash-brand-row"><span class="dash-brand-icon">✨</span><span class="dash-brand-word">Research On</span></div>
@@ -145,9 +150,11 @@
   </div>
   <div class="dash-shortcuts">
     <button class="dash-shortcut" data-go="new-research" type="button"><span class="dash-shortcut-icon" style="background:var(--soft)">✨</span><span>새 리서치</span></button>
-    <button class="dash-shortcut" data-go="newssum" type="button"><span class="dash-shortcut-icon" style="background:var(--greenSoft)">📑</span><span>뉴스 요약</span></button>
-    <button class="dash-shortcut" data-go="history" type="button"><span class="dash-shortcut-icon" style="background:var(--orangeSoft)">🕘</span><span>검색 히스토리</span></button>
-    <button class="dash-shortcut" data-go="saved" type="button"><span class="dash-shortcut-icon" style="background:var(--purpleSoft)">⭐</span><span>저장 자료</span></button>
+    <button class="dash-shortcut" data-go="newssum" type="button"><span class="dash-shortcut-icon" style="background:var(--greenSoft)">📑</span><span>AI 검색</span></button>
+    <button class="dash-shortcut" data-go="insight-history" type="button"><span class="dash-shortcut-icon" style="background:var(--purpleSoft)">✦</span><span>인사이트 히스토리</span></button>
+    <button class="dash-shortcut" data-go="saved" type="button"><span class="dash-shortcut-icon" style="background:var(--orangeSoft)">⭐</span><span>저장 자료함</span></button>
+    <button class="dash-shortcut" data-go="history" type="button"><span class="dash-shortcut-icon" style="background:var(--soft)">🕘</span><span>검색 히스토리</span></button>
+    <button class="dash-shortcut" data-go="newsletter" type="button"><span class="dash-shortcut-icon" style="background:var(--greenSoft)">📮</span><span>뉴스레터</span></button>
   </div>
   <div class="dash-widget-grid">
     <div class="card" id="dashRecentCard">
@@ -308,7 +315,7 @@
   </div>
 </section>
 <section class="page" id="newssum">
-  <div class="page-title"><div><h2>뉴스 기사 요약</h2><p>키워드를 검색하면 관련 기사를 모아드려요. 요약받고 싶은 기사를 클릭하면 AI가 3~5문장으로 정리합니다.</p></div><span class="badge blue">News Summary</span></div>
+  <div class="page-title"><div><h2>AI 검색</h2><p>키워드를 검색하면 관련 기사를 모아드려요. 요약받고 싶은 기사를 클릭하면 AI가 3~5문장으로 정리합니다.</p></div><span class="badge blue">News Summary</span></div>
 
   <div class="card">
     <h3>키워드로 기사 검색</h3>
@@ -344,7 +351,7 @@
 </section>
 <section class="page" id="results">
   <div class="page-title"><div><h2>리서치 결과</h2><p id="resultsSubtitle">새 리서치 만들기에서 검색했던 키워드별 결과를 언제든지 다시 확인할 수 있습니다.</p></div>
-    <div style="display:flex;gap:8px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
       <div style="position:relative;display:inline-block" id="exportDropdownWrap">
         <button class="btn soft" id="exportResultsBtn" type="button">⬇ 내보내기 ▾</button>
         <div id="exportMenu" style="display:none;position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:100;overflow:hidden;min-width:160px">
@@ -365,6 +372,19 @@
   </div>
 </section>
 
+<section class="page" id="insight-history">
+  <div class="page-title"><div><h2>인사이트 히스토리</h2><p>지금까지 도출한 인사이트를 언제, 어떤 키워드로 만들었는지와 함께 모아봅니다.</p></div>
+    <div style="position:relative;display:inline-block" id="insightExportWrap">
+      <button class="btn soft" id="insightExportBtn" type="button">⬇ 내보내기 ▾</button>
+      <div id="insightExportMenu" style="display:none;position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:100;overflow:hidden;min-width:160px">
+        <button class="export-menu-item" id="insightExportPdfBtn" type="button">📄 PDF로 저장</button>
+        <button class="export-menu-item" id="insightExportWordBtn" type="button">📝 Word로 저장</button>
+      </div>
+    </div>
+  </div>
+  <div id="insightList" class="list"></div>
+</section>
+
 <section class="page" id="results-detail">
   <button class="btn line" id="resultsDetailBackBtn" type="button" style="margin-bottom:16px">← 리서치 결과로 돌아가기</button>
   <div class="page-title"><div><h2 id="resultsDetailTitle"></h2><p id="resultsDetailSub"></p></div></div>
@@ -376,21 +396,73 @@
     <button class="btn dark" id="generateInsightBtn" type="button">✦ 인사이트 도출</button>
   </div>
   <div id="resultsDetailList" class="list"></div>
+</section>
+<section class="page" id="newsletter">
+  <div id="newsletterListView">
+    <div class="page-title"><div><h2>뉴스레터</h2><p>이트너스 리서치 팀이 정리한 주요 소식을 정기적으로 받아보세요.</p></div></div>
 
-  <div class="section-head" style="margin-top:30px">
-    <div><h3>도출된 인사이트</h3><p>선택한 기사를 기반으로 AI가 생성한 인사이트입니다.</p></div>
-    <div style="position:relative;display:inline-block" id="insightExportWrap">
-      <button class="btn soft" id="insightExportBtn" type="button">⬇ 내보내기 ▾</button>
-      <div id="insightExportMenu" style="display:none;position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:100;overflow:hidden;min-width:160px">
-        <button class="export-menu-item" id="insightExportPdfBtn" type="button">📄 PDF로 저장</button>
-        <button class="export-menu-item" id="insightExportWordBtn" type="button">📝 Word로 저장</button>
+    <div class="section-head"><div><h3>최신 뉴스레터</h3><p>가장 최근 발행된 이슈입니다.</p></div></div>
+    <div class="card" id="newsletterLatestCard">
+      <div class="empty-state"><h3>아직 발행된 뉴스레터가 없어요</h3><p>첫 뉴스레터가 발행되면 여기에서 바로 확인할 수 있습니다.</p></div>
+    </div>
+
+    <div id="newsletterArchiveSection" style="display:none">
+      <div class="section-head" style="margin-top:30px"><div><h3>지난 뉴스레터</h3><p>이전에 발행된 뉴스레터 아카이브입니다. 클릭하면 전체 내용을 볼 수 있어요.</p></div></div>
+      <div id="newsletterArchiveList" class="list">
+        <div class="empty-state"><h3>지난 발행 기록이 없어요</h3></div>
       </div>
     </div>
   </div>
-  <div id="insightList" class="list"></div>
+
+  <div id="newsletterDetailView" style="display:none">
+    <button class="btn line" id="newsletterDetailBackBtn" type="button" style="margin-bottom:16px">← 뉴스레터 목록으로</button>
+    <div class="page-title"><div><h2 id="newsletterDetailTitle"></h2><p id="newsletterDetailMeta"></p></div></div>
+    <div class="card" id="newsletterDetailBody" style="line-height:1.8"></div>
+  </div>
 </section>
+
+<section class="page" id="newsletter-subscribe">
+  <div class="page-title"><div><h2>구독 신청</h2><p>뉴스레터 구독을 신청하거나 해지할 수 있어요.</p></div></div>
+
+  <div class="card" style="margin-bottom:24px">
+    <h3 style="margin:0 0 6px">어떤 내용을 받아보게 되나요?</h3>
+    <p style="color:var(--muted);font-size:12px;margin:0 0 14px">※ 아래 내용은 임시 예시이며, 실제 뉴스레터 구성안이 확정되면 이 자리가 업데이트될 예정입니다.</p>
+    <!-- TODO: 사용자가 첨부할 실제 뉴스레터 기획안으로 교체 예정 -->
+    <ul id="newsletterDescList" style="margin:0;padding-left:20px;color:#334155;line-height:1.9;font-size:14px">
+      <li>이트너스 관련 주요 리서치 결과 요약</li>
+      <li>업계 트렌드 및 AI가 도출한 인사이트</li>
+      <li>팀에서 자주 검색한 키워드 동향</li>
+    </ul>
+  </div>
+
+  <div class="card" id="newsletterSubscribeCard" style="margin-bottom:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+    <div style="width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--soft);flex-shrink:0;font-size:20px">📮</div>
+    <div style="flex:1;min-width:220px">
+      <h3 style="margin:0 0 4px">뉴스레터 구독</h3>
+      <p id="newsletterSubStatusText" style="color:var(--muted);margin:0">구독 상태를 불러오는 중...</p>
+    </div>
+    <button class="btn dark" id="newsletterSubscribeBtn" type="button">구독 신청</button>
+  </div>
+
+  <div class="card" id="newsletterUnsubscribeCard" style="display:none;border-color:rgba(220,38,38,.25);background:#fff7f7">
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+      <div style="width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--redSoft);flex-shrink:0;font-size:20px">🚫</div>
+      <div style="flex:1;min-width:220px">
+        <h3 style="margin:0 0 4px;color:var(--red)">구독 해지</h3>
+        <p style="color:var(--muted);margin:0;font-size:13px">더 이상 뉴스레터를 받고 싶지 않으시면 언제든 해지할 수 있어요. 해지하면 최신호 요약만 보이고, 지난 뉴스레터 아카이브 열람은 제한됩니다.</p>
+      </div>
+      <button class="btn red" id="newsletterUnsubscribeBtn" type="button">구독 해지</button>
+    </div>
+  </div>
+</section>
+
 <section class="page" id="saved">
-  <div class="page-title"><div><h2>저장 자료함</h2><p>저장한 기사와 요약을 모아봅니다.</p></div><span class="badge purple" id="savedCountBadge">0 Saved</span></div>
+  <div class="page-title"><div><h2>저장 자료함</h2><p>저장한 기사와 인사이트를 모아봅니다.</p></div><span class="badge purple" id="savedCountBadge">0 Saved</span></div>
+  <div class="tabbar" style="margin-bottom:16px">
+    <button class="tab active" data-saved-filter="all" type="button">전체</button>
+    <button class="tab" data-saved-filter="article" type="button">기사</button>
+    <button class="tab" data-saved-filter="insight" type="button">인사이트</button>
+  </div>
   <div class="grid cols-3" id="savedGrid"></div>
 </section>
 
@@ -402,6 +474,7 @@
     </div>
     <div id="docModalMeta" style="margin:10px 0"></div>
     <p id="docModalBody" style="white-space:pre-line;color:#334155"></p>
+    <div id="docModalSourceLink" style="margin-top:10px"></div>
     <div id="docModalSummaryArea" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
       <strong style="font-size:13px">AI 요약</strong>
       <p id="docModalSummaryText" style="font-size:13px;color:#334155;margin:8px 0 0;line-height:1.7"></p>
@@ -418,20 +491,23 @@
     <div class="card metric"><div class="label">오늘 검색</div><div class="num" id="histTodayCount">0</div></div>
     <div class="card metric"><div class="label">가장 많이 검색</div><div class="num" id="histTopKw" style="font-size:22px">—</div></div>
   </div>
-
-  <div class="section-head" style="margin-top:30px"><div><h3>상세 검색 키워드</h3><p>새 리서치 만들기에서 검색해 결과를 가져온 키워드의 Pool·전방·후방 구성을 확인합니다.</p></div><button class="btn dark" id="newResearchBtn" data-go="new-research" type="button">새 리서치 검색하기</button></div>
-  <div class="card table-card">
-    <table><thead><tr><th>키워드 Pool</th><th>전방 키워드</th><th>후방 키워드</th><th>검색 날짜</th><th>작업</th></tr></thead><tbody id="researchKeywordsBody"></tbody></table>
-  </div>
-  <div class="insight-box" style="margin-top:16px">권장 구조: 전방 확장 키워드 + 핵심 키워드 + 후방 확장 키워드</div>
-
-  <div class="tabbar" style="margin-top:30px">
+  <div class="tabbar" style="margin-top:18px">
     <button class="tab active" data-hist-filter="all" type="button">전체</button>
     <button class="tab" data-hist-filter="today" type="button">오늘</button>
     <button class="tab" data-hist-filter="week" type="button">이번 주</button>
     <button class="tab" data-hist-filter="month" type="button">이번 달</button>
   </div>
-  <div id="histList" style="display:flex;flex-direction:column;gap:10px"></div>
+
+  <div class="section-head" style="margin-top:24px"><div><h3>상세 검색 키워드</h3><p>새 리서치 만들기에서 검색해 결과를 가져온 키워드의 Pool·전방·후방 구성을 확인합니다.</p></div><button class="btn dark" id="newResearchBtn" data-go="new-research" type="button">새 리서치 검색하기</button></div>
+  <div class="card table-card">
+    <table style="table-layout:fixed">
+      <colgroup>
+        <col style="width:18%"><col style="width:19%"><col style="width:15%"><col style="width:16%"><col style="width:32%">
+      </colgroup>
+      <thead><tr><th style="white-space:nowrap">키워드 Pool</th><th style="white-space:nowrap">전방 키워드</th><th style="white-space:nowrap">후방 키워드</th><th style="white-space:nowrap">검색 날짜</th><th style="white-space:nowrap">작업</th></tr></thead>
+      <tbody id="researchKeywordsBody"></tbody>
+    </table>
+  </div>
 
   <div class="section-head" style="margin-top:30px"><div><h3>정기 모니터링</h3><p>선택한 키워드를 즐겨찾기처럼 등록해두고 빠르게 재검색할 수 있습니다.</p></div></div>
   <div class="card" style="padding:18px 20px">
@@ -583,9 +659,12 @@ function showPage(id){
   closeUserPopup();
   if(id==='dashboard') renderDashboard();
   if(id==='newssum') renderNewsSumPage();
-  if(id==='history'){ renderHistoryPage(); renderKeywordsPage(); }
+  if(id==='history'){ renderHistoryPage(); }
   if(id==='results') renderResultsPage();
+  if(id==='insight-history') renderInsightList();
   if(id==='results-detail') renderResultsDetail();
+  if(id==='newsletter') renderNewsletterPage();
+  if(id==='newsletter-subscribe') renderNewsletterSubscribePage();
   if(id==='saved') renderSavedPage();
   if(id==='account') renderAccountPage();
   if(id==='admin-approve') loadAdminRequests();
@@ -781,6 +860,7 @@ let keywordSets = [];
 function resetAppState(){
   subscribedKws = []; savedDocs = []; keywordSets = [];
   searchHistory = []; resultHistory = []; nsHistory = [];
+  if(typeof insightHistory !== 'undefined') insightHistory = [];
   if(typeof monitorKws !== 'undefined') monitorKws = [];
   resultDocs = []; currentResultKw = '';
   if(typeof currentNsSummary !== 'undefined') currentNsSummary = '';
@@ -823,6 +903,9 @@ async function loadUserData(){
   const { data: rh } = await _sb.from('research_history').select('*').eq('profile_id', uid).order('searched_at', {ascending:false}).limit(30);
   resultHistory = (rh||[]).map(r=>({ id:r.id, kw:r.keyword, front:r.front||[], core:r.core||[], back:r.back||[], date:r.date_str, time:r.time_str, docs:r.docs||[] }));
 
+  const { data: ih } = await _sb.from('insight_history').select('*').eq('profile_id', uid).order('created_at', {ascending:false}).limit(50);
+  insightHistory = (ih||[]).map(r=>({ id:r.id, kw:r.keyword, articleCount:r.article_count||0, report:r.report||null, createdAt: r.created_at ? new Date(r.created_at) : new Date() }));
+
   const { data: ns } = await _sb.from('news_summary_history').select('*').eq('profile_id', uid).order('created_at', {ascending:false}).limit(20);
   nsHistory = (ns||[]).map(r=>({ id:r.id, url:r.url, hostname:r.title||(r.url||'').match(/https?:\/\/([^/]+)/)?.[1]||r.url, summary:r.summary, date:r.created_at?new Date(r.created_at).toLocaleDateString('ko-KR'):'' }));
 
@@ -860,28 +943,68 @@ function getCoreOrderIndex(coreArr){
   return best;
 }
 function renderKeywordsPage(){
-  const rows = [...resultHistory].sort((a,b)=>{
+  // 키워드 Pool(핵심 키워드)이 같으면 전방/후방 구성이 달라도 하나의 그룹으로 묶음
+  const groups = [];
+  const groupIndex = {};
+  resultHistory.forEach((h,idx)=>{
+    if(typeof histFilterMode!=='undefined' && !matchesHistFilter(h.date)) return;
+    const poolKey = (h.core && h.core.length) ? h.core.join(', ') : h.kw;
+    if(!(poolKey in groupIndex)){ groupIndex[poolKey] = groups.length; groups.push({ poolKey, core:h.core, items:[] }); }
+    groups[groupIndex[poolKey]].items.push({h,idx});
+  });
+  groups.sort((a,b)=>{
     const ai = getCoreOrderIndex(a.core), bi = getCoreOrderIndex(b.core);
     if(ai!==bi) return ai-bi;
-    return a.kw.localeCompare(b.kw,'ko');
+    return a.poolKey.localeCompare(b.poolKey,'ko');
   });
-  $('#researchKeywordsBody').innerHTML = rows.length ? rows.map(h=>{
-    const front = h.front || [], back = h.back || [];
-    const poolText = (h.core && h.core.length) ? h.core.join(', ') : h.kw;
-    return `<tr><td style="cursor:pointer" onclick="viewResearchKeyword('${esc(h.kw)}')"><b>${esc(poolText)}</b></td>
-    <td>${esc(front.join(', ') || '-')}</td>
-    <td>${esc(back.join(', ') || '-')}</td>
-    <td>${esc(h.date)}</td>
-    <td><button class="btn soft" type="button" onclick="viewResearchKeyword('${esc(h.kw)}')">결과 보기</button> <button class="btn line" type="button" onclick="researchKeywordResearch('${esc(h.kw)}')">재검색</button> <button class="btn red" type="button" onclick="deleteResearchKeyword('${esc(h.kw)}')">삭제</button></td></tr>`;
+
+  $('#researchKeywordsBody').innerHTML = groups.length ? groups.map((g,gi)=>{
+    const latest = g.items[0].h;
+    const headerRow = `<tr class="kw-group-toggle" onclick="toggleKwGroup(${gi})" style="cursor:pointer;background:#f8fafc">
+      <td colspan="5">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span id="kwGroupArrow-${gi}" style="display:inline-block;width:14px;color:var(--muted)">▸</span>
+          <b>${esc(g.poolKey)}</b>
+          <span class="badge blue">${g.items.length}건</span>
+          <span style="color:var(--muted);font-size:12px;white-space:nowrap;margin-left:auto">최근 검색 ${esc(latest.date)}${latest.time?' '+esc(latest.time):''}</span>
+        </div>
+      </td>
+    </tr>`;
+    const itemRows = g.items.map(({h,idx})=>{
+      const front = h.front || [], back = h.back || [];
+      return `<tr class="kw-group-item" data-group-item="${gi}" style="display:none">
+        <td style="padding-left:34px;color:var(--muted);white-space:nowrap">└ 검색 기록</td>
+        <td>${esc(front.join(', ') || '-')}</td>
+        <td>${esc(back.join(', ') || '-')}</td>
+        <td style="white-space:nowrap">${esc(h.date)}${h.time?' '+esc(h.time):''}</td>
+        <td><div style="display:flex;gap:6px;flex-wrap:nowrap">
+          <button class="btn soft" type="button" onclick="event.stopPropagation();viewResearchKeywordAt(${idx})" style="min-height:34px;padding:0 12px;font-size:13px">결과 보기</button>
+          <button class="btn line" type="button" onclick="event.stopPropagation();researchKeywordResearchAt(${idx})" style="min-height:34px;padding:0 12px;font-size:13px">재검색</button>
+          <button class="btn red" type="button" onclick="event.stopPropagation();deleteResearchKeywordAt(${idx})" style="min-height:34px;padding:0 12px;font-size:13px">삭제</button>
+        </div></td>
+      </tr>`;
+    }).join('');
+    return headerRow + itemRows;
   }).join('') : '<tr><td colspan="5" style="color:var(--muted)">아직 새 리서치 만들기에서 검색한 키워드가 없습니다.</td></tr>';
 }
-function viewResearchKeyword(kw){ showPage('results'); viewResultSession(kw); }
-function researchKeywordResearch(kw){ doGlobalSearch(kw); }
-async function deleteResearchKeyword(kw){
+function toggleKwGroup(gi){
+  const items = $$(`tr[data-group-item="${gi}"]`);
+  const arrow = $(`#kwGroupArrow-${gi}`);
+  const opening = items.length && items[0].style.display === 'none';
+  items.forEach(tr=>{ tr.style.display = opening ? 'table-row' : 'none'; });
+  if(arrow) arrow.textContent = opening ? '▾' : '▸';
+}
+function viewResearchKeyword(kw){
+  const idx = resultHistory.findIndex(h=>h.kw===kw);
+  if(idx>=0){ viewResultsDetail(idx); } else { showPage('results'); viewResultSession(kw); }
+}
+function viewResearchKeywordAt(idx){ const h = resultHistory[idx]; if(!h) return; viewResultsDetail(idx); }
+function researchKeywordResearchAt(idx){ const h = resultHistory[idx]; if(!h) return; doGlobalSearch(h.kw, {front:[...h.front], core:[...h.core], back:[...h.back]}); }
+async function deleteResearchKeywordAt(idx){
   const uid = await getUid(); if(!uid) return;
-  const entry = resultHistory.find(h=>h.kw===kw);
-  if(entry?.id) await _sb.from('research_history').delete().eq('id', entry.id).eq('profile_id', uid);
-  resultHistory = resultHistory.filter(h=>h.kw!==kw);
+  const entry = resultHistory[idx]; if(!entry) return;
+  if(entry.id) await _sb.from('research_history').delete().eq('id', entry.id).eq('profile_id', uid);
+  resultHistory.splice(idx,1);
   renderKeywordsPage();
   showToast('키워드 기록이 삭제되었습니다.');
 }
@@ -897,12 +1020,132 @@ async function deleteKeywordSet(i){
   if(set?.id) await _sb.from('keyword_sets').delete().eq('id', set.id).eq('profile_id', uid);
   keywordSets.splice(i,1); renderKeywordsPage(); showToast('키워드 세트가 삭제되었습니다.');
 }
+let savedFilterMode = 'all';
+function isInsightDoc(d){ return d.type === '인사이트'; }
+// ══════════════════════════════════════════
+// 뉴스레터 (목록/상세보기, 구독 신청/해지)
+// ══════════════════════════════════════════
+// TODO: 사용자가 첨부할 실제 뉴스레터 콘텐츠(발행호별 제목/날짜/요약/본문)로 교체 예정.
+// 배열 맨 앞이 최신호입니다. 예: { title, issueDate, summary, body }
+let NEWSLETTER_ISSUES = [
+  {
+    title: 'Research On 위클리 — 3호',
+    issueDate: '2026. 7. 21.',
+    summary: '이번 주는 Physical AI 관련 검색이 가장 많았어요. 팀별 주요 리서치 결과와 AI가 도출한 인사이트 3건을 정리했습니다.',
+    body: '■ 이번 주 가장 많이 검색된 키워드\n1. Physical AI (12회)\n2. 글로벌 인력지원 (8회)\n3. 개인정보보호 (5회)\n\n■ 주요 리서치 하이라이트\nBW센터, WS센터에서 이번 주 진행한 리서치 중 관련성 "높음"으로 평가된 기사가 총 34건 수집됐습니다. 특히 Physical AI 분야는 국내 대기업의 투자 확대 소식이 다수 포착됐어요.\n\n■ 도출된 인사이트\n"글로벌 기업 미국 Physical AI" 키워드로 도출한 인사이트에 따르면, 해외 진출을 검토 중인 기업들에게 실질적으로 참고할 만한 사례가 있는 것으로 분석되었습니다. 자세한 내용은 인사이트 히스토리 탭에서 확인해보세요.\n\n■ 다음 주 예고\n다음 호에서는 "AI 에이전트" 관련 트렌드를 집중 조명할 예정입니다.'
+  },
+  {
+    title: 'Research On 위클리 — 2호',
+    issueDate: '2026. 7. 14.',
+    summary: '개인정보보호 관련 이슈가 급증했던 한 주였습니다. 주요 대기업의 대응 동향을 모아봤어요.',
+    body: '■ 이번 주 가장 많이 검색된 키워드\n1. 개인정보보호 (9회)\n2. SK하이닉스 출입보안 (6회)\n\n■ 주요 리서치 하이라이트\n국내 주요 대기업의 개인정보보호 관련 정책 변화가 다수 보도되었습니다. 관련 리서치 결과 12건이 저장 자료함에 저장되었어요.\n\n■ 팀 활동 요약\n이번 주 전체 검색 횟수는 지난주 대비 18% 증가했습니다.'
+  },
+  {
+    title: 'Research On 위클리 — 1호 (창간호)',
+    issueDate: '2026. 7. 7.',
+    summary: 'Research On 뉴스레터 첫 발행! 서비스 소개와 함께 첫 주 리서치 활동을 정리했습니다.',
+    body: '■ Research On을 소개합니다\n이트너스 AI 리서치 허브 "Research On"이 정식 오픈했습니다. 키워드 검색부터 AI 인사이트 도출까지 한 곳에서 처리할 수 있어요.\n\n■ 첫 주 활동 요약\n첫 주 동안 총 47건의 키워드 검색이 이루어졌고, 15건의 자료가 저장 자료함에 저장되었습니다.\n\n■ 이용 안내\n"새 리서치 만들기"에서 키워드 Pool을 탐색해 검색을 시작해보세요.'
+  }
+];
+let currentNewsletterIssue = null;
+
+async function isNewsletterSubscribed(){
+  const uid = await getUid(); if(!uid) return false;
+  const { data: profile } = await _sb.from('profiles').select('newsletter_subscribed').eq('id', uid).maybeSingle();
+  return !!(profile && profile.newsletter_subscribed);
+}
+async function renderNewsletterPage(){
+  $('#newsletterDetailView').style.display = 'none';
+  $('#newsletterListView').style.display = 'block';
+
+  const subscribed = await isNewsletterSubscribed();
+  const latest = NEWSLETTER_ISSUES[0];
+  const latestCard = $('#newsletterLatestCard');
+
+  if(!latest){
+    latestCard.innerHTML = '<div class="empty-state"><h3>아직 발행된 뉴스레터가 없어요</h3><p>첫 뉴스레터가 발행되면 여기에서 바로 확인할 수 있습니다.</p></div>';
+  } else if(!subscribed){
+    latestCard.innerHTML = `
+      <span class="badge blue">최신 발행</span>
+      <h3 style="margin:10px 0 4px">${esc(latest.title)}</h3>
+      <p style="color:var(--muted);font-size:13px;margin:0 0 12px">${esc(latest.issueDate)}</p>
+      <p style="color:var(--muted)">${esc(latest.summary||'')}</p>
+      <div class="insight-box" style="margin-top:14px">구독하면 이 호의 전체 내용과 지난 뉴스레터 아카이브를 모두 볼 수 있어요. <a href="#" onclick="event.preventDefault();showPage('newsletter-subscribe')" style="color:var(--primary2);font-weight:800">구독 신청하기 →</a></div>`;
+  } else {
+    latestCard.innerHTML = `
+      <span class="badge green">최신 발행</span>
+      <h3 style="margin:10px 0 4px">${esc(latest.title)}</h3>
+      <p style="color:var(--muted);font-size:13px;margin:0 0 12px">${esc(latest.issueDate)}</p>
+      <div style="white-space:pre-line">${esc(latest.body || latest.summary || '')}</div>`;
+  }
+
+  const archiveSection = $('#newsletterArchiveSection');
+  if(!subscribed){
+    archiveSection.style.display = 'none';
+  } else {
+    archiveSection.style.display = 'block';
+    const rest = NEWSLETTER_ISSUES.slice(1);
+    $('#newsletterArchiveList').innerHTML = rest.length ? rest.map((iss,i)=>`
+      <div class="list-item" onclick="viewNewsletterIssue(${i+1})">
+        <div class="list-icon">📮</div>
+        <div><h4 style="margin:0 0 3px">${esc(iss.title)}</h4><p style="margin:0;color:var(--muted);font-size:13px">${esc(iss.issueDate)}</p></div>
+      </div>`).join('') : '<div class="empty-state"><h3>지난 발행 기록이 없어요</h3></div>';
+  }
+}
+function viewNewsletterIssue(idx){
+  const issue = NEWSLETTER_ISSUES[idx]; if(!issue) return;
+  currentNewsletterIssue = idx;
+  $('#newsletterListView').style.display = 'none';
+  $('#newsletterDetailView').style.display = 'block';
+  $('#newsletterDetailTitle').textContent = issue.title;
+  $('#newsletterDetailMeta').textContent = issue.issueDate;
+  $('#newsletterDetailBody').innerHTML = esc(issue.body || issue.summary || '').replace(/\n/g,'<br>');
+}
+function backToNewsletterList(){
+  $('#newsletterDetailView').style.display = 'none';
+  $('#newsletterListView').style.display = 'block';
+}
+async function renderNewsletterSubscribePage(){
+  const subBtn = $('#newsletterSubscribeBtn');
+  const statusText = $('#newsletterSubStatusText');
+  const unsubCard = $('#newsletterUnsubscribeCard');
+  const uid = await getUid();
+  if(!uid){ if(statusText) statusText.textContent='로그인이 필요합니다.'; return; }
+  const subscribed = await isNewsletterSubscribed();
+  if(subscribed){
+    if(statusText) statusText.innerHTML = '<span class="badge green" style="margin-right:6px">구독 중</span>새 뉴스레터가 발행되면 알려드릴게요.';
+    if(subBtn){ subBtn.textContent='구독 중'; subBtn.className='btn line'; subBtn.disabled=true; }
+    if(unsubCard) unsubCard.style.display='block';
+  } else {
+    if(statusText) statusText.textContent = '아직 구독 중이 아니에요. 구독하면 새 뉴스레터가 발행될 때마다 알림을 받을 수 있어요.';
+    if(subBtn){ subBtn.textContent='구독 신청'; subBtn.className='btn dark'; subBtn.disabled=false; }
+    if(unsubCard) unsubCard.style.display='none';
+  }
+}
+async function subscribeNewsletter(){
+  const uid = await getUid(); if(!uid){ showToast('로그인이 필요합니다.'); return; }
+  await _sb.from('profiles').update({ newsletter_subscribed: true }).eq('id', uid);
+  showToast('뉴스레터 구독이 신청되었습니다.');
+  renderNewsletterSubscribePage();
+}
+async function unsubscribeNewsletter(){
+  const uid = await getUid(); if(!uid){ showToast('로그인이 필요합니다.'); return; }
+  if(!confirm('정말 뉴스레터 구독을 해지하시겠어요?')) return;
+  await _sb.from('profiles').update({ newsletter_subscribed: false }).eq('id', uid);
+  showToast('뉴스레터 구독이 해지되었습니다.');
+  renderNewsletterSubscribePage();
+}
 function renderSavedPage(){
   $('#savedCountBadge').textContent = savedDocs.length + ' Saved';
-  $('#savedGrid').innerHTML = savedDocs.length ? savedDocs.map((d,i)=>`
+  const filtered = savedDocs
+    .map((d,i)=>({ d, i }))
+    .filter(({d})=> savedFilterMode==='all' ? true : savedFilterMode==='insight' ? isInsightDoc(d) : !isInsightDoc(d));
+  $('#savedGrid').innerHTML = filtered.length ? filtered.map(({d,i})=>`
     <div class="card" style="cursor:pointer" onclick="openDocModal(${i},'saved')"><span class="badge ${d.badge||'blue'}">${esc(d.type||'자료')}</span><h3>${esc(d.title)}</h3><p style="color:var(--muted)">${esc((d.body||'').slice(0,80))}${(d.body||'').length>80?'...':''}</p>
     <button class="btn line" type="button" onclick="event.stopPropagation();deleteSavedDoc(${i})">삭제</button></div>
-  `).join('') : '<div class="empty-state"><h3>저장한 자료가 없어요</h3><p>리서치 결과나 뉴스 요약에서 저장해보세요.</p></div>';
+  `).join('') : (savedDocs.length
+    ? '<div class="empty-state"><h3>해당 분류에 저장된 자료가 없어요</h3><p>다른 분류를 선택해보세요.</p></div>'
+    : '<div class="empty-state"><h3>저장한 자료가 없어요</h3><p>리서치 결과나 인사이트 히스토리에서 저장해보세요.</p></div>');
 }
 async function deleteSavedDoc(i){
   const uid = await getUid(); if(!uid) return;
@@ -968,21 +1211,13 @@ async function saveResultSession(kw, parts){
   const timeStr = now.toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
   const entry = { kw, front:[...p.front], core:[...p.core], back:[...p.back], date:dateStr, time:timeStr, ts:now.getTime(), docs:resultDocs.map(d=>({...d})) };
 
-  const idx = resultHistory.findIndex(h=>h.kw===kw);
-  if(idx>=0) resultHistory.splice(idx,1);
+  // 같은 키워드로 재검색해도 기존 결과는 지우지 않고, 새 검색 결과를 맨 위에 새로 추가함
   resultHistory.unshift(entry);
   if(resultHistory.length > RESULT_HIST_MAX) resultHistory.length = RESULT_HIST_MAX;
 
-  // 반드시 "현재 계정 + 키워드"로 DB 조회 후 처리 (계정 간 오염 방지)
   const row = { profile_id:uid, keyword:kw, front:p.front, core:p.core, back:p.back, date_str:dateStr, time_str:timeStr, docs:resultDocs.map(d=>({...d})) };
-  const { data: existRow } = await _sb.from('research_history').select('id').eq('profile_id', uid).eq('keyword', kw).maybeSingle();
-  if(existRow){
-    await _sb.from('research_history').update(row).eq('id', existRow.id).eq('profile_id', uid);
-    resultHistory[0].id = existRow.id;
-  } else {
-    const { data } = await _sb.from('research_history').insert(row).select().single();
-    if(data) resultHistory[0].id = data.id;
-  }
+  const { data } = await _sb.from('research_history').insert(row).select().single();
+  if(data) resultHistory[0].id = data.id;
 }
 
 async function generateResultsFor(kw, parts){
@@ -1106,22 +1341,18 @@ function renderResultsDetail(){
     </div>`;
   }).join('') : '<div class="empty-state"><h3>결과가 없습니다</h3></div>';
   const selectAll = $('#selectAllDetail'); if(selectAll) selectAll.checked = false;
-  renderInsightList();
 }
 function getSelectedDetailDocs(){
   return $$('.detail-chk:checked').map(c=>displayedDocs[+c.dataset.gi]).filter(Boolean);
 }
 let insightHistory = [];
-async function deriveInsight(){
-  const selected = getSelectedDetailDocs();
+async function deriveInsightFromDocs(selected, kw, btn){
   if(!selected.length){ showToast('인사이트를 도출할 기사를 먼저 선택해주세요.'); return; }
   const withUrl = selected.filter(d=>d.url);
   if(!withUrl.length){ showToast('선택한 기사에 원문 URL이 없어 인사이트를 도출할 수 없습니다.'); return; }
   if(selected.length > 10) showToast('최대 10건까지만 분석에 반영됩니다.');
 
-  const h = currentResultsDetailHidx!==null ? resultHistory[currentResultsDetailHidx] : null;
-  const kw = h?.kw || '';
-  const btn = $('#generateInsightBtn'); const origLabel = btn.innerHTML;
+  const origLabel = btn.innerHTML;
   btn.disabled = true; btn.innerHTML = '<span class="streaming-dot"></span>인사이트 도출 중...';
 
   let report;
@@ -1144,6 +1375,17 @@ async function deriveInsight(){
   renderInsightList();
   btn.disabled = false; btn.innerHTML = origLabel;
   showToast('인사이트가 도출되었습니다.');
+
+  const uid = await getUid();
+  if(uid){
+    const { data } = await _sb.from('insight_history').insert({ profile_id:uid, keyword:kw, report, article_count:withUrl.length }).select().single();
+    if(data) insightHistory[0].id = data.id;
+  }
+}
+async function deriveInsight(){
+  const selected = getSelectedDetailDocs();
+  const h = currentResultsDetailHidx!==null ? resultHistory[currentResultsDetailHidx] : null;
+  await deriveInsightFromDocs(selected, h?.kw || '', $('#generateInsightBtn'));
 }
 function generateFallbackReport(kw, docs){
   return {
@@ -1248,12 +1490,68 @@ function renderInsightList(){
       <input type="checkbox" class="insight-chk" data-idx="${i}" style="margin-top:4px;flex-shrink:0" />
       <div class="list-icon">✦</div>
       <div style="flex:1">
-        <h4>${esc(ins.report?.subtitle || ins.kw)} <span class="badge gray" style="margin-left:6px;font-weight:800">${esc(ins.createdAt.toLocaleString('ko-KR'))}</span></h4>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap">
+          <h4 style="margin:0">
+            <span class="badge blue" style="margin-right:6px">${esc(ins.kw||'키워드 없음')}</span>
+            <span style="font-weight:900">${esc(ins.report?.title || '종합 리서치 리포트')}</span>
+          </h4>
+          <div style="display:flex;gap:8px;flex-shrink:0">
+            <button class="btn soft" type="button" onclick="event.stopPropagation();saveInsightToLibrary(${i})">저장</button>
+            <button class="btn line" type="button" onclick="event.stopPropagation();deleteInsight(${i})">삭제</button>
+          </div>
+        </div>
+        <p style="color:var(--muted);font-size:12px;margin:4px 0 10px">도출 일시: ${esc(ins.createdAt.toLocaleString('ko-KR'))} · 참고 기사 ${ins.articleCount}건</p>
         ${reportTabsHtml(ins.report)}
       </div>
     </div>
-  `).join('') : '<div class="empty-state"><h3>아직 도출된 인사이트가 없어요</h3><p>기사를 선택하고 "인사이트 도출" 버튼을 눌러보세요.</p></div>';
+  `).join('') : '<div class="empty-state"><h3>아직 도출된 인사이트가 없어요</h3><p>리서치 결과 또는 결과 확인 페이지에서 기사를 선택하고 "인사이트 도출" 버튼을 눌러보세요.</p></div>';
   updateInsightExportLabel();
+}
+async function deleteInsight(i){
+  const ins = insightHistory[i]; if(!ins) return;
+  const uid = await getUid();
+  if(uid && ins.id) await _sb.from('insight_history').delete().eq('id', ins.id).eq('profile_id', uid);
+  insightHistory.splice(i,1);
+  renderInsightList();
+  showToast('인사이트가 삭제되었습니다.');
+}
+function reportToPlainText(report){
+  if(!report || !Array.isArray(report.tabs)) return '';
+  const lines = [];
+  if(report.subtitle) { lines.push(report.subtitle); lines.push(''); }
+  report.tabs.forEach(tab=>{
+    lines.push(`■ ${tab.tab_label||''}`);
+    if(tab.type==='executive_brief'){
+      const c = tab.content||{};
+      if(c.one_line_conclusion) lines.push(c.one_line_conclusion);
+      if(c.importance||c.urgency) lines.push(`중요도: ${c.importance||''} / 긴급도: ${c.urgency||''}`);
+      if(c.relevance_to_organization) lines.push(c.relevance_to_organization);
+      if(c.recommended_action) lines.push(`추천 액션: ${c.recommended_action}`);
+    } else if(tab.type==='sections'){
+      (tab.sections||[]).forEach(s=>{
+        lines.push(`- ${s.title||''}`);
+        (s.items||[]).forEach(it=>lines.push(`  • ${it}`));
+      });
+    } else if(tab.type==='sources'){
+      (tab.items||[]).forEach(s=>{
+        lines.push(`- ${s.title||''}${s.url?` (${s.url})`:''}`);
+        if(s.summary) lines.push(`  ${s.summary}`);
+      });
+    }
+    lines.push('');
+  });
+  if(report.limitations) lines.push(`한계: ${report.limitations}`);
+  return lines.join('\n').trim();
+}
+async function saveInsightToLibrary(i){
+  const ins = insightHistory[i]; if(!ins) return;
+  const uid = await getUid(); if(!uid){ showToast('로그인이 필요합니다.'); return; }
+  const title = `[인사이트] ${ins.kw || ins.report?.title || '리포트'}`;
+  const body = reportToPlainText(ins.report);
+  const row = { profile_id:uid, title, body, type:'인사이트', badge:'purple' };
+  const { data } = await _sb.from('saved_docs').insert(row).select().single();
+  savedDocs.unshift({ id:data?.id, ...row });
+  showToast('저장 자료함에 저장되었습니다.');
 }
 function getSelectedInsights(){
   const checked = $$('.insight-chk:checked');
@@ -1307,8 +1605,7 @@ async function deleteSelectedResults(){
   for(const h of targets){
     if(h.id) await _sb.from('research_history').delete().eq('id', h.id).eq('profile_id', uid);
   }
-  const targetKws = new Set(targets.map(h=>h.kw));
-  resultHistory = resultHistory.filter(h=>!targetKws.has(h.kw));
+  resultHistory = resultHistory.filter((h,hi)=>!hidxSet.has(hi));
 
   renderResults();
   try{ renderDashboard(); }catch(e){}
@@ -1335,6 +1632,9 @@ function openDocModal(i, kind){
     ? `<span class="badge blue">${esc(doc.kw)}</span> <span class="badge ${doc.badge||'gray'}">${esc(doc.type||'자료')}</span>`
     : `<span class="badge ${doc.badge||'blue'}">${esc(doc.type||'자료')}</span>`;
   $('#docModalBody').textContent = doc.body || doc.desc || '';
+  $('#docModalSourceLink').innerHTML = doc.url
+    ? `<a href="${esc(doc.url)}" target="_blank" rel="noopener noreferrer" class="btn soft" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px">🔗 원문 기사 바로가기${doc.source?` <span style="color:var(--muted);font-weight:700">· ${esc(doc.source)}</span>`:''}</a>`
+    : '';
   $('#docModalOverlay').style.display = 'flex';
   $('#docModalSummaryArea').style.display='none';
   $('#docModalSummaryText').textContent='';
@@ -1568,13 +1868,21 @@ async function saveSearchHistory(q){
   renderDashboard();
 }
 async function saveHistoryToSheets(q){ /* Supabase로 대체됨 */ }
-function getFilteredHistory(){
-  const today = new Date().toLocaleDateString('ko-KR');
-  const weekAgo = new Date(Date.now()-7*864e5).toLocaleDateString('ko-KR');
-  if(histFilterMode==='today') return searchHistory.filter(h=>h.date===today);
-  if(histFilterMode==='week') return searchHistory.filter(h=>h.date>=weekAgo);
-  if(histFilterMode==='month'){ const m = today.slice(0,7); return searchHistory.filter(h=>h.date && h.date.startsWith(m)); }
-  return searchHistory;
+function parseKoDate(str){
+  if(!str) return null;
+  const m = String(str).match(/(\d+)\D+(\d+)\D+(\d+)/);
+  if(!m) return null;
+  return new Date(+m[1], +m[2]-1, +m[3]);
+}
+function matchesHistFilter(dateStr){
+  if(histFilterMode==='all') return true;
+  const d = parseKoDate(dateStr); if(!d) return true;
+  d.setHours(0,0,0,0);
+  const today = new Date(); today.setHours(0,0,0,0);
+  if(histFilterMode==='today') return d.getTime()===today.getTime();
+  if(histFilterMode==='week'){ const weekAgo = new Date(today.getTime()-7*864e5); return d.getTime()>=weekAgo.getTime(); }
+  if(histFilterMode==='month'){ const monthStart = new Date(today.getFullYear(), today.getMonth(), 1); return d.getTime()>=monthStart.getTime(); }
+  return true;
 }
 function renderHistoryPage(){
   const today = new Date().toLocaleDateString('ko-KR');
@@ -1584,30 +1892,8 @@ function renderHistoryPage(){
   $('#histTodayCount').textContent = todayItems.length;
   $('#histTopKw').textContent = topItem ? topItem.kw : '—';
 
-  const filtered = getFilteredHistory();
-  const list = $('#histList');
-  if(filtered.length===0){
-    list.innerHTML = `<div class="empty-state"><h3>검색 기록이 없어요</h3><p>${histFilterMode==='all'?'키워드를 검색하면 여기에 기록됩니다.':'해당 기간의 검색 기록이 없습니다.'}</p></div>`;
-    return;
-  }
-  const maxCount = Math.max(...filtered.map(h=>h.count),1);
-  list.innerHTML = filtered.map(h=>{
-    const pct = Math.round(h.count/maxCount*100);
-    return `<div class="hist-row" onclick="doGlobalSearch('${esc(h.kw)}')">
-      <div style="flex:1"><b>${esc(h.kw)}</b><div style="font-size:12px;color:var(--muted);margin-top:2px">${esc(h.date)} ${esc(h.time)} · ${h.count}회 검색</div>
-      <div class="freq-bar"><span style="width:${pct}%"></span></div></div>
-      <button class="btn line" type="button" onclick="event.stopPropagation();deleteHistByKw('${esc(h.kw)}')">삭제</button>
-    </div>`;
-  }).join('');
+  renderKeywordsPage();
   renderMonitorList();
-}
-async function deleteHistByKw(kw){
-  const uid = await getUid(); if(!uid) return;
-  const entry = searchHistory.find(h=>h.kw===kw);
-  if(entry?.id) await _sb.from('search_history').delete().eq('id', entry.id).eq('profile_id', uid);
-  searchHistory = searchHistory.filter(h=>h.kw!==kw);
-  renderHistoryPage(); renderDashboard();
-  showToast('"'+kw+'" 기록이 삭제되었습니다.');
 }
 async function clearAllHistory(){
   if(searchHistory.length===0){ showToast('삭제할 기록이 없습니다.'); return; }
@@ -1654,7 +1940,14 @@ document.addEventListener('click', e=>{
 function bindEvents(){
   $$('.nav-item[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
   $$('[data-go]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.go)));
-  $('#mobileMenu')?.addEventListener('click',()=>$('#sidebar')?.classList.toggle('open'));
+  $('#mobileMenu')?.addEventListener('click',()=>{
+    $('#sidebar')?.classList.toggle('open');
+    const app = $('#appRoot');
+    if(app){
+      app.classList.toggle('sidebar-collapsed');
+      localStorage.setItem('ro_sidebar_collapsed', app.classList.contains('sidebar-collapsed') ? '1' : '0');
+    }
+  });
   $$('.tab[data-mode]').forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.mode)));
   $$('[data-mode-go]').forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.modeGo)));
   $('#prevStep')?.addEventListener('click',()=>setStep(step-1));
@@ -1692,6 +1985,7 @@ function bindEvents(){
 
   // 검색 히스토리
   $$('.tab[data-hist-filter]').forEach(b=>b.addEventListener('click', ()=>{ $$('.tab[data-hist-filter]').forEach(x=>x.classList.toggle('active',x===b)); histFilterMode=b.dataset.histFilter; renderHistoryPage(); }));
+  $$('.tab[data-saved-filter]').forEach(b=>b.addEventListener('click', ()=>{ $$('.tab[data-saved-filter]').forEach(x=>x.classList.toggle('active',x===b)); savedFilterMode=b.dataset.savedFilter; renderSavedPage(); }));
 
   // 계정 설정 / 사용자 팝업
   $('#saveAccountBtn')?.addEventListener('click', saveAccountSettings);
@@ -2078,9 +2372,14 @@ function bindEvents(){
 
   // 새 키워드 세트 만들기 버튼 (고급 옵션 JSON으로부터 세트 자동 생성)
   $('#newResearchBtn')?.addEventListener('click', ()=>{ showToast('새 리서치 만들기에서 키워드를 검색해보세요.'); });
+  $('#newsletterSubscribeBtn')?.addEventListener('click', subscribeNewsletter);
+  $('#newsletterUnsubscribeBtn')?.addEventListener('click', unsubscribeNewsletter);
+  $('#newsletterDetailBackBtn')?.addEventListener('click', backToNewsletterList);
 }
 
 async function init(){
+  const savedSidebarPref = localStorage.getItem('ro_sidebar_collapsed');
+  if(savedSidebarPref === '0') $('#appRoot')?.classList.remove('sidebar-collapsed');
   renderCore(); renderExt(); updateSelection(); setStep(0); renderExcludeDomainGroups(); updatePayload(); initPool(); bindEvents();
   // 사용자 데이터 로드는 하단 인증 스크립트의 restoreSession → enterApp → loadUserData 단일 경로로만 실행
   renderDashboard();
