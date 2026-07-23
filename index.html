@@ -5,12 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Research On — 이트너스 리서치 자동화 허브</title>
 <style>
-:root{--bg:#f4f7fb;--surface:#fff;--ink:#172033;--muted:#697386;--line:#e5eaf2;--primary:#2563eb;--primary2:#1d4ed8;--soft:#eaf1ff;--green:#0f766e;--greenSoft:#e6fffb;--orange:#f97316;--orangeSoft:#fff7ed;--purple:#7c3aed;--purpleSoft:#f3e8ff;--red:#dc2626;--redSoft:#fee2e2;--shadow:0 16px 40px rgba(15,23,42,.08);--radius:22px}
-*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(37,99,235,.14),transparent 27%),radial-gradient(circle at top right,rgba(15,118,110,.1),transparent 32%),var(--bg);color:var(--ink);line-height:1.55} button,input,select,textarea{font:inherit} button{cursor:pointer} a{color:inherit;text-decoration:none}
-.app{min-height:100vh}.app.sidebar-collapsed{}.sidebar{position:fixed;top:0;left:0;width:292px;height:100vh;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-right:1px solid var(--line);padding:24px 18px;display:flex;flex-direction:column;gap:20px;overflow-y:auto;overflow-x:visible;transition:width .18s ease,padding .18s ease}.main{margin-left:292px;padding:24px 28px 48px;min-width:0;transition:margin-left .18s ease}.app.sidebar-collapsed .sidebar{width:76px}.app.sidebar-collapsed .main{margin-left:76px}.sidebar-toggle-btn{width:32px;height:32px;border:1px solid var(--line);background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#475569;font-weight:900;align-self:flex-end;flex-shrink:0;transition:.16s}.sidebar-toggle-btn:hover{background:#f1f5f9;color:var(--primary)}.sidebar.collapsed{padding:18px 10px;align-items:center;gap:10px;overflow:visible}.sidebar.collapsed .sidebar-toggle-btn{align-self:center}.sidebar.collapsed .brand{justify-content:center;padding:2px 0 10px;border-bottom-color:transparent}.sidebar.collapsed .brand h1,.sidebar.collapsed .brand p{display:none}.sidebar.collapsed .brand .logo{width:36px;height:36px}.sidebar.collapsed .nav-section{width:100%;margin-top:0;display:flex;flex-direction:column;gap:4px}.sidebar.collapsed .nav-title{display:none}.sidebar.collapsed .nav-item{justify-content:center;padding:9px;position:relative}.sidebar.collapsed .nav-item:hover{transform:none}.sidebar.collapsed .nav-item>span.nav-label{display:none}.sidebar.collapsed .nav-icon{width:22px;height:22px}.sidebar.collapsed .nav-section:not(:first-child){border-top:1px solid var(--line);padding-top:10px;margin-top:6px}.sidebar.collapsed .sidebar-footer{padding:8px;display:flex;justify-content:center;width:44px;height:44px;border-radius:50%}.sidebar.collapsed .sidebar-footer strong,.sidebar.collapsed .sidebar-footer span{display:none}.brand{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding:4px 8px 18px}.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#1d4ed8,#0f766e);font-weight:900}.brand h1{font-size:17px;margin:0;line-height:1.1}.brand p{font-size:12px;color:var(--muted);margin:3px 0 0}.nav-section{margin-top:4px}.nav-title{font-size:12px;font-weight:900;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;padding:0 10px 8px}.nav-item{width:100%;border:0;background:transparent;color:#475569;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:14px;font-size:14px;font-weight:800;text-align:left;transition:.16s}.nav-item:hover{background:#f1f5f9;color:var(--primary);transform:translateX(2px)}.nav-item.active{background:linear-gradient(135deg,#eaf1ff,#fff);color:var(--primary2);box-shadow:inset 0 0 0 1px rgba(37,99,235,.15)}.nav-icon{width:26px;height:26px;display:grid;place-items:center;border-radius:10px;background:#eef2ff;flex-shrink:0}.sidebar-footer{margin-top:auto;background:linear-gradient(135deg,#0f172a,#1d4ed8);color:#fff;border-radius:20px;padding:16px;box-shadow:var(--shadow);cursor:pointer;position:relative}.sidebar-footer strong{display:block;font-size:14px}.sidebar-footer span{display:block;font-size:12px;opacity:.82;margin-top:4px}
-.user-popup{position:absolute;bottom:calc(100% + 8px);left:0;right:0;background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:8px;display:none;flex-direction:column;gap:2px;z-index:50}.user-popup.open{display:flex}.user-popup button{width:100%;text-align:left;border:0;background:transparent;padding:10px 12px;border-radius:10px;font-size:13px;font-weight:800;color:#334155;display:flex;align-items:center;gap:8px}.user-popup button:hover{background:#f1f5f9}.user-popup button.danger{color:var(--red)}.user-popup button.popup-primary{background:var(--soft);color:var(--primary2)}.user-popup button.popup-primary:hover{background:var(--soft);opacity:.85}.sidebar.collapsed .user-popup{left:8px;right:auto;width:230px;bottom:calc(100% + 10px)}
-.main{padding:24px 28px 48px;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px;width:100%}.mobile-menu{display:none;border:1px solid var(--line);background:#fff;border-radius:14px;height:44px;padding:0 12px;font-weight:900}.search{flex:1;max-width:680px;position:relative}.search input{width:100%;height:48px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.86);padding:0 18px 0 46px;outline:none;box-shadow:0 8px 28px rgba(15,23,42,.04)}.search:before{content:"⌕";position:absolute;left:17px;top:6px;color:#94a3b8;font-size:27px;pointer-events:none}.user-chip{display:flex;align-items:center;gap:11px;padding:9px 12px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 24px rgba(15,23,42,.05);min-width:210px;margin-left:auto}.avatar{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-weight:900}.user-chip b{display:block;font-size:14px}.user-chip small{display:block;color:var(--muted);font-size:12px}
-.page{display:none;animation:fade .18s ease}.page.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.hero{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 52%,#0f766e 100%);color:#fff;padding:34px;box-shadow:0 24px 70px rgba(15,23,42,.22);margin-bottom:22px}.hero:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.12);right:-80px;top:-90px}.hero>*{position:relative;z-index:1}.hero h2{margin:8px 0 10px;font-size:34px;line-height:1.2;letter-spacing:-.04em}.hero p{margin:0 0 20px;color:rgba(255,255,255,.86);max-width:760px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.15);font-size:13px;font-weight:900}.dash-search-wrap{max-width:640px;margin:0 auto;text-align:center;padding:30px 0 16px}.dash-brand{max-width:640px;margin:0 auto;text-align:center;padding:36px 0 0}.dash-brand-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px}.dash-brand-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,#1d4ed8,#0f766e);display:grid;place-items:center;font-size:18px}.dash-brand-word{font-size:34px;font-weight:950;letter-spacing:-.03em;background:linear-gradient(135deg,#1d4ed8,#0f766e);-webkit-background-clip:text;background-clip:text;color:transparent}.dash-brand p{font-size:13px;color:var(--muted);font-weight:800;margin:0}.dash-search-wrap p{font-size:14px;color:var(--muted);font-weight:800;margin:0 0 14px}.dash-search-box{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:6px 6px 6px 20px;background:#fff;box-shadow:var(--shadow)}.dash-search-box span{font-size:18px;color:#94a3b8}.dash-search-box input{border:0;flex:1;height:44px;font-size:15px}.dash-search-box input:focus{outline:0}.dash-search-box button{border-radius:999px;padding:0 22px;height:44px}.dash-shortcuts{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;padding:6px 0 32px}.dash-shortcut{display:flex;flex-direction:column;align-items:center;gap:7px;cursor:pointer;border:0;background:transparent;font:inherit}.dash-shortcut-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:20px;transition:.16s}.dash-shortcut:hover .dash-shortcut-icon{transform:translateY(-2px)}.dash-shortcut span{font-size:12px;color:#475569;font-weight:800}.dash-widget-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}.dash-widget-grid .card{padding:16px 18px}.row-flash{animation:rowflash 1.6s ease}@keyframes rowflash{0%{background:var(--soft)}100%{background:transparent}}.export-menu-item{width:100%;display:flex;align-items:center;gap:8px;padding:11px 16px;font-size:13px;font-weight:800;background:transparent;border:0;text-align:left;cursor:pointer;transition:.12s;color:var(--ink)}.export-menu-item:hover{background:var(--soft)}.ai-insight-box{background:linear-gradient(135deg,#f5f3ff,#eff6ff);border:1px solid #c4b5fd;border-radius:18px;padding:18px 20px;margin-bottom:16px}
+:root{--bg:#f4f7fb;--surface:#fff;--ink:#172033;--muted:#697386;--line:#e5eaf2;--primary:#2563eb;--primary2:#1d4ed8;--soft:#eaf1ff;--green:#0f766e;--greenSoft:#e6fffb;--orange:#f97316;--orangeSoft:#fff7ed;--purple:#7c3aed;--purpleSoft:#f3e8ff;--red:#dc2626;--redSoft:#fee2e2;--amberSoft:#fef3c7;--pinkSoft:#fce7f3;--shadow:0 16px 40px rgba(15,23,42,.08);--radius:22px}
+*{box-sizing:border-box;word-break:keep-all;overflow-wrap:break-word} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR","Apple SD Gothic Neo",Arial,sans-serif;background:radial-gradient(circle at top left,rgba(37,99,235,.14),transparent 27%),radial-gradient(circle at top right,rgba(15,118,110,.1),transparent 32%),var(--bg);color:var(--ink);line-height:1.55} button,input,select,textarea{font:inherit} button{cursor:pointer} a{color:inherit;text-decoration:none}
+.app{min-height:100vh}.app.sidebar-collapsed{}.sidebar{position:fixed;top:0;left:0;width:292px;height:100vh;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border-right:1px solid var(--line);padding:24px 18px;display:flex;flex-direction:column;gap:20px;overflow:visible;transition:width .18s ease,padding .18s ease}.sidebar>nav{flex:1;min-height:0;overflow-y:auto;overflow-x:visible}.main{margin-left:292px;padding:24px 28px 48px;min-width:0;transition:margin-left .18s ease}.app.sidebar-collapsed .sidebar{width:76px}.app.sidebar-collapsed .main{margin-left:76px}.sidebar-toggle-btn{width:32px;height:32px;border:1px solid var(--line);background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#475569;font-weight:900;flex-shrink:0;transition:.16s}.sidebar-toggle-btn:hover{background:#f1f5f9;color:var(--primary)}.sidebar.collapsed{padding:18px 10px;align-items:center;gap:10px;overflow:visible}.sidebar.collapsed .sidebar-toggle-btn{align-self:center}.sidebar.collapsed .sidebar-header{flex-direction:column;gap:8px;padding:2px 0 14px;border-bottom-color:transparent}.sidebar.collapsed .user-info-text{display:none}.sidebar.collapsed .sidebar-header-actions{flex-direction:column}.sidebar.collapsed .sidebar-logout-btn{padding:10px}.sidebar.collapsed .sidebar-logout-btn .logout-label{display:none}.sidebar.collapsed .nav-section{width:100%;margin-top:0;display:flex;flex-direction:column;gap:4px}.sidebar.collapsed .nav-title{display:none}.sidebar.collapsed .nav-item{justify-content:center;padding:9px;position:relative}.sidebar.collapsed .nav-item:hover{transform:none}.sidebar.collapsed .nav-item>span.nav-label{display:none}.sidebar.collapsed .nav-icon{width:22px;height:22px}.sidebar.collapsed .nav-section:not(:first-child){border-top:1px solid var(--line);padding-top:10px;margin-top:6px}.sidebar-header{display:flex;align-items:center;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:4px 4px 18px}.user-info-text{min-width:0;flex:1}.user-info-welcome{margin:0;font-size:13px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.user-info-welcome strong{font-weight:950}.user-info-sub{margin:2px 0 0;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sidebar-header-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}.sidebar-icon-btn{width:32px;height:32px;border:1px solid var(--line);background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#475569;font-size:15px;transition:.16s}.sidebar-icon-btn:hover{background:#f1f5f9;color:var(--primary)}.sidebar-logout-btn{flex-shrink:0;width:100%;border:0;background:var(--redSoft);color:var(--red);font-weight:900;font-size:14px;padding:12px;border-radius:14px;display:flex;align-items:center;justify-content:center;gap:8px;transition:.16s}
+.sidebar-logout-btn:hover{background:var(--red);color:#fff}.nav-section{margin-top:4px}.nav-title{font-size:12px;font-weight:900;color:#94a3b8;text-transform:uppercase;letter-spacing:.08em;padding:0 10px 8px}.nav-item{width:100%;border:0;background:transparent;color:#475569;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:14px;font-size:14px;font-weight:800;text-align:left;transition:.16s}.nav-item:hover{background:#f1f5f9;color:var(--primary);transform:translateX(2px)}.nav-item.active{background:linear-gradient(135deg,#eaf1ff,#fff);color:var(--primary2);box-shadow:inset 0 0 0 1px rgba(37,99,235,.15)}.nav-icon{width:26px;height:26px;display:grid;place-items:center;border-radius:10px;background:#eef2ff;flex-shrink:0}
+.main{padding:24px 28px 48px;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:22px;width:100%}.mobile-menu{display:none;border:1px solid var(--line);background:#fff;border-radius:14px;height:44px;padding:0 12px;font-weight:900}.search{flex:1;max-width:680px;position:relative}.search input{width:100%;height:48px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.86);padding:0 18px 0 46px;outline:none;box-shadow:0 8px 28px rgba(15,23,42,.04)}.search:before{content:"⌕";position:absolute;left:17px;top:6px;color:#94a3b8;font-size:27px;pointer-events:none}
+.page{display:none;animation:fade .18s ease}.page.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}.hero{position:relative;overflow:hidden;border-radius:28px;background:linear-gradient(135deg,#0f172a 0%,#1d4ed8 52%,#0f766e 100%);color:#fff;padding:34px;box-shadow:0 24px 70px rgba(15,23,42,.22);margin-bottom:22px}.hero:after{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,.12);right:-80px;top:-90px}.hero>*{position:relative;z-index:1}.hero h2{margin:8px 0 10px;font-size:34px;line-height:1.2;letter-spacing:-.04em}.hero p{margin:0 0 20px;color:rgba(255,255,255,.86);max-width:760px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.15);font-size:13px;font-weight:900}.dash-search-wrap{max-width:720px;margin:0 auto;text-align:center;padding:22px 0 20px}.dash-brand{max-width:1040px;margin:0 auto;text-align:center;padding:44px 0 8px}.dash-brand-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:6px}.dash-brand-icon{width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,#1d4ed8,#0f766e);display:grid;place-items:center;font-size:26px}.dash-brand-word{font-size:60px;font-weight:950;letter-spacing:-.03em;background:linear-gradient(135deg,#1d4ed8,#0f766e);-webkit-background-clip:text;background-clip:text;color:transparent}.dash-brand p{font-size:13px;color:var(--muted);font-weight:800;margin:0}.dash-search-wrap p{font-size:15px;color:var(--muted);font-weight:800;margin:0 0 14px}.dash-search-box{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:8px 8px 8px 24px;background:#fff;box-shadow:var(--shadow)}.dash-search-box span{font-size:19px;color:#94a3b8}.dash-search-box input{border:0;flex:1;height:48px;font-size:16px}.dash-search-box input:focus{outline:0}.dash-search-box button{border-radius:999px;padding:0 26px;height:48px;font-size:15px}.dash-shortcuts{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;padding:8px 0 36px}.dash-shortcut{display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.85);border-radius:20px;padding:22px 10px 18px;font:inherit}.dash-shortcut-icon{width:60px;height:60px;border-radius:18px;display:grid;place-items:center;font-size:27px;transition:.16s}.dash-shortcut:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(15,23,42,.09);border-color:rgba(37,99,235,.28)}.dash-shortcut:hover .dash-shortcut-icon{transform:translateY(-2px)}.dash-shortcut span{font-size:13.5px;color:#334155;font-weight:800}.dash-widget-grid{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr;gap:18px;padding-bottom:40px}.dash-widget-grid .card{padding:24px 26px}#dashSuggestChips .chip{padding:12px 20px;font-size:15px;border-radius:999px;box-shadow:0 4px 12px rgba(15,23,42,.04)}#dashSuggestChips .chip:hover{box-shadow:0 6px 16px rgba(37,99,235,.12)}.row-flash{animation:rowflash 1.6s ease}@keyframes rowflash{0%{background:var(--soft)}100%{background:transparent}}.export-menu-item{width:100%;display:flex;align-items:center;gap:8px;padding:11px 16px;font-size:13px;font-weight:800;background:transparent;border:0;text-align:left;cursor:pointer;transition:.12s;color:var(--ink)}.export-menu-item:hover{background:var(--soft)}.ai-insight-box{background:linear-gradient(135deg,#f5f3ff,#eff6ff);border:1px solid #c4b5fd;border-radius:18px;padding:18px 20px;margin-bottom:16px}
+.kw-groups{display:flex;flex-direction:column;gap:12px}.kw-group-card{border:1px solid var(--line);border-radius:20px;background:#fff;overflow:hidden}
+.kw-group-header{width:100%;display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#f8fafc;border:0;padding:16px 18px;text-align:left;cursor:pointer}
+.kw-group-arrow{display:inline-block;width:14px;color:var(--muted)}.kw-group-title{font-size:15px}
+.kw-group-date{color:var(--muted);font-size:12px;white-space:nowrap;margin-left:auto}
+.kw-group-body{border-top:1px solid var(--line)}
+.kw-item{padding:14px 18px;border-bottom:1px solid var(--line)}.kw-item:last-child{border-bottom:0}
+.kw-item-row{display:flex;gap:10px;padding:4px 0;font-size:13px}
+.kw-item-label{flex:0 0 84px;color:var(--muted);font-weight:800}.kw-item-val{flex:1;word-break:break-word}
+.kw-item-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.kw-item-actions .btn{min-height:34px;padding:0 12px;font-size:13px}
+.result-cards{display:flex;flex-direction:column;gap:14px}
+.result-card{position:relative;border:1px solid var(--line);border-radius:16px;background:#fff;padding:16px 18px 14px;box-shadow:0 6px 18px rgba(15,23,42,.05);transition:box-shadow .15s}
+.result-card:active{box-shadow:0 2px 8px rgba(15,23,42,.08)}
+.result-card-head{display:flex;align-items:flex-start;gap:10px}
+.result-card-head input[type="checkbox"]{margin-top:4px;flex-shrink:0}
+.result-card-title{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:15.5px;font-weight:900}
+.result-card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.result-card-date{color:var(--muted);font-size:12px;white-space:nowrap}
+.result-card-actions{display:flex;gap:8px;flex-wrap:wrap}
+.insight-cards{display:flex;flex-direction:column;gap:12px}
+.insight-card{border:1px solid var(--line);border-radius:20px;background:#fff;padding:16px 18px}
+.insight-card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.insight-card-date{color:var(--muted);font-size:12px;white-space:nowrap}
+.insight-card-mid{color:var(--muted);font-size:13px;margin:8px 0 12px}
+.nl-archive-card{border:1px solid var(--line);border-radius:20px;background:#fff;padding:16px 18px}
+.nl-archive-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.nl-archive-date{color:var(--muted);font-size:12px;white-space:nowrap}
+.nl-archive-title{color:var(--ink);font-size:14px;font-weight:700;margin:12px 0}
+.nl-archive-btn{min-height:32px;padding:0 14px;font-size:12.5px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border-radius:13px;border:0;font-weight:900;background:#fff;color:#334155;white-space:nowrap}.btn.primary{background:#fff;color:var(--primary2)}.btn.dark{background:#0f172a;color:#fff}.btn.soft{background:var(--soft);color:var(--primary2)}.btn.green{background:var(--greenSoft);color:var(--green)}.btn.orange{background:var(--orangeSoft);color:#c2410c}.btn.red{background:var(--redSoft);color:var(--red)}.btn.line{background:#fff;border:1px solid var(--line);color:#334155}.btn:hover{transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
 .grid{display:grid;gap:18px}.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.split{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:start}.card{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 12px 32px rgba(15,23,42,.055)}.metric{min-height:132px}.metric .label{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;font-weight:900}.metric .num{font-size:34px;font-weight:950;letter-spacing:-.05em;margin:18px 0 4px}.metric .desc{margin:0;color:var(--muted);font-size:13px}.section-head,.page-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:26px 0 12px}.page-title{align-items:center;margin:0 0 18px}.section-head h3,.page-title h2{margin:0;letter-spacing:-.035em}.page-title h2{font-size:30px}.section-head p,.page-title p{margin:5px 0 0;color:var(--muted);font-size:14px}
 .badge{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:900;white-space:nowrap}.badge.blue{background:var(--soft);color:var(--primary2)}.badge.green{background:var(--greenSoft);color:var(--green)}.badge.orange{background:var(--orangeSoft);color:#c2410c}.badge.purple{background:var(--purpleSoft);color:var(--purple)}.badge.gray{background:#f1f5f9;color:#475569}.badge.red{background:var(--redSoft);color:var(--red)}
@@ -30,7 +59,63 @@
 .toast{position:fixed;bottom:24px;right:24px;background:#0f172a;color:#fff;padding:13px 20px;border-radius:14px;font-size:13px;font-weight:800;display:none;z-index:999;box-shadow:var(--shadow)}.toast.show{display:block;animation:fade .2s}
 .tag-input-area{display:flex;flex-wrap:wrap;gap:6px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:8px 10px;min-height:48px;align-items:center}.tag-input-area input{border:0;flex:1;min-width:120px;padding:6px}.tag-pill{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--primary2);padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800}.tag-pill .rm{cursor:pointer;font-weight:900}.domain-group-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#64748b;font-size:13px;font-weight:800;cursor:pointer;transition:.14s}.domain-group-btn:hover{border-color:#cbd5e1;color:#334155}.domain-group-btn.on{background:var(--redSoft);border-color:rgba(220,38,38,.3);color:var(--red)}.domain-group-btn .dg-count{font-size:11px;opacity:.7;font-weight:700}
 
-@media(max-width:1100px){.cols-4{grid-template-columns:repeat(2,1fr)}.cols-3,.cols-2,.split,.builder-layout,.exp-grid,.pool-cols{grid-template-columns:1fr}.sticky-panel{position:static}}@media(max-width:840px){.app.sidebar-collapsed{}.main{margin-left:0}.app.sidebar-collapsed .main{margin-left:0}.sidebar{display:none;position:fixed;z-index:30;width:292px;left:0;top:0}.sidebar.open{display:flex}.app.sidebar-collapsed .sidebar{width:292px}.sidebar.collapsed{padding:24px 18px;align-items:stretch}.sidebar.collapsed .brand h1,.sidebar.collapsed .brand p{display:block}.sidebar.collapsed .nav-item>span.nav-label{display:inline}.sidebar.collapsed .nav-item{justify-content:flex-start}.sidebar.collapsed .nav-section:not(:first-child){border-top:0;padding-top:0;margin-top:4px}.main{padding:18px}.mobile-menu{display:inline-flex;align-items:center}.topbar{align-items:stretch;flex-wrap:wrap}.search{order:3;max-width:none;flex-basis:100%}.user-chip{margin-left:auto;min-width:0}.hero h2{font-size:28px}.cols-4,.cols-3,.cols-2{grid-template-columns:1fr}.page-title{align-items:flex-start;flex-direction:column}th:nth-child(4),td:nth-child(4){display:none}}
+html{overflow-x:hidden}body{overflow-x:hidden;max-width:100vw}.main{overflow-x:hidden}
+.sidebar-backdrop{display:none;position:fixed;inset:0;z-index:25;background:rgba(15,23,42,.5);opacity:0;transition:opacity .18s ease}.sidebar-backdrop.open{display:block;opacity:1}
+#resultsTableWrap,#kwTableWrap,#newsletterArchiveTableWrap,#insightTableWrap,#nlSubMgmtTableWrap,#acctMgmtTableWrap{display:none}
+@media(min-width:841px){
+#resultsTableWrap,#kwTableWrap,#newsletterArchiveTableWrap,#insightTableWrap,#nlSubMgmtTableWrap,#acctMgmtTableWrap{display:block}
+#resultsBody.result-cards,#resultsSelectAllBar,#researchKeywordsBody.kw-groups,#newsletterArchiveList.insight-cards,#insightHistoryBody.insight-cards,#nlSubMgmtCards.result-cards,#acctMgmtCards.result-cards{display:none}
+#savedGrid.grid{gap:12px}
+#savedGrid .card{padding:16px}
+#savedGrid .card h3{font-size:16px;margin:8px 0 4px;line-height:1.35}
+#savedGrid .card .badge{font-size:11.5px;padding:4px 10px}
+#savedGrid .card p{font-size:13px;margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#savedGrid .card .btn{min-height:34px;padding:0 14px;font-size:12.5px}
+}
+@media(max-width:1100px){.cols-4{grid-template-columns:repeat(2,1fr)}.cols-3,.cols-2,.split,.builder-layout,.exp-grid,.pool-cols{grid-template-columns:1fr}.sticky-panel{position:static}}
+@media(max-width:840px){.app.sidebar-collapsed{}.main{margin-left:0}.app.sidebar-collapsed .main{margin-left:0}.sidebar{display:flex;position:fixed;z-index:30;width:min(292px,82vw);left:0;top:0;transform:translateX(-100%);transition:transform .2s ease;background:#fff;backdrop-filter:none}.sidebar.open{transform:translateX(0)}.app.sidebar-collapsed .sidebar{width:min(292px,82vw)}.sidebar.collapsed{padding:24px 18px;align-items:stretch}.sidebar.collapsed .sidebar-header{flex-direction:row}.sidebar.collapsed .user-info-text{display:block}.sidebar.collapsed .sidebar-header-actions{flex-direction:row}.sidebar.collapsed .sidebar-logout-btn .logout-label{display:inline}.sidebar.collapsed .nav-item>span.nav-label{display:inline}.sidebar.collapsed .nav-item{justify-content:flex-start}.sidebar.collapsed .nav-section:not(:first-child){border-top:0;padding-top:0;margin-top:4px}.main{padding:16px}.mobile-menu{display:inline-flex;align-items:center}.topbar{align-items:stretch;flex-wrap:wrap}.search{order:3;max-width:none;flex-basis:100%}.hero{padding:22px}.hero h2{font-size:24px}.cols-4,.cols-3,.cols-2{grid-template-columns:1fr}.page-title{align-items:flex-start;flex-direction:column;gap:10px}
+.section-head{align-items:flex-start;flex-direction:column;gap:10px}
+.section-head>div{width:100%}
+#resultsActionBar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+#resultsActionBar,#resultsActionBar>*{width:auto}
+#resultsActionBar .btn,#exportDropdownWrap{width:100%}
+#resultsActionBar .btn{flex:none;font-size:12.5px;padding:0 6px;white-space:normal;line-height:1.3;min-height:46px}
+#exportMenu{left:0;right:auto;min-width:0;width:100%}
+th:nth-child(4),td:nth-child(4){display:none}
+.dash-brand{padding:20px 0 4px}.dash-brand-word{font-size:34px}.dash-brand-icon{width:40px;height:40px;font-size:18px}.dash-brand p{font-size:12px}
+.dash-search-wrap{padding:14px 0 12px}.dash-search-box{padding:6px 6px 6px 16px}.dash-search-box input{height:42px;font-size:15px}.dash-search-box button{height:42px;padding:0 16px;font-size:13px}
+.dash-shortcuts{grid-template-columns:repeat(3,1fr);gap:10px;padding:6px 0 24px}.dash-shortcut{padding:14px 6px 12px}.dash-shortcut-icon{width:42px;height:42px;font-size:19px}.dash-shortcut span{font-size:11.5px}
+.dash-widget-grid{grid-template-columns:1fr}
+.metric{min-height:auto!important;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px}
+.metric .label{font-size:12px;flex:0 0 auto;max-width:38%}
+.metric .num{font-size:16px!important;margin:0!important;text-align:right;white-space:normal;flex:1;min-width:0}
+.table-card{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.table-card table{min-width:560px}
+.table-card table td[colspan]{white-space:normal;min-width:0}
+.pool-cols{grid-template-columns:1fr}
+.mindmap{overflow-x:auto}
+.core-toolbar{flex-wrap:wrap}
+.depth3-title,.pool-item span:first-child,.chip{white-space:normal;word-break:break-word}
+.builder-progress{flex-wrap:wrap}
+.step-dot{flex:1 1 45%}
+.modal,.ro-modal{width:92vw;max-width:92vw}
+.builder-layout{grid-template-columns:1fr}
+.result-card{padding:12px 14px 10px;border-radius:14px}
+.result-card-title{font-size:14px}
+.result-card-foot{margin-top:8px;padding-top:8px}
+.result-card-actions .btn{min-height:32px;padding:0 10px;font-size:12px}
+.card{padding:16px}
+.card h3{font-size:16px}
+#newsletterSubscribeCard,#newsletterUnsubscribeCard,.card[style*="align-items:center"]{padding:14px}
+[style*="width:44px"][style*="height:44px"]{width:36px!important;height:36px!important;font-size:16px!important}
+#savedGrid.grid{gap:10px}
+#savedGrid .card{padding:14px}
+#savedGrid .card h3{font-size:15px;margin:8px 0 4px;line-height:1.3}
+#savedGrid .card .badge{font-size:11px;padding:4px 9px}
+#savedGrid .card p{font-size:12.5px;margin:0 0 10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+#savedGrid .card .btn{min-height:32px;padding:0 12px;font-size:12px}
+}
+@media(max-width:420px){.dash-brand-word{font-size:28px}.dash-shortcuts{grid-template-columns:repeat(2,1fr)}.hero h2{font-size:21px}}
 
 /* ── Auth 오버레이 ── */
 #auth-overlay{position:fixed;inset:0;z-index:9999;background:radial-gradient(circle at top left,rgba(37,99,235,.18),transparent 30%),radial-gradient(circle at bottom right,rgba(15,118,110,.13),transparent 35%),#f4f7fb;display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
@@ -56,6 +141,38 @@
 .auth-status.success{background:var(--greenSoft);color:var(--green);display:block}
 .auth-status.loading{background:var(--soft);color:var(--primary2);display:block}
 .auth-domain-badge{display:inline-flex;align-items:center;gap:5px;background:#eaf1ff;color:var(--primary2);font-size:12px;font-weight:900;padding:4px 10px;border-radius:999px;margin-bottom:18px}
+
+/* ── 계정 설정: 프로필 읽기전용 표시 ── */
+.profile-static{padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:#f8fafc;color:#334155;font-weight:700;font-size:14px;min-height:20px}
+.profile-static.muted{color:var(--muted);font-weight:600}
+.profile-input{display:none}
+
+/* ── 계정 설정: 지원/문의 카드(가로 4열) ── */
+.support-card{display:flex;flex-direction:column;gap:6px;padding:16px;border:1px solid var(--line);background:#fff;border-radius:18px;cursor:pointer;transition:.16s}
+.support-card:hover{border-color:rgba(37,99,235,.4);transform:translateY(-1px)}
+.support-card .list-icon{margin-bottom:2px}
+.support-card h4{margin:0;font-size:14px}
+.support-card p{margin:0;color:var(--muted);font-size:12.5px;line-height:1.55;flex:1}
+.support-card .list-link{color:var(--primary2);font-size:12.5px;font-weight:900;white-space:nowrap}
+
+/* ── 공용 모달(지원/문의, 이용가이드, 개인정보처리방침) ── */
+.ro-modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:20px}
+.ro-modal-overlay.open{display:flex}
+.ro-modal{background:#fff;border-radius:26px;width:100%;max-height:86vh;overflow-y:auto;box-shadow:0 30px 80px rgba(15,23,42,.28);padding:26px 28px}
+.ro-modal-sm{max-width:480px}
+.ro-modal-lg{max-width:760px}
+.ro-modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+.ro-modal-head h3{margin:0;font-size:20px;letter-spacing:-.03em}
+.ro-modal-close{width:34px;height:34px;flex-shrink:0;border-radius:10px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;font-weight:900;color:#475569;transition:.14s}
+.ro-modal-close:hover{background:#f1f5f9;color:var(--red)}
+.ro-modal-body{font-size:14px;color:#334155;line-height:1.75}
+.ro-modal-body h4{margin:20px 0 8px;font-size:15px;color:#0f172a}
+.ro-modal-body h4:first-child{margin-top:0}
+.ro-modal-body p{margin:0 0 10px}
+.ro-modal-body ul{margin:0 0 10px;padding-left:20px}
+.ro-modal-body li{margin-bottom:4px}
+.ro-modal-foot{display:flex;justify-content:flex-end;margin-top:20px}
+.pw-hint{font-size:12px;color:var(--muted);margin:0 0 14px;line-height:1.6}
 
 </style>
 </head>
@@ -105,9 +222,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <div id="sidebarTooltip" style="display:none;position:fixed;background:#0f172a;color:#fff;padding:7px 12px;border-radius:9px;font-size:12px;font-weight:800;white-space:nowrap;z-index:9999;pointer-events:none;box-shadow:0 8px 22px rgba(0,0,0,.2)"></div>
 <div class="app">
+<div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 <aside class="sidebar" id="sidebar">
-  <button class="sidebar-toggle-btn" id="sidebarToggleBtn" type="button" title="메뉴 접기/펼치기"><span id="sidebarToggleIcon">◀</span></button>
-  <div class="brand"><div class="logo">RO</div><div><h1>Research On</h1><p>BPO사업본부 AI 리서치</p></div></div>
+  <div class="sidebar-header">
+    <div class="user-info-text" id="sidebarUserText">
+      <p class="user-info-welcome"><strong id="sidebarUserName">이트너스 사용자</strong>님 환영합니다.</p>
+      <p class="user-info-sub">오늘도 행복 가득한 하루 되세요.</p>
+    </div>
+    <div class="sidebar-header-actions">
+      <button class="sidebar-icon-btn" id="sidebarSettingsBtn" data-page="account" type="button" title="내 계정 설정">⚙</button>
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" type="button" title="메뉴 접기/펼치기"><span id="sidebarToggleIcon">◀</span></button>
+    </div>
+  </div>
   <nav>
     <div class="nav-section"><div class="nav-title">리서치 허브</div>
       <button class="nav-item active" data-page="dashboard" type="button"><span class="nav-icon">🏠</span><span class="nav-label">내 대시보드</span></button>
@@ -121,28 +247,17 @@
       <button class="nav-item" data-page="newsletter" type="button"><span class="nav-icon">📮</span><span class="nav-label">뉴스레터</span></button>
       <button class="nav-item" data-page="newsletter-subscribe" type="button"><span class="nav-icon">🔔</span><span class="nav-label">구독 신청</span></button>
     </div>
-    <div class="nav-section"><div class="nav-title">운영·설정</div>
-      <button class="nav-item" data-page="account" type="button"><span class="nav-icon">👤</span><span class="nav-label">내 계정 설정</span></button>
-      <button class="nav-item" id="nav-admin-request" data-page="admin-request" type="button" style="display:none"><span class="nav-icon">🔐</span><span class="nav-label">관리자 권한 신청</span></button>
+    <div class="nav-section" id="nav-section-account-request" style="display:none"><div class="nav-title">계정</div>
+      <button class="nav-item" id="nav-admin-request" data-page="admin-request" type="button"><span class="nav-icon">🔐</span><span class="nav-label">관리자 권한 신청</span></button>
     </div>
   </nav>
-  <div class="sidebar-footer" id="sidebarFooter">
-    <strong id="footerName">이트너스 사용자</strong><span id="footerStatus">로그인 중 · 클릭하여 메뉴 보기</span>
-    <div class="user-popup" id="userPopup">
-      <button type="button" class="popup-primary" data-page="dashboard"><span>🏠</span>내 대시보드</button>
-      <button type="button" data-page="account"><span>👤</span>내 계정 설정</button>
-      <button type="button" data-page="history"><span>🕘</span>검색 히스토리</button>
-      <button type="button" data-page="saved"><span>⭐</span>저장 자료함</button>
-      <button type="button" class="danger" id="logoutBtn"><span>🚪</span>로그아웃</button>
-    </div>
-  </div>
+  <button class="sidebar-logout-btn" id="logoutBtn" type="button"><span class="logout-icon">🚪</span><span class="logout-label">로그아웃</span></button>
 </aside>
 <main class="main">
-  <div class="topbar"><button class="mobile-menu" id="mobileMenu" type="button">☰ 메뉴</button><div class="user-chip" id="topUserChip" style="cursor:pointer"><div class="avatar">U</div><div><b>이트너스 사용자</b><small>Research User · Standard</small></div></div></div>
+  <div class="topbar"><button class="mobile-menu" id="mobileMenu" type="button">☰ 메뉴</button></div>
 <section class="page active" id="dashboard">
   <div class="dash-brand">
-    <div class="dash-brand-row"><span class="dash-brand-icon">✨</span><span class="dash-brand-word">Research On</span></div>
-    <p>Research On : 리서치 허브</p>
+    <div class="dash-brand-row"><span class="dash-brand-icon">✨</span><span class="dash-brand-word">Research ON</span></div>
   </div>
   <div class="dash-search-wrap">
     <p>무엇을 검색할까요?</p>
@@ -154,20 +269,20 @@
   </div>
   <div class="dash-shortcuts">
     <button class="dash-shortcut" data-go="new-research" type="button"><span class="dash-shortcut-icon" style="background:var(--soft)">✨</span><span>새 리서치</span></button>
-    <button class="dash-shortcut" data-go="newssum" type="button"><span class="dash-shortcut-icon" style="background:var(--greenSoft)">📄</span><span>AI 검색</span></button>
+    <button class="dash-shortcut" data-go="newssum" type="button"><span class="dash-shortcut-icon" style="background:var(--greenSoft)">📄</span><span>AI 리포트</span></button>
     <button class="dash-shortcut" data-go="newssum" type="button"><span class="dash-shortcut-icon" style="background:var(--purpleSoft)">✦</span><span>인사이트 히스토리</span></button>
     <button class="dash-shortcut" data-go="saved" type="button"><span class="dash-shortcut-icon" style="background:var(--orangeSoft)">⭐</span><span>저장 자료함</span></button>
-    <button class="dash-shortcut" data-go="history" type="button"><span class="dash-shortcut-icon" style="background:#f1f5f9">🕘</span><span>검색 히스토리</span></button>
-    <button class="dash-shortcut" data-go="newsletter" type="button"><span class="dash-shortcut-icon" style="background:var(--redSoft)">📮</span><span>뉴스레터</span></button>
+    <button class="dash-shortcut" data-go="history" type="button"><span class="dash-shortcut-icon" style="background:var(--amberSoft)">🕘</span><span>검색 히스토리</span></button>
+    <button class="dash-shortcut" data-go="newsletter" type="button"><span class="dash-shortcut-icon" style="background:var(--pinkSoft)">📮</span><span>뉴스레터</span></button>
   </div>
   <div class="dash-widget-grid">
     <div class="card" id="dashRecentCard">
-      <h3 style="font-size:13px;color:var(--muted);margin:0 0 8px">최근 본 리서치</h3>
+      <h3 style="font-size:14px;color:var(--muted);margin:0 0 12px;letter-spacing:.01em">최근 본 리서치</h3>
       <div id="dashRecentBody"></div>
     </div>
     <div class="card">
-      <h3 style="font-size:13px;color:var(--muted);margin:0 0 8px">오늘의 추천 키워드</h3>
-      <div id="dashSuggestChips" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+      <h3 style="font-size:14px;color:var(--muted);margin:0 0 12px;letter-spacing:.01em">오늘의 추천 키워드</h3>
+      <div id="dashSuggestChips" style="display:flex;flex-wrap:wrap;gap:8px"></div>
     </div>
   </div>
 </section>
@@ -260,18 +375,19 @@
   </div>
 </section>
 <section class="page" id="newssum">
-  <div class="page-title"><div><h2>AI 인사이트 리포트</h2><p>그동안 도출한 인사이트 리포트를 한 번에 확인할 수 있습니다.</p></div><span class="badge blue">AI Report</span></div>
-  <div class="card table-card">
+  <div class="page-title"><div><h2>AI 인사이트 리포트</h2><p>그동안 도출한 인사이트 리포트를 한 번에 확인할 수 있습니다.</p></div></div>
+  <div class="insight-cards" id="insightHistoryBody"></div>
+  <div class="card table-card" id="insightTableWrap">
     <table><thead><tr>
       <th>키워드</th><th>생성일</th><th>선택 자료</th><th>결과 확인</th>
     </tr></thead>
-    <tbody id="insightHistoryBody"></tbody></table>
+    <tbody id="insightHistoryBodyTable"></tbody></table>
   </div>
 </section>
 
 <section class="page" id="newssum-detail">
   <button class="btn line" id="newssumDetailBackBtn" type="button" style="margin-bottom:16px">← 리포트 목록으로 돌아가기</button>
-  <div class="page-title"><div><h2>AI 인사이트 리포트</h2><p>선택한 자료를 기반으로 AI가 작성한 리포트입니다.</p></div><span class="badge blue">AI Report</span></div>
+  <div class="page-title"><div><h2>AI 인사이트 리포트</h2><p>선택한 자료를 기반으로 AI가 작성한 리포트입니다.</p></div></div>
 
   <div class="card" id="insightReportCard">
     <div id="insightReportLoading" style="display:none;text-align:center;padding:60px 20px">
@@ -289,7 +405,7 @@
 </section>
 <section class="page" id="results">
   <div class="page-title"><div><h2>리서치 결과</h2><p id="resultsSubtitle">새 리서치 만들기에서 검색했던 키워드별 결과를 언제든지 다시 확인할 수 있습니다.</p></div>
-    <div style="display:flex;gap:8px">
+    <div id="resultsActionBar" style="display:flex;gap:8px;flex-wrap:wrap">
       <div style="position:relative;display:inline-block" id="exportDropdownWrap">
         <button class="btn soft" id="exportResultsBtn" type="button">⬇ 내보내기 ▾</button>
         <div id="exportMenu" style="display:none;position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:100;overflow:hidden;min-width:160px">
@@ -301,12 +417,17 @@
       <button class="btn red" id="deleteSelectedResultsBtn" type="button">선택 결과 삭제</button>
     </div>
   </div>
-  <div class="card table-card">
+  <div class="card" id="resultsSelectAllBar" style="padding:14px 20px;display:flex;align-items:center;gap:10px;margin-bottom:12px">
+    <input type="checkbox" class="select-all-results" id="selectAllResultsMobile" title="전체 선택" />
+    <span style="font-weight:800;font-size:13px;color:var(--muted)">전체 선택</span>
+  </div>
+  <div class="result-cards" id="resultsBody"></div>
+  <div class="card table-card" id="resultsTableWrap">
     <table><thead><tr>
-      <th style="width:36px"><input type="checkbox" id="selectAllResults" title="전체 선택" /></th>
+      <th style="width:36px"><input type="checkbox" class="select-all-results" id="selectAllResultsDesktop" title="전체 선택" /></th>
       <th>검색 키워드</th><th>검색일</th><th>관련성</th><th>결과 확인</th><th>작업</th>
     </tr></thead>
-    <tbody id="resultsBody"></tbody></table>
+    <tbody id="resultsBodyTable"></tbody></table>
   </div>
 </section>
 
@@ -337,6 +458,17 @@
     </div>
   </div>
 
+  <div class="card" style="margin-bottom:18px">
+    <h3 style="margin:0 0 4px">사용자 선정 자료</h3>
+    <p style="color:var(--muted);font-size:13px;margin:0 0 14px">검색 결과에 없는 기사를 직접 찾으셨다면, 링크를 추가해 인사이트 리포트 작성에 함께 반영할 수 있어요. (최대 5건)</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <input id="userLinkUrlInput" type="url" placeholder="https://... 뉴스 기사 링크" style="flex:2;min-width:220px" />
+      <input id="userLinkTitleInput" type="text" placeholder="제목 (선택)" style="flex:1;min-width:140px" />
+      <button class="btn dark" id="userLinkAddBtn" type="button" style="flex-shrink:0">추가</button>
+    </div>
+    <div id="userLinkList" style="margin-top:12px;display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:10px">
     <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;cursor:pointer">
       <input type="checkbox" id="selectAllDetail" /> 전체 선택
@@ -346,7 +478,7 @@
   <div id="resultsDetailList" class="list"></div>
 </section>
 <section class="page" id="saved">
-  <div class="page-title"><div><h2>저장 자료함</h2><p>저장한 기사와 AI 인사이트 리포트를 모아봅니다.</p></div><span class="badge purple" id="savedCountBadge">0 Saved</span></div>
+  <div class="page-title"><div><h2>저장 자료함</h2><p>저장한 기사와 AI 인사이트 리포트를 모아봅니다.</p></div></div>
   <div class="tabbar" style="margin-bottom:16px">
     <button class="tab active" data-saved-filter="all" type="button">전체</button>
     <button class="tab" data-saved-filter="article" type="button">기사</button>
@@ -381,13 +513,14 @@
   </div>
 
   <div class="section-head" style="margin-top:24px"><div><h3>상세 검색 키워드</h3><p>새 리서치 만들기에서 검색해 결과를 가져온 키워드의 Pool·전방·후방 구성을 확인합니다.</p></div><button class="btn dark" id="newResearchBtn" data-go="new-research" type="button">새 리서치 검색하기</button></div>
-  <div class="card table-card">
+  <div class="kw-groups" id="researchKeywordsBody"></div>
+  <div class="card table-card" id="kwTableWrap">
     <table style="table-layout:fixed">
       <colgroup>
         <col style="width:18%"><col style="width:19%"><col style="width:15%"><col style="width:16%"><col style="width:32%">
       </colgroup>
       <thead><tr><th style="white-space:nowrap">키워드 Pool</th><th style="white-space:nowrap">전방 키워드</th><th style="white-space:nowrap">후방 키워드</th><th style="white-space:nowrap">검색 날짜</th><th style="white-space:nowrap">작업</th></tr></thead>
-      <tbody id="researchKeywordsBody"></tbody>
+      <tbody id="researchKeywordsBodyTable"></tbody>
     </table>
   </div>
 </section>
@@ -396,10 +529,10 @@
   <div id="newsletterListView">
     <div class="page-title"><div><h2>뉴스레터</h2><p>이트너스 리서치 팀이 정리한 주요 소식을 정기적으로 받아보세요.</p></div></div>
 
-    <div class="dash-widget-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px">
-      <div class="card"><p style="color:var(--muted);font-size:12px;font-weight:800;margin:0 0 8px">구독 시작일</p><h3 id="nlSubscribedSince" style="margin:0;font-size:19px">-</h3></div>
-      <div class="card"><p style="color:var(--muted);font-size:12px;font-weight:800;margin:0 0 8px">마지막으로 받은 뉴스레터</p><h3 id="nlLastIssue" style="margin:0;font-size:19px">-</h3></div>
-      <div class="card"><p style="color:var(--muted);font-size:12px;font-weight:800;margin:0 0 8px">다음 발송 예정</p><h3 id="nlNextSchedule" style="margin:0;font-size:19px">-</h3></div>
+    <div class="grid cols-3 nl-stats-grid" style="margin-bottom:24px">
+      <div class="card metric nl-stat-card"><div class="label">구독 시작일</div><div class="num" id="nlSubscribedSince" style="font-size:20px">-</div></div>
+      <div class="card metric nl-stat-card"><div class="label">마지막으로 받은 뉴스레터</div><div class="num" id="nlLastIssue" style="font-size:20px">-</div></div>
+      <div class="card metric nl-stat-card"><div class="label">다음 발송 예정</div><div class="num" id="nlNextSchedule" style="font-size:20px">-</div></div>
     </div>
 
     <div class="section-head"><div><h3>최신 뉴스레터</h3><p>가장 최근 발행된 이슈입니다.</p></div></div>
@@ -409,9 +542,10 @@
 
     <div id="newsletterArchiveSection" style="display:none">
       <div class="section-head" style="margin-top:30px"><div><h3>뉴스레터 히스토리</h3><p>그동안 발행된 뉴스레터를 회차별로 확인할 수 있습니다.</p></div></div>
-      <div class="card table-card">
+      <div class="insight-cards" id="newsletterArchiveList"></div>
+      <div class="card table-card" id="newsletterArchiveTableWrap">
         <table><thead><tr><th>발행 회차</th><th>발송일시</th><th>제목</th><th>상세 보기</th></tr></thead>
-        <tbody id="newsletterArchiveList"></tbody></table>
+        <tbody id="newsletterArchiveListTable"></tbody></table>
       </div>
     </div>
   </div>
@@ -456,6 +590,22 @@
       <button class="btn red" id="newsletterUnsubscribeBtn" type="button">구독 해지</button>
     </div>
   </div>
+
+  <div class="card" style="margin-top:16px">
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+      <div style="width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:var(--soft);flex-shrink:0;font-size:20px">🤝</div>
+      <div>
+        <h3 style="margin:0 0 4px">다른 구성원 구독 등록</h3>
+        <p style="color:var(--muted);margin:0;font-size:13px">구독을 원하는 분의 이름과 이메일을 입력하면 대신 등록해드립니다.</p>
+      </div>
+    </div>
+    <div class="grid cols-2">
+      <div class="field"><label>이름</label><input id="proxySubName" placeholder="이름을 입력하세요" /></div>
+      <div class="field"><label>이메일</label><input type="email" id="proxySubEmail" placeholder="example@etners.com" /></div>
+    </div>
+    <div id="proxySubStatus" class="auth-status" style="margin-top:12px"></div>
+    <button class="btn dark" id="proxySubBtn" type="button" style="margin-top:14px">구독 등록</button>
+  </div>
 </section>
 
 <div class="empty-state" id="newsletterSubModalOverlay" style="display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:230;border:0;border-radius:0;padding:40px 20px;align-items:center;justify-content:center;overflow:auto">
@@ -470,60 +620,203 @@
   </div>
 </div>
 
-<section class="page" id="account">
-  <div class="page-title"><div><h2>내 계정 설정</h2><p>프로필, 기본 검색 옵션, n8n 연동 주소를 관리합니다.</p></div><button class="btn dark" id="saveAccountBtn" type="button">저장</button></div>
-  <div class="split">
-    <div class="card">
-      <h3>프로필</h3>
-      <div class="form">
-        <div class="field"><label>이름</label><input id="acctName" value="이트너스 사용자" /></div>
-        <div class="field"><label>부서/역할</label><input id="acctDept" value="리서치팀" /></div>
-        <div class="field"><label>기본 인사이트 톤</label><select><option>실무 보고서형</option><option>임원 보고형</option><option>간단 뉴스레터형</option></select></div>
+<section class="page" id="newsletter-manage">
+  <div class="page-title"><div><h2>뉴스레터 관리</h2><p>구독자 현황을 확인하고, 발송할 뉴스레터를 작성·미리보기·발송합니다.</p></div></div>
+
+  <div class="grid cols-3" style="margin-bottom:20px">
+    <div class="card metric"><div class="label">구독자 수</div><div class="num" id="nlSubscriberCount">-</div></div>
+    <div class="card metric"><div class="label">발행 회차 수</div><div class="num" id="nlIssueCount">-</div></div>
+    <div class="card metric"><div class="label">최근 발송</div><div class="num" id="nlLastSentAt" style="font-size:18px">-</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div>
+      <h3 style="margin:0 0 4px">AI 초안 가져오기</h3>
+      <p style="margin:0;color:var(--muted);font-size:13px">n8n 워크플로우가 최근 7일 자료를 가공해 만든 초안을 불러옵니다. 불러온 뒤 아래에서 자유롭게 수정·추가·삭제할 수 있습니다.</p>
+    </div>
+    <button class="btn dark" id="nlFetchDraftBtn" type="button">✨ AI 초안 가져오기</button>
+  </div>
+  <div id="nlDraftFetchStatus" class="auth-status" style="margin-bottom:20px"></div>
+
+  <div class="card" style="margin-bottom:20px">
+    <h3 style="margin:0 0 14px">기본 정보</h3>
+    <div class="form">
+      <div class="grid cols-2">
+        <div class="field"><label>발행 회차 제목</label><input id="nlIssueTitle" placeholder="Research-On 주간 뉴스레터" /></div>
+        <div class="field"><label>시작일</label><input type="date" id="nlPeriodStart" /><small id="nlPeriodHint" style="display:block;margin-top:6px;color:var(--muted)"></small></div>
+      </div>
+      <div class="field"><label>마감일 (제목·구독자 화면의 발행일로 사용)</label><input type="date" id="nlPeriodEnd" /></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <h3 style="margin:0 0 14px">Executive Brief</h3>
+    <div class="form">
+      <div class="field"><label>헤드라인</label><input id="nlHeadline" placeholder="삼성전자 로봇 사업 조직 신설 및 노란봉투법 리스크 점검" /></div>
+      <div class="field"><label>요약 (**텍스트**로 감싸면 굵게 표시됩니다)</label><textarea id="nlSummary" style="min-height:90px"></textarea></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px" data-section="client_watch">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <h3 style="margin:0">01 · CLIENT WATCH</h3>
+      <button class="btn soft" type="button" onclick="addNewsletterItem('client_watch')">+ 항목 추가</button>
+    </div>
+    <p style="color:var(--muted);font-size:12px;margin:0 0 12px">핵심 고객사의 사업·조직·AI·운영 변화를 중심으로 정리했습니다.</p>
+    <div id="nlItems-client_watch" style="display:flex;flex-direction:column;gap:14px"></div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px" data-section="research_on_insight">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <h3 style="margin:0">02 · RESEARCH ON INSIGHT</h3>
+      <button class="btn soft" type="button" onclick="addNewsletterItem('research_on_insight')">+ 항목 추가</button>
+    </div>
+    <p style="color:var(--muted);font-size:12px;margin:0 0 12px">사용자들이 직접 수행한 리서치에서 반복적으로 나타난 관심사를 정리했습니다.</p>
+    <div id="nlItems-research_on_insight" style="display:flex;flex-direction:column;gap:14px"></div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px" data-section="business_work">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <h3 style="margin:0">03 · BUSINESS &amp; WORK</h3>
+      <button class="btn soft" type="button" onclick="addNewsletterItem('business_work')">+ 항목 추가</button>
+    </div>
+    <p style="color:var(--muted);font-size:12px;margin:0 0 12px">본부 사업과 운영에 영향을 줄 수 있는 외부 변화를 정리했습니다.</p>
+    <div id="nlItems-business_work" style="display:flex;flex-direction:column;gap:14px"></div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px" data-section="people_culture">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+      <h3 style="margin:0">04 · PEOPLE &amp; CULTURE</h3>
+      <button class="btn soft" type="button" onclick="addNewsletterItem('people_culture')">+ 항목 추가</button>
+    </div>
+    <p style="color:var(--muted);font-size:12px;margin:0 0 12px">젊은 세대의 행동과 가치관을 조직 운영 관점에서 해석했습니다. (항목별 시사점 없이, 섹션 전체 종합 코멘트로 정리해요)</p>
+    <div id="nlItems-people_culture" style="display:flex;flex-direction:column;gap:14px"></div>
+    <div class="field" style="margin-top:14px"><label>섹션 종합 코멘트</label><textarea id="nlCultureView" style="min-height:70px"></textarea></div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <h3 style="margin:0 0 10px">편집자 노트 (내부 참고용, 발송 메일에는 포함되지 않음)</h3>
+    <textarea id="nlEditorNote" style="min-height:60px"></textarea>
+  </div>
+
+  <div style="display:flex;gap:10px;margin-bottom:20px">
+    <button class="btn line" id="nlPreviewBtn" type="button">미리보기</button>
+    <button class="btn dark" id="nlSendBtn" type="button">📮 발송하기</button>
+  </div>
+
+  <div class="card" id="nlPreviewCard" style="display:none;padding:0;overflow:hidden;margin-bottom:40px">
+    <div style="padding:14px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <b style="font-size:13px">미리보기</b>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span id="nlPreviewSubject" style="font-size:12px;color:var(--muted)"></span>
+        <button class="btn line" id="nlPreviewRefreshBtn" type="button" style="padding:6px 12px;min-height:auto;font-size:12px">🔄 새로고침</button>
       </div>
     </div>
-    <div class="card">
+    <iframe id="nlPreviewFrame" style="width:100%;height:900px;border:0;background:#fff;display:block"></iframe>
+  </div>
+</section>
+
+<section class="page" id="account">
+  <div class="page-title"><div><h2>내 계정 설정</h2><p>프로필과 로그인 정보를 관리합니다.</p></div></div>
+  <div class="grid cols-2" style="align-items:start">
+    <div class="card" id="profileCard">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
-        <div>
-          <h3 style="margin:0 0 3px">Webhook 연동 설정</h3>
-          <p style="color:var(--muted);font-size:12px;margin:0">n8n, Make, Zapier 등 어떤 자동화 도구든 Webhook URL을 입력하면 연동됩니다.</p>
-        </div>
-        <span class="badge green">Webhook</span>
+        <h3 style="margin:0">프로필</h3>
+        <button class="btn line" id="profileEditBtn" type="button" style="min-height:36px;padding:0 16px;font-size:13px">수정</button>
       </div>
-      <div style="border:1px solid var(--line);border-radius:14px;overflow:hidden">
-        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;border-bottom:1px solid var(--line);padding:10px 14px;gap:12px">
-          <div><div style="font-size:12px;font-weight:900;color:var(--ink)">뉴스 기사 검색 <span class="badge orange" style="font-size:9px;padding:2px 6px;margin-left:4px">추정값</span></div><code style="font-size:10px;color:var(--muted)">POST · research/manual</code></div>
-          <input id="cfgNewsSearchUrl" placeholder="https://your-n8n-domain/webhook/research/manual" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
+      <div class="form">
+        <div class="field">
+          <label>이름</label>
+          <div class="profile-static muted" id="profileNameStatic">—</div>
         </div>
-        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;border-bottom:1px solid var(--line);padding:10px 14px;gap:12px">
-          <div><div style="font-size:12px;font-weight:900;color:var(--ink)">뉴스 요약</div><code style="font-size:10px;color:var(--muted)">POST · news-summary</code></div>
-          <input id="cfgNewsUrl" placeholder="https://your-webhook-url/news-summary" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
+        <div class="field">
+          <label>부서</label>
+          <div class="profile-static" data-field="dept" id="profileDeptStatic">—</div>
+          <select class="profile-input" data-field="dept" id="acctDept">
+            <option value="BPO사업본부">BPO사업본부</option>
+            <option value="BPO사업본부 > BPO지원그룹">　- BPO지원그룹</option>
+            <option value="BPO사업본부 > DS지원사업부">　- DS지원사업부</option>
+            <option value="BPO사업본부 > DS지원사업부 > GA센터">　　. GA센터</option>
+            <option value="BPO사업본부 > DS지원사업부 > GA센터 > 1팀">　　　* 1팀</option>
+            <option value="BPO사업본부 > DS지원사업부 > GA센터 > 2팀">　　　* 2팀</option>
+            <option value="BPO사업본부 > DS지원사업부 > GA센터 > 3팀">　　　* 3팀</option>
+            <option value="BPO사업본부 > DS지원사업부 > BW센터">　　. BW센터</option>
+            <option value="BPO사업본부 > DS지원사업부 > BW센터 > 1팀">　　　* 1팀</option>
+            <option value="BPO사업본부 > DS지원사업부 > BW센터 > 2팀">　　　* 2팀</option>
+            <option value="BPO사업본부 > DS지원사업부 > POC센터">　　. POC센터</option>
+            <option value="BPO사업본부 > DS지원사업부 > POC센터 > 평택지원팀">　　　* 평택지원팀</option>
+            <option value="BPO사업본부 > DS지원사업부 > POC센터 > 온양천안지원팀">　　　* 온양천안지원팀</option>
+            <option value="BPO사업본부 > DS지원사업부 > POC센터 > 세메스지원팀">　　　* 세메스지원팀</option>
+            <option value="BPO사업본부 > ESOP사업부">　- ESOP사업부</option>
+            <option value="BPO사업본부 > ESOP사업부 > ESOP워크센터">　　. ESOP워크센터</option>
+            <option value="BPO사업본부 > ESOP사업부 > ESOP워크센터 > 1팀">　　　* 1팀</option>
+            <option value="BPO사업본부 > ESOP사업부 > ESOP워크센터 > 2팀">　　　* 2팀</option>
+            <option value="BPO사업본부 > ESOP사업부 > ESOP에듀센터">　　. ESOP에듀센터</option>
+            <option value="BPO사업본부 > ESOP사업부 > ESOP에듀센터 > 1팀">　　　* 1팀</option>
+            <option value="BPO사업본부 > ESOP사업부 > ESOP에듀센터 > 2팀">　　　* 2팀</option>
+          </select>
         </div>
-        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;border-bottom:1px solid var(--line);padding:10px 14px;gap:12px">
-          <div><div style="font-size:12px;font-weight:900;color:var(--ink)">검색 히스토리</div><code style="font-size:10px;color:var(--muted)">POST · history</code></div>
-          <input id="cfgHistoryUrl" placeholder="https://your-webhook-url/history" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
+        <div class="field">
+          <label>직위</label>
+          <div class="profile-static" data-field="position" id="profilePositionStatic">—</div>
+          <select class="profile-input" data-field="position" id="acctPosition">
+            <option value="">선택 안 함</option>
+            <option value="본부장">본부장</option>
+            <option value="사업부장">사업부장</option>
+            <option value="센터장">센터장</option>
+            <option value="그룹장">그룹장</option>
+            <option value="팀장">팀장</option>
+            <option value="프로">프로</option>
+            <option value="인턴">인턴</option>
+          </select>
         </div>
-        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;border-bottom:1px solid var(--line);padding:10px 14px;gap:12px">
-          <div><div style="font-size:12px;font-weight:900;color:var(--ink)">인사이트 도출 <span class="badge orange" style="font-size:9px;padding:2px 6px;margin-left:4px">추정값</span></div><code style="font-size:10px;color:var(--muted)">POST · research/summarize-selected</code></div>
-          <input id="cfgInsightUrl" placeholder="https://your-n8n-domain/webhook/research/summarize-selected" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
-        </div>
-        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;border-bottom:1px solid var(--line);padding:10px 14px;gap:12px">
-          <div><div style="font-size:12px;font-weight:900;color:var(--ink)">뉴스레터 초안 조회</div><code style="font-size:10px;color:var(--muted)">GET · newsletter/draft</code></div>
-          <input id="cfgNewsletterDraftUrl" placeholder="https://your-n8n-domain/webhook/newsletter/draft" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
-        </div>
-        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;border-bottom:1px solid var(--line);padding:10px 14px;gap:12px">
-          <div><div style="font-size:12px;font-weight:900;color:var(--ink)">뉴스레터 발송 승인</div><code style="font-size:10px;color:var(--muted)">POST · newsletter/queue</code></div>
-          <input id="cfgNewsletterQueueUrl" placeholder="https://your-n8n-domain/webhook/newsletter/queue" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
-        </div>
-        <div style="display:grid;grid-template-columns:170px minmax(0,1fr);align-items:center;padding:10px 14px;gap:12px">
-          <div><div style="font-size:12px;font-weight:900;color:var(--ink)">뉴스레터 구독 관리</div><code style="font-size:10px;color:var(--muted)">POST · newsletter/subscribe</code></div>
-          <input id="cfgNewsletterSubUrl" placeholder="https://your-n8n-domain/webhook/newsletter/subscribe" style="font-size:12px;padding:7px 10px;border:1px solid var(--line);border-radius:8px" />
+        <div class="field">
+          <label>이메일 계정</label>
+          <div class="profile-static muted" id="profileEmailStatic">—</div>
         </div>
       </div>
-      <div style="background:var(--orangeSoft);border-radius:12px;padding:12px 14px;margin-top:10px">
-        <p style="font-size:12px;color:#9a3412;margin:0;font-weight:800">⚠ '뉴스 기사 검색'과 '인사이트 도출' 주소는 자동으로 채운 추정값입니다</p>
-        <p style="font-size:11px;color:#9a3412;margin:6px 0 0;line-height:1.6">n8n 워크플로우 JSON 파일에는 실제 서버 주소(도메인)가 포함되지 않아 완전 자동 연동은 불가능해요. n8n에서 각 <b>Webhook</b> 노드를 열어 <b>Production URL</b>을 복사해 정확한 주소로 교체해주세요. 또한 내보내신 두 워크플로우 모두 <b>비활성(Inactive)</b> 상태였으니, n8n 화면 우측 상단의 활성화 스위치를 꼭 켜주세요.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 6px">로그인 및 보안</h3>
+      <p class="pw-hint">비밀번호는 8자 이상이며, 숫자와 특수문자를 모두 포함해야 합니다. 최근 사용한(현재) 비밀번호와 동일하게는 설정할 수 없습니다.</p>
+      <div class="form">
+        <div class="field"><label>현재 비밀번호</label><input type="password" id="pwCurrent" autocomplete="current-password" /></div>
+        <div class="field"><label>새 비밀번호</label><input type="password" id="pwNew" autocomplete="new-password" /></div>
+        <div class="field"><label>새 비밀번호 확인</label><input type="password" id="pwConfirm" autocomplete="new-password" /></div>
       </div>
-      <p style="font-size:11px;color:var(--muted);margin:10px 0 0">모든 요청은 <code style="background:#f1f5f9;padding:1px 5px;border-radius:4px">POST</code> 방식으로 JSON 본문을 전송합니다.</p>
+      <div id="pwStatus" class="auth-status" style="margin-top:12px"></div>
+      <button class="btn dark" id="pwChangeBtn" type="button" style="margin-top:14px">비밀번호 변경</button>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:18px">
+    <h3 style="margin:0 0 14px">지원 및 문의</h3>
+    <div class="grid cols-4">
+      <div class="support-card support-trigger" data-support="account">
+        <div class="list-icon">💬</div>
+        <h4>계정 관련 문의</h4>
+        <p>로그인, 권한, 소속 정보 등 계정과 관련된 내용을 문의합니다.</p>
+        <span class="list-link">문의하기 →</span>
+      </div>
+      <div class="support-card support-trigger" data-support="bug">
+        <div class="list-icon">🐞</div>
+        <h4>오류 신고</h4>
+        <p>서비스 이용 중 발견한 오류나 이상 동작을 신고합니다.</p>
+        <span class="list-link">신고하기 →</span>
+      </div>
+      <div class="support-card info-trigger" data-info="guide">
+        <div class="list-icon">📘</div>
+        <h4>이용 가이드</h4>
+        <p>Research On의 주요 기능과 사용 방법을 확인합니다.</p>
+        <span class="list-link">자세히 보기 →</span>
+      </div>
+      <div class="support-card info-trigger" data-info="privacy">
+        <div class="list-icon">🔒</div>
+        <h4>개인정보 처리방침</h4>
+        <p>개인정보 수집·이용·보관에 대한 안내입니다.</p>
+        <span class="list-link">자세히 보기 →</span>
+      </div>
     </div>
   </div>
 </section>
@@ -547,13 +840,46 @@
     </div>
   </div>
 </section>
-<!-- 관리자 전용: 계정 승인 관리 -->
-<section class="page" id="admin-approve">
-  <div class="page-title"><div><h2>계정 승인 관리</h2><p>관리자 권한 신청 목록을 검토하고 승인 또는 거절합니다.</p></div><button class="btn line" onclick="loadAdminRequests()">새로고침</button></div>
-  <div class="card table-card">
+<!-- 관리자 전용: 뉴스레터 구독 관리 -->
+<section class="page" id="newsletter-subscribers">
+  <div class="page-title"><div><h2>뉴스레터 구독 관리</h2><p>현재 구독 중인 인원을 확인하고 발송·구독 상태를 관리합니다.</p></div><button class="btn line" onclick="loadNewsletterSubscribers()">새로고침</button></div>
+  <div class="card" style="margin-bottom:16px">
+    <input id="nlSubMgmtSearch" placeholder="이름·이메일 검색" />
+  </div>
+  <div class="result-cards" id="nlSubMgmtCards"><div class="card" style="text-align:center;color:var(--muted);padding:30px">데이터를 불러오는 중...</div></div>
+  <div class="card table-card" id="nlSubMgmtTableWrap">
     <table>
+      <thead><tr><th>NO</th><th>이름</th><th>이메일</th><th>구독일</th><th>상태</th><th>액션</th></tr></thead>
+      <tbody id="nlSubMgmtTbody"><tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">데이터를 불러오는 중...</td></tr></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 관리자 전용: 계정 관리 -->
+<section class="page" id="admin-approve">
+  <div class="page-title"><div><h2>계정 관리</h2><p>가입된 계정을 조회하고 권한을 관리합니다.</p></div><button class="btn dark" id="createAccountBtn" type="button">+ 새 계정 발급</button></div>
+
+  <div class="card table-card" id="pendingAdminRequestsCard" style="margin-bottom:16px;display:none">
+    <div style="padding:16px 18px 0"><h3 style="margin:0 0 2px">대기 중인 관리자 권한 신청</h3><p style="margin:0;color:var(--muted);font-size:13px">사용자가 직접 신청한 관리자 권한 요청입니다. 승인하면 즉시 역할이 변경됩니다.</p></div>
+    <table style="margin-top:12px">
       <thead><tr><th>신청일시</th><th>이름</th><th>소속</th><th>ID</th><th>이메일</th><th>처리</th></tr></thead>
-      <tbody id="admin-requests-tbody"><tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">데이터를 불러오는 중...</td></tr></tbody>
+      <tbody id="admin-requests-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <input id="acctMgmtSearch" placeholder="아이디·이름·이메일 검색" />
+  </div>
+  <div class="tabbar" style="margin-bottom:16px">
+    <button class="tab active" data-acct-filter="all" type="button">전체</button>
+    <button class="tab" data-acct-filter="user" type="button">사용자</button>
+    <button class="tab" data-acct-filter="admin" type="button">관리자</button>
+  </div>
+  <div class="result-cards" id="acctMgmtCards"><div class="card" style="text-align:center;color:var(--muted);padding:30px">데이터를 불러오는 중...</div></div>
+  <div class="card table-card" id="acctMgmtTableWrap">
+    <table>
+      <thead><tr><th>NO</th><th>아이디</th><th>이름</th><th>역할</th><th>이메일</th><th>액션</th></tr></thead>
+      <tbody id="acctMgmtTbody"><tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">데이터를 불러오는 중...</td></tr></tbody>
     </table>
   </div>
 </section>
@@ -561,6 +887,143 @@
 </main>
 </div>
 <div class="toast" id="toast"></div>
+
+<!-- 지원 및 문의: 계정 관련 문의 / 오류 신고 모달 -->
+<div class="ro-modal-overlay" id="supportModalOverlay">
+  <div class="ro-modal ro-modal-sm">
+    <div class="ro-modal-head">
+      <h3 id="supportModalTitle">계정 관련 문의</h3>
+      <button class="ro-modal-close" id="supportModalClose" type="button">✕</button>
+    </div>
+    <div class="ro-modal-body">
+      <div class="form">
+        <div class="field"><label>제목</label><input id="supportTitleInput" placeholder="제목을 입력하세요" /></div>
+        <div class="field"><label>내용</label><textarea id="supportContentInput" placeholder="내용을 자세히 입력해주세요"></textarea></div>
+      </div>
+      <div id="supportModalStatus" class="auth-status" style="margin-top:12px"></div>
+    </div>
+    <div class="ro-modal-foot">
+      <button class="btn dark" id="supportSubmitBtn" type="button">제출</button>
+    </div>
+  </div>
+</div>
+
+<!-- 지원 및 문의: 이용 가이드 / 개인정보 처리방침 모달 -->
+<div class="ro-modal-overlay" id="infoModalOverlay">
+  <div class="ro-modal ro-modal-lg">
+    <div class="ro-modal-head">
+      <h3 id="infoModalTitle">이용 가이드</h3>
+      <button class="ro-modal-close" id="infoModalClose" type="button">✕</button>
+    </div>
+    <div class="ro-modal-body">
+      <div id="infoGuideBody">
+        <h4>Research On, 이렇게 사용하세요</h4>
+        <p>Research On은 BPO사업본부 구성원을 위한 AI 기반 리서치·뉴스레터 허브입니다. 아래 순서를 참고해 주세요.</p>
+        <h4>1. 새 리서치 만들기</h4>
+        <ul>
+          <li>키워드 Pool(핵심·전방·후방)에서 관심 키워드를 선택하고 조합해 검색 조건을 구성합니다.</li>
+          <li>고급 옵션에서 제외할 사이트·키워드, 검색 기간 등을 세부 설정할 수 있습니다.</li>
+        </ul>
+        <h4>2. 리서치 결과 확인</h4>
+        <ul>
+          <li>검색이 끝나면 관련도 순으로 자료가 정렬되어 표시됩니다.</li>
+          <li>필요한 자료를 선택해 저장하거나, 인사이트 리포트 작성에 활용할 수 있습니다.</li>
+        </ul>
+        <h4>3. AI 인사이트 리포트</h4>
+        <ul>
+          <li>리서치 결과에서 자료를 선택한 뒤 "인사이트 도출"을 실행하면 Executive Brief, 사실 요약, 분석, 추천 액션이 담긴 리포트가 생성됩니다.</li>
+          <li>생성된 리포트는 목록에 자동으로 누적되어 이후에도 다시 확인할 수 있습니다.</li>
+        </ul>
+        <h4>4. 저장 자료함 · 검색 히스토리</h4>
+        <ul>
+          <li>저장 자료함에서는 즐겨찾기한 자료를 모아볼 수 있습니다.</li>
+          <li>검색 히스토리에서는 그동안 검색했던 키워드와 결과를 다시 확인할 수 있습니다.</li>
+        </ul>
+        <h4>5. 뉴스레터 허브</h4>
+        <ul>
+          <li>구독 신청 메뉴에서 주간 뉴스레터 수신 여부와 수신 이메일을 관리할 수 있습니다.</li>
+          <li>발송된 뉴스레터는 히스토리에서 다시 열람할 수 있습니다.</li>
+        </ul>
+        <p style="color:var(--muted);font-size:12.5px;margin-top:18px">※ 이용 가이드는 추후 일반 사용자단 가이드와 관리자단(승인·발송 관리) 가이드로 구분되어 제공될 예정입니다.</p>
+      </div>
+      <div id="infoPrivacyBody" style="display:none">
+        <h4>개인정보 처리방침</h4>
+        <p>이트너스 BPO사업본부(이하 "회사")는 "Research On" 서비스(이하 "서비스") 이용자의 개인정보를 중요하게 생각하며, 관련 법령을 준수하기 위해 다음과 같이 개인정보 처리방침을 수립·공개합니다.</p>
+        <h4>1. 수집하는 개인정보 항목</h4>
+        <ul>
+          <li>필수 항목: 이름, 사내 이메일 주소(@etners.com), 로그인 ID, 비밀번호(암호화 저장), 소속(부서), 직위</li>
+          <li>서비스 이용 과정에서 생성되는 정보: 검색 키워드 및 검색 조건, 열람·저장한 리서치 자료, AI 인사이트 리포트 생성 이력, 뉴스레터 구독 여부, 접속 및 이용 기록</li>
+          <li>문의·신고 시: 문의 제목 및 내용, 문의 접수 시각</li>
+        </ul>
+        <h4>2. 개인정보의 수집 및 이용 목적</h4>
+        <ul>
+          <li>회원 식별 및 로그인, 계정 관리(권한 구분 포함)</li>
+          <li>리서치 검색·AI 인사이트 리포트 생성 등 서비스 제공 및 이용 이력 관리</li>
+          <li>사내 주간 뉴스레터 발송 대상자 관리</li>
+          <li>계정 관련 문의 및 오류 신고 접수·처리</li>
+          <li>서비스 품질 개선 및 오류 분석</li>
+        </ul>
+        <h4>3. 개인정보의 보유 및 이용 기간</h4>
+        <ul>
+          <li>회원 탈퇴 또는 계정 삭제 시까지 보유하며, 탈퇴 후에는 지체 없이 파기합니다.</li>
+          <li>단, 관계 법령에서 별도의 보존 기간을 정한 경우 해당 기간 동안 보관합니다.</li>
+          <li>검색 히스토리·인사이트 리포트 등 서비스 이용 기록은 계정 보유 기간과 동일하게 관리되며, 계정 삭제 시 함께 삭제됩니다.</li>
+        </ul>
+        <h4>4. 개인정보 처리 위탁 및 보관 인프라</h4>
+        <p>회사는 서비스 운영을 위해 백엔드 데이터베이스·인증 인프라로 <b>Supabase</b>를 이용하고 있으며, 이용자의 계정 정보 및 서비스 이용 데이터는 Supabase 인프라를 통해 저장·관리됩니다. 회사는 위탁받은 업체가 개인정보를 안전하게 관리하도록 관리·감독합니다.</p>
+        <h4>5. 이용자의 권리</h4>
+        <ul>
+          <li>이용자는 언제든지 본인의 개인정보를 조회하거나 수정할 수 있으며, 계정 설정 페이지에서 직접 처리하거나 계정 관련 문의를 통해 요청할 수 있습니다.</li>
+          <li>회원 탈퇴(개인정보 삭제)를 원하실 경우 계정 관련 문의를 통해 요청해 주세요.</li>
+        </ul>
+        <h4>6. 개인정보의 안전성 확보조치</h4>
+        <ul>
+          <li>비밀번호는 암호화하여 저장하며, 사내 도메인(@etners.com) 이메일 인증을 통해 가입을 제한합니다.</li>
+          <li>서비스 접근 권한은 일반 사용자·관리자로 구분해 관리합니다.</li>
+        </ul>
+        <h4>7. 문의처</h4>
+        <p>개인정보 처리와 관련한 문의사항은 계정 설정 &gt; 지원 및 문의 &gt; "계정 관련 문의"를 통해 접수해 주시기 바랍니다.</p>
+        <p style="color:var(--muted);font-size:12.5px;margin-top:18px">※ 본 방침은 서비스 운영 방식 변경에 따라 사전 고지 없이 개정될 수 있으며, 정식 게시 전 사내 개인정보보호 담당자의 검토가 필요합니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 관리자: 새 계정 발급 모달 -->
+<div class="ro-modal-overlay" id="createAccountModalOverlay">
+  <div class="ro-modal ro-modal-sm">
+    <div class="ro-modal-head">
+      <h3>새 계정 발급</h3>
+      <button class="ro-modal-close" id="createAccountModalClose" type="button">✕</button>
+    </div>
+    <div class="ro-modal-body">
+      <div class="form">
+        <div class="field"><label>아이디</label><input id="newAcctId" placeholder="영문/숫자 4자 이상" /></div>
+        <div class="field"><label>이름</label><input id="newAcctName" /></div>
+        <div class="field">
+          <label>이메일</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="newAcctEmailLocal" placeholder="아이디" style="flex:1" />
+            <span style="color:var(--muted);font-weight:900">@</span>
+            <input id="newAcctEmailDomain" value="etners.com" style="width:130px" disabled />
+          </div>
+        </div>
+        <div class="field">
+          <label>역할</label>
+          <select id="newAcctRole"><option value="user">사용자</option><option value="admin">관리자</option></select>
+        </div>
+        <div class="field">
+          <label>초기 비밀번호</label>
+          <input type="text" id="newAcctPw" value="dlxmsjtm1!" />
+        </div>
+      </div>
+      <div id="createAccountStatus" class="auth-status" style="margin-top:12px"></div>
+    </div>
+    <div class="ro-modal-foot">
+      <button class="btn dark" id="createAccountSubmitBtn" type="button">발급</button>
+    </div>
+  </div>
+</div>
 <script>
 // ══════════════════════════════════════════
 // Supabase 초기화
@@ -569,6 +1032,14 @@ const { createClient } = supabase;
 const _sb = createClient(
   'https://aiftpranlfudkbobxyll.supabase.co',
   'sb_publishable_qnUFAiMRiJNzARP_FE12Bg_3zFEdc94'
+);
+// 관리자가 "새 계정 발급"으로 회원가입을 대신 처리할 때, 그 signUp 호출이 현재 로그인된
+// 관리자의 세션을 새로 만든 계정 세션으로 덮어써버리는 것을 막기 위한 별도(격리된) 클라이언트.
+// 세션을 저장하지 않으므로(persistSession:false) 발급 즉시 버려집니다.
+const _sbAdmin = createClient(
+  'https://aiftpranlfudkbobxyll.supabase.co',
+  'sb_publishable_qnUFAiMRiJNzARP_FE12Bg_3zFEdc94',
+  { auth: { storageKey: 'ro-admin-provisioning', persistSession: false, autoRefreshToken: false } }
 );
 // 현재 로그인 유저 ID — 캐싱하지 않고 항상 실시간 세션에서 조회 (계정 전환 버그 방지)
 async function getUid(){
@@ -579,19 +1050,22 @@ async function getUid(){
 // ══════════════════════════════════════════
 // ★ n8n Webhook URL 설정 — 계정 설정 페이지에서도 변경 가능 ★
 // ══════════════════════════════════════════
-let N8N_NEWS_URL = localStorage.getItem('ro_news_url') || 'https://여기에-n8n-주소를-붙여넣으세요/webhook/news-summary';
-let N8N_NEWS_SEARCH_URL = localStorage.getItem('ro_news_search_url') || 'https://n8n.mokai.kr/webhook/research/manual';
-let N8N_HISTORY_URL = localStorage.getItem('ro_history_url') || 'https://여기에-n8n-주소를-붙여넣으세요/webhook/research-on/history';
-let N8N_INSIGHT_URL = localStorage.getItem('ro_insight_url') || 'https://n8n.mokai.kr/webhook/research/summarize-selected';
-let N8N_NEWSLETTER_DRAFT_URL = localStorage.getItem('ro_newsletter_draft_url') || 'https://n8n.mokai.kr/webhook/newsletter/draft';
-let N8N_NEWSLETTER_QUEUE_URL = localStorage.getItem('ro_newsletter_queue_url') || 'https://n8n.mokai.kr/webhook/newsletter/queue';
-let N8N_NEWSLETTER_SUB_URL = localStorage.getItem('ro_newsletter_sub_url') || 'https://n8n.mokai.kr/webhook/newsletter/subscribe';
+// n8n Webhook 주소는 계정 설정 화면에서 노출/수정되지 않도록 코드 내부에 고정합니다.
+const N8N_NEWS_SEARCH_URL = 'https://n8n.mokai.kr/webhook/webhook/research/manual';
+const N8N_INSIGHT_URL = 'https://n8n.mokai.kr/webhook/webhook/research/summarize-selected';
+const N8N_NEWSLETTER_DRAFT_URL = 'https://n8n.mokai.kr/webhook/newsletter/draft';
+const N8N_NEWSLETTER_QUEUE_URL = 'https://n8n.mokai.kr/webhook/newsletter/queue';
 
 const DATA = {"core": [{"d1": "글로벌 인력지원", "d2": "비자·체류 지원", "d3": "체류·비자 제도지원", "keyword": "K-Tech Pass", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "비자·체류 지원", "d3": "체류·비자 제도지원", "keyword": "영주권", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "비자·체류 지원", "d3": "체류·비자 제도지원", "keyword": "출입국 디지털화", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "정착·생활 지원", "d3": "생활·가족 정착지원", "keyword": "온보딩", "job": "GHD, 채용"}, {"d1": "글로벌 인력지원", "d2": "정착·생활 지원", "d3": "생활·가족 정착지원", "keyword": "다문화가정", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "정착·생활 지원", "d3": "생활·가족 정착지원", "keyword": "주택 임대", "job": "GHD, 사택관리"}, {"d1": "글로벌 인력지원", "d2": "커뮤니티·리텐션", "d3": "생활·가족 정착지원", "keyword": "리텐션", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "행정·문서 지원", "d3": "공증·행정대행 지원", "keyword": "아포스티유", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "행정·문서 지원", "d3": "공증·행정대행 지원", "keyword": "공증", "job": "GHD"}, {"d1": "글로벌 인력지원", "d2": "행정·문서 지원", "d3": "공증·행정대행 지원", "keyword": "행정대행", "job": "GHD"}, {"d1": "기술·AI·데이터", "d2": "AI 운영·거버넌스", "d3": "AI 통제·검증체계", "keyword": "AI 거버넌스", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 운영·거버넌스", "d3": "AI 통제·검증체계", "keyword": "휴먼인더루프", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "내부망·온프레미스 운영", "keyword": "온프레미스", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "AI 시스템 아키첵처", "keyword": "시스템", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "AI 시스템 아키첵처", "keyword": "아키텍처", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 인프라·운영환경", "d3": "AI 플랫폼 운영", "keyword": "플랫폼", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 에이전트 활용기술", "keyword": "AI 에이전트", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 에이전트 활용기술", "keyword": "에이전틱 AI", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 워크플로우·오케스트레이션", "keyword": "AI 오케스트레이션", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "AI 자동화·에이전트", "d3": "AI 워크플로우·오케스트레이션", "keyword": "하네스 엔지니어링", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "지식관리·검색기술", "d3": "검색증강 생성기술", "keyword": "RAG", "job": "공통"}, {"d1": "기술·AI·데이터", "d2": "지식관리·검색기술", "d3": "지식모델링·검색기반 기술", "keyword": "온톨로지", "job": "공통"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "사업장 보안관리", "keyword": "물리보안", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "사업장 보안관리", "keyword": "출입보안", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "출입·신분증 관리", "keyword": "사원증", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "물리·출입보안", "d3": "출입·신분증 관리", "keyword": "출입증", "job": "정보보호"}, {"d1": "보안·리스크·컴플라이언스", "d2": "정보보호 관리", "d3": "개인정보 보호관리", "keyword": "개인정보보호", "job": "공통"}, {"d1": "보안·리스크·컴플라이언스", "d2": "정보보호 관리", "d3": "보안정책·거버넌스", "keyword": "기업보안", "job": "공통"}, {"d1": "보안·리스크·컴플라이언스", "d2": "정보보호 관리", "d3": "보안정책·거버넌스", "keyword": "보안 거버넌스", "job": "공통"}, {"d1": "산업·시장 인텔리전스", "d2": "반도체 기술·제품동향", "d3": "메모리·AI반도체 동향", "keyword": "HBM", "job": "공통"}, {"d1": "산업·시장 인텔리전스", "d2": "반도체 산업동향", "d3": "글로벌 시장동향", "keyword": "수출 규제", "job": "공통"}, {"d1": "산업·시장 인텔리전스", "d2": "첨단기술 트렌드", "d3": "AI·로보틱스 기술동향", "keyword": "Physical AI", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "EHS 관리체계", "d3": "EHS 운영관리", "keyword": "EHS", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "EHS 관리체계", "d3": "EHS 운영관리", "keyword": "환경안전", "job": "교육운영"}, {"d1": "안전보건환경(EHS)", "d2": "교육·인식제고", "d3": "법정·안전교육 운영", "keyword": "안전교육", "job": "교육운영"}, {"d1": "안전보건환경(EHS)", "d2": "비상대응·예방관리", "d3": "화재·비상대응 관리", "keyword": "비상대응", "job": "교육운영"}, {"d1": "안전보건환경(EHS)", "d2": "비상대응·예방관리", "d3": "화재·비상대응 관리", "keyword": "화재예방", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 법규대응", "d3": "법정 의무·규제 대응", "keyword": "산업안전보건법", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 법규대응", "d3": "법정 의무·규제 대응", "keyword": "중대재해처벌법", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 운영", "d3": "안전·보건 관리", "keyword": "보건관리", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "안전보건 운영", "d3": "안전·보건 관리", "keyword": "안전관리", "job": "공통"}, {"d1": "안전보건환경(EHS)", "d2": "위험관리·예방활동", "d3": "위험성 평가관리", "keyword": "위험성평가", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "강사·콘텐츠 운영", "keyword": "강사", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "디지털·AI 역량교육", "keyword": "AI 교육", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "온라인 학습플랫폼 운영", "keyword": "교육플랫폼", "job": "공통"}, {"d1": "인사·조직", "d2": "교육·역량개발", "d3": "온라인 학습플랫폼 운영", "keyword": "온라인 교육", "job": "공통"}, {"d1": "인사·조직", "d2": "근무제도·복무", "d3": "근무제도 운영", "keyword": "유연 근무제", "job": "공통"}, {"d1": "인사·조직", "d2": "근무제도·복무", "d3": "휴직·휴가 제도운영", "keyword": "육아휴직", "job": "공통"}, {"d1": "인사·조직", "d2": "근무제도·복무", "d3": "휴직·휴가 제도운영", "keyword": "출산휴가", "job": "공통"}, {"d1": "인사·조직", "d2": "글로벌 HR 운영", "d3": "해외근무자 지원", "keyword": "주재원", "job": "GHD, 복리후생"}, {"d1": "인사·조직", "d2": "노무·근로관계", "d3": "노동관계 법·제도 대응", "keyword": "노란봉투법", "job": "공통"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "급여·세무·사회보험 지원", "keyword": "4대 보험", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "급여·세무·사회보험 지원", "keyword": "연말정산", "job": "GHD"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "개인연금", "job": "공통"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "선택적 복지", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "의료비", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "휴양소", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "난임", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "복지몰", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "복지제도 운영", "keyword": "복지 포인트", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "총보상 전략", "keyword": "직원 경험", "job": "복리후생"}, {"d1": "인사·조직", "d2": "보상·복리후생", "d3": "총보상 전략", "keyword": "총보상", "job": "복리후생"}, {"d1": "인사·조직", "d2": "인력 운영", "d3": "비정규직 인력운영", "keyword": "계약직", "job": "공통"}, {"d1": "인사·조직", "d2": "조직문화·변화관리", "d3": "조직문화 운영", "keyword": "조직문화", "job": "공통"}, {"d1": "인사·조직", "d2": "채용·온보딩", "d3": "면접·선발 운영", "keyword": "면접장", "job": "채용"}, {"d1": "인사·조직", "d2": "채용·온보딩", "d3": "입사 전 절차관리", "keyword": "채용 검진", "job": "채용"}, {"d1": "인사·조직", "d2": "채용·온보딩", "d3": "입사자 온보딩 지원", "keyword": "웰컴키트", "job": "채용"}, {"d1": "총무·오피스 운영", "d2": "부동산·임대관리", "d3": "임대·거점 관리", "keyword": "임대관리", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "시설·공간 운영", "d3": "시설 운영관리", "keyword": "시설관리", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "시설·공간 운영", "d3": "시설 운영관리", "keyword": "시설운영", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "공유오피스", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "사무환경", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "스마트오피스", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "오피스 전략·근무환경", "d3": "업무공간·근무환경 개선", "keyword": "하이브리드워크", "job": "영업(ESOP)"}, {"d1": "총무·오피스 운영", "d2": "자산·비품관리", "d3": "비품·소모품 관리", "keyword": "비품관리", "job": "영업(ESOP), 총무일반"}, {"d1": "총무·오피스 운영", "d2": "오피스 물류 운영", "d3": "사내 문서·물품 배송", "keyword": "사내이사", "job": "사내물류"}, {"d1": "총무·오피스 운영", "d2": "오피스 물류 운영", "d3": "사내 문서·물품 배송", "keyword": "무인택배함", "job": "사내물류"}, {"d1": "총무·오피스 운영", "d2": "오피스 물류 운영", "d3": "사내 문서·물품 배송", "keyword": "키오스크", "job": "사내물류"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "세미나", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "컨퍼런스", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "박람회", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "행사", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "행사", "keyword": "프로그램", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "재무제표", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "매출", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "실적", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "재무·실적", "keyword": "분기실적", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "사업 확장", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "투자", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "신사업", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "해외진출", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "사업·전략", "keyword": "리스크", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "시장·산업 동향", "keyword": "시장 점유율", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "시장·산업 동향", "keyword": "경쟁사", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "정책·제도", "keyword": "정책", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "정책·제도", "keyword": "제도", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "도급", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "운영 방식", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "운영 매뉴얼", "job": "공통"}, {"d1": "기타", "d2": "공통 리서치 주제", "d3": "운영·계약 모델", "keyword": "대행", "job": "공통"}], "ext": {"target": ["삼성전자", "SK하이닉스", "주요 대기업", "대기업", "중견기업", "스타트업", "공공기관", "지자체", "외국계 기업", "글로벌 기업", "대학교", "협력사", "외국인", "외국인 근로자", "외국인 임직원", "산학장학생", "인턴", "저연차 사원", "보직자", "임원"], "scope": ["국내", "해외", "글로벌", "사내", "사외", "서울", "수도권", "경기", "수원", "용인", "평택", "화성", "천안", "온양", "판교", "미국", "중국", "일본", "대만", "베트남"], "industry": ["반도체", "제조업", "IT", "바이오", "교육 서비스", "BPO", "아웃소싱"], "time": ["2024", "2025", "2026", "최신", "최근 3개월", "지난 3년", "과거 5년"], "intent": ["동향", "트렌드", "사례", "시장 조사", "산업 분석", "분석", "비교", "비용", "후기", "효과", "만족도", "개선", "이슈 모니터링", "운영", "지원"], "content": ["인사이트", "보도자료", "PDF", "보고서", "뉴스", "정부 자료", "논문", "블로그", "공고", "입찰공고"]}};
 
 const $ = (sel, root=document) => root.querySelector(sel);
 const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 const selected = {core:[], front:[], back:[]};
+let currentUserRole = 'user';
+let currentUserEmail = '';
+let currentUserId = '';
+let currentUserProfile = { name:'', affiliation:'', position:'', email:'' };
+let profileEditing = false;
 // 최종 조합에 실제로 표시·정렬되는 순서. { group, value } 형태이며
 // 드래그로 자유롭게 순서를 바꿀 수 있다 (front/core/back 구분과 무관하게 섞일 수 있음).
 let comboOrder = [];
@@ -603,6 +1077,18 @@ const frontKeys = [['target','대상 키워드'],['scope','범위 키워드'],['
 const backKeys = [['intent','의도 키워드'],['content','콘텐츠 유형 키워드']];
 
 function esc(s){ return String(s).replace(/[&<>'"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+// 네이버 등 일부 API가 제목/요약에 &quot; 같은 HTML 엔티티를 인코딩된 채로 내려보내는 경우가 있어
+// 화면에 그대로 노출되지 않도록 디코딩한다. (n8n 쪽에서도 정리하지만, 프론트에서도 한 번 더 방어)
+function decodeHtmlEntities(s){
+  return String(s || '')
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&');
+}
 function formatPublishedDate(v){
   if(!v) return '';
   const d = new Date(v);
@@ -625,22 +1111,24 @@ function showToast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add
 
 // ── 페이지 전환 ──
 function showPage(id){
+  if((id==='newsletter-manage'||id==='admin-approve'||id==='newsletter-subscribers') && currentUserRole!=='admin'){ showToast('관리자만 접근할 수 있는 페이지입니다.'); id='dashboard'; }
   const target = document.getElementById(id); if(!target) return;
   $$('.page').forEach(p=>p.classList.toggle('active', p.id===id));
   $$('.nav-item[data-page]').forEach(b=>b.classList.toggle('active', b.dataset.page===id));
   currentPage=id; $('#sidebar')?.classList.remove('open');
-  closeUserPopup();
   if(id==='dashboard') renderDashboard();
   if(id==='newssum') renderInsightHistoryPage();
   if(id==='newssum-detail') renderInsightDetail();
   if(id==='newsletter') renderNewsletterPage();
   if(id==='newsletter-subscribe') renderNewsletterSubscribePage();
+  if(id==='newsletter-manage') renderNewsletterAdminPage();
   if(id==='history'){ renderHistoryPage(); }
   if(id==='results') renderResultsPage();
   if(id==='results-detail') renderResultsDetail();
   if(id==='saved') renderSavedPage();
   if(id==='account') renderAccountPage();
-  if(id==='admin-approve') loadAdminRequests();
+  if(id==='admin-approve'){ loadAdminRequests(); loadAllAccounts(); }
+  if(id==='newsletter-subscribers') loadNewsletterSubscribers();
   window.scrollTo({top:0, behavior:'smooth'});
 }
 function switchMode(mode){
@@ -666,6 +1154,47 @@ function useSuggestedKeyword(kw){
   setStep(1);
   updateSelection(); renderCore(); renderExt(); updatePayload();
   showToast(`"${kw}"이(가) 핵심 키워드로 선택되었습니다. 전방 확장 키워드를 골라보세요.`);
+}
+// 대시보드 검색창에 키워드를 입력하면 바로 웹훅 검색을 실행하지 않고,
+// 키워드 Pool·전방·후방 확장 데이터에서 유사한 항목을 찾아 자동으로 조합한 뒤
+// "새 리서치 만들기"로 이동시켜, 사용자가 조합을 확인·보완할 수 있게 한다.
+function useSearchKeywordForBuilder(raw){
+  const kw = (raw||'').trim();
+  if(!kw) return;
+  const q = kw.toLowerCase();
+  let addedCore = 0, addedFront = 0, addedBack = 0;
+
+  // 1) 핵심 키워드 Pool에서 유사 키워드 탐색 (완전일치 우선, 없으면 부분일치 최대 5개)
+  const exact = DATA.core.filter(r => r.keyword.toLowerCase() === q);
+  const partial = DATA.core.filter(r => r.keyword.toLowerCase().includes(q) || q.includes(r.keyword.toLowerCase()));
+  const coreMatches = (exact.length ? exact : partial).slice(0, 5);
+  coreMatches.forEach(r=>{
+    if(!selected.core.includes(r.keyword)){ selected.core.push(r.keyword); addToCombo('core', r.keyword); addedCore++; }
+  });
+  // Pool에 일치하는 항목이 없으면, 입력어 자체를 핵심 키워드로 담아준다.
+  if(!coreMatches.length && !selected.core.includes(kw)){ selected.core.push(kw); addToCombo('core', kw); addedCore++; }
+
+  // 2) 전방/후방 확장 키워드 풀에서도 유사 항목 탐색
+  frontKeys.forEach(([key])=>{
+    DATA.ext[key].forEach(v=>{
+      if(v.toLowerCase().includes(q) && !selected.front.includes(v)){ selected.front.push(v); addToCombo('front', v); addedFront++; }
+    });
+  });
+  backKeys.forEach(([key])=>{
+    DATA.ext[key].forEach(v=>{
+      if(v.toLowerCase().includes(q) && !selected.back.includes(v)){ selected.back.push(v); addToCombo('back', v); addedBack++; }
+    });
+  });
+
+  showPage('new-research');
+  switchMode('detail');
+  setStep(addedCore ? 1 : 0);
+  updateSelection(); renderCore(); renderExt(); updatePayload();
+  const parts = [];
+  if(addedCore) parts.push(`핵심 키워드 ${addedCore}개`);
+  if(addedFront) parts.push(`전방 확장 ${addedFront}개`);
+  if(addedBack) parts.push(`후방 확장 ${addedBack}개`);
+  showToast(parts.length ? `"${kw}"와(과) 관련된 ${parts.join(', ')}를 자동으로 담았어요. 조합을 확인해보세요.` : `"${kw}"을(를) 핵심 키워드로 담았어요.`);
 }
 function toggleValue(group, value){
   const arr = selected[group]; const i = arr.indexOf(value);
@@ -1004,7 +1533,9 @@ function resetAppState(){
   resultDocs = []; currentResultKw = '';
   if(typeof insightHistory !== 'undefined') insightHistory = [];
   if(typeof currentReport !== 'undefined') currentReport = null;
-  currentUserEmail = ''; currentUserRole = 'user';
+  if(typeof newsletterDraft !== 'undefined'){
+    newsletterDraft = { issue_title:'Research-On 주간 뉴스레터', period:'', period_start:'', period_end:'', executive_brief:{headline:'',summary:''}, editor_note:'', sections:{client_watch:[],research_on_insight:[],business_work:[],people_culture:[],people_culture_view:''} };
+  }
   const rb = document.getElementById('resultsBody');
   if(rb) rb.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">로그인 후 검색하면 결과가 여기에 표시됩니다.</td></tr>';
 }
@@ -1044,6 +1575,20 @@ async function loadUserData(){
     const { data: ir } = await _sb.from('insight_reports').select('*').eq('profile_id', uid).order('created_at', {ascending:false}).limit(30);
     insightHistory = (ir||[]).map(r=>({ id:r.id, kw:r.keyword, articleCount:r.article_count, report:r.report_json, createdAt: r.created_at ? new Date(r.created_at) : new Date() }));
   } catch(e){ /* insight_reports 테이블이 아직 없어도 앱은 정상 동작 */ }
+
+  // 발송된 뉴스레터 (전사 공통 발행물 — profile_id 필터 없이 조회, Supabase 테이블 newsletter_send_history)
+  try {
+    const { data: nh } = await _sb.from('newsletter_send_history').select('*').order('sent_at', {ascending:false}).limit(50);
+    if(nh && nh.length){
+      NEWSLETTER_ISSUES = nh.map(r=>({
+        title: r.issue_label,
+        issueDate: r.sent_at ? new Date(r.sent_at).toLocaleDateString('ko-KR') : '',
+        summary: r.subject || '',
+        html: r.newsletter_html || '',
+        id: r.id
+      }));
+    }
+  } catch(e){ /* newsletter_send_history 테이블이 아직 없어도 앱은 정상 동작 (예시 데이터 유지) */ }
 
   renderAllPages();
   console.log('[SB] 사용자 데이터 로드 완료 (uid: '+uid+')');
@@ -1090,10 +1635,36 @@ function renderKeywordsPage(){
 
   $('#researchKeywordsBody').innerHTML = groups.length ? groups.map((g,gi)=>{
     const latest = g.items[0].h;
+    const itemsHtml = g.items.map(({h,idx})=>{
+      const front = h.front || [], back = h.back || [];
+      return `<div class="kw-item">
+        <div class="kw-item-row"><span class="kw-item-label">전방 키워드</span><span class="kw-item-val">${esc(front.join(', ') || '-')}</span></div>
+        <div class="kw-item-row"><span class="kw-item-label">후방 키워드</span><span class="kw-item-val">${esc(back.join(', ') || '-')}</span></div>
+        <div class="kw-item-row"><span class="kw-item-label">검색 날짜</span><span class="kw-item-val">${esc(h.date)}${h.time?' '+esc(h.time):''}</span></div>
+        <div class="kw-item-actions">
+          <button class="btn soft" type="button" onclick="event.stopPropagation();viewResearchKeywordAt(${idx})">결과 보기</button>
+          <button class="btn line" type="button" onclick="event.stopPropagation();researchKeywordResearchAt(${idx})">재검색</button>
+          <button class="btn red" type="button" onclick="event.stopPropagation();deleteResearchKeywordAt(${idx})">삭제</button>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="kw-group-card">
+      <button type="button" class="kw-group-header" onclick="toggleKwGroup(${gi})">
+        <span id="kwGroupArrow-${gi}" class="kw-group-arrow">▸</span>
+        <b class="kw-group-title">${esc(g.poolKey)}</b>
+        <span class="badge blue">${g.items.length}건</span>
+        <span class="kw-group-date">최근 검색 ${esc(latest.date)}${latest.time?' '+esc(latest.time):''}</span>
+      </button>
+      <div class="kw-group-body" data-group-item="${gi}" style="display:none">${itemsHtml}</div>
+    </div>`;
+  }).join('') : '<div class="card" style="color:var(--muted);text-align:center;padding:30px">아직 새 리서치 만들기에서 검색한 키워드가 없습니다.</div>';
+
+  $('#researchKeywordsBodyTable').innerHTML = groups.length ? groups.map((g,gi)=>{
+    const latest = g.items[0].h;
     const headerRow = `<tr class="kw-group-toggle" onclick="toggleKwGroup(${gi})" style="cursor:pointer;background:#f8fafc">
       <td colspan="5">
         <div style="display:flex;align-items:center;gap:10px">
-          <span id="kwGroupArrow-${gi}" style="display:inline-block;width:14px;color:var(--muted)">▸</span>
+          <span id="kwGroupArrowTable-${gi}" style="display:inline-block;width:14px;color:var(--muted)">▸</span>
           <b>${esc(g.poolKey)}</b>
           <span class="badge blue">${g.items.length}건</span>
           <span style="color:var(--muted);font-size:12px;white-space:nowrap;margin-left:auto">최근 검색 ${esc(latest.date)}${latest.time?' '+esc(latest.time):''}</span>
@@ -1118,11 +1689,20 @@ function renderKeywordsPage(){
   }).join('') : '<tr><td colspan="5" style="color:var(--muted)">아직 새 리서치 만들기에서 검색한 키워드가 없습니다.</td></tr>';
 }
 function toggleKwGroup(gi){
-  const items = $$(`tr[data-group-item="${gi}"]`);
-  const arrow = $(`#kwGroupArrow-${gi}`);
-  const opening = items.length && items[0].style.display === 'none';
-  items.forEach(tr=>{ tr.style.display = opening ? 'table-row' : 'none'; });
-  if(arrow) arrow.textContent = opening ? '▾' : '▸';
+  const cardBody = $(`.kw-group-body[data-group-item="${gi}"]`);
+  if(cardBody){
+    const arrow = $(`#kwGroupArrow-${gi}`);
+    const opening = cardBody.style.display === 'none';
+    cardBody.style.display = opening ? 'block' : 'none';
+    if(arrow) arrow.textContent = opening ? '▾' : '▸';
+  }
+  const rows = $$(`tr[data-group-item="${gi}"]`);
+  if(rows.length){
+    const arrowT = $(`#kwGroupArrowTable-${gi}`);
+    const openingT = rows[0].style.display === 'none';
+    rows.forEach(tr=>{ tr.style.display = openingT ? 'table-row' : 'none'; });
+    if(arrowT) arrowT.textContent = openingT ? '▾' : '▸';
+  }
 }
 function viewResearchKeyword(kw){
   const idx = resultHistory.findIndex(h=>h.kw===kw);
@@ -1152,7 +1732,6 @@ async function deleteKeywordSet(i){
 }
 let savedFilterMode = 'all'; // 'all' | 'article' | 'report'
 function renderSavedPage(){
-  $('#savedCountBadge').textContent = savedDocs.length + ' Saved';
   const isReport = d => d.type === 'AI 인사이트 리포트';
   const filtered = savedDocs
     .map((d,i)=>({d,i}))
@@ -1246,7 +1825,8 @@ async function saveResultSession(kw, parts){
 async function generateResultsFor(kw, parts){
   currentResultKw = kw;
   $('#resultsSubtitle').textContent = `"${kw}" 검색 중...`;
-  $('#resultsBody').innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px"><span class="streaming-dot"></span>"${esc(kw)}" 관련 자료를 가져오는 중입니다...</td></tr>`;
+  $('#resultsBody').innerHTML = `<div class="card" style="text-align:center;color:var(--muted);padding:30px"><span class="streaming-dot"></span>"${esc(kw)}" 관련 자료를 가져오는 중입니다...</div>`;
+  $('#resultsBodyTable').innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px"><span class="streaming-dot"></span>"${esc(kw)}" 관련 자료를 가져오는 중입니다...</td></tr>`;
 
   try {
     const resp = await fetch(N8N_NEWS_SEARCH_URL, {
@@ -1263,18 +1843,22 @@ async function generateResultsFor(kw, parts){
     resultDocs = list.map(item=>{
       const score = typeof item.score === 'number' ? item.score
         : (typeof item.ai_relevance_score === 'number' ? item.ai_relevance_score/100 : 0.6);
-      const summary = item.summary || item.content || item.snippet || '';
-      const bodyLines = [item.title || '', '', summary];
+      const title = decodeHtmlEntities(item.title || '');
+      const summary = decodeHtmlEntities(item.summary || item.content || item.snippet || '');
+      // 'naver_news'/'serper' 같은 검색 API 이름 대신, 실제 배포 주체(언론사명)를 우선 표시한다.
+      // 언론사명을 알 수 없으면 도메인이라도 보여주고, 그마저 없으면 미확인으로 표기한다.
+      const displaySource = item.publisher || item.domain || '';
+      const bodyLines = [title, '', summary];
       if(item.recommendation_label) bodyLines.push('', `AI 추천도: ${item.recommendation_label}`);
       if(item.recommendation_reason) bodyLines.push(`추천 사유: ${item.recommendation_reason}`);
       if(item.risk_note) bodyLines.push('', `⚠ 주의사항: ${item.risk_note}`);
-      const sourceLine = [item.source, item.published_date].filter(Boolean).join(' · ');
+      const sourceLine = [displaySource, item.published_date].filter(Boolean).join(' · ');
       bodyLines.push('', `출처: ${sourceLine || '출처 미확인'}`);
       if(item.url) bodyLines.push(item.url);
       return {
-        title: item.title || '(제목 없음)',
+        title: title || '(제목 없음)',
         desc: summary,
-        source: item.source || '출처 미확인',
+        source: displaySource || '출처 미확인',
         url: item.url || '',
         score,
         status: 'success',
@@ -1291,7 +1875,7 @@ async function generateResultsFor(kw, parts){
 let displayedDocs = [];
 function viewResultSession(kw){
   currentResultKw = kw;
-  const row = document.querySelector(`#resultsBody tr[data-row-kw="${CSS.escape(kw)}"]`);
+  const row = document.querySelector(`[data-row-kw="${CSS.escape(kw)}"]`);
   if(row){ row.scrollIntoView({behavior:'smooth', block:'center'}); row.classList.remove('row-flash'); void row.offsetWidth; row.classList.add('row-flash'); }
 }
 function renderResultsPage(){
@@ -1320,6 +1904,26 @@ function renderResults(){
 
   $('#resultsBody').innerHTML = resultHistory.length ? resultHistory.map((h,hi)=>{
     const { count, avgScore, hasSuccess } = computeKwStats(h);
+    return `<div class="result-card" data-row-kw="${esc(h.kw)}">
+      <div class="result-card-head">
+        <input type="checkbox" class="result-chk" data-hidx="${hi}" />
+        <div class="result-card-title">
+          <span>${esc(h.kw)}</span>
+          ${hasSuccess ? relevanceBadge(avgScore) : '<span class="badge red">낮음</span>'}
+        </div>
+      </div>
+      <div class="result-card-foot">
+        <span class="result-card-date">${esc(h.date)}</span>
+        <div class="result-card-actions">
+          <button class="btn soft" type="button" onclick="viewResultsDetail(${hi})">${count>0 ? count+'건 보기' : '결과 확인'}</button>
+          <button class="btn line" type="button" onclick="retryKwSearch(${hi})">재검색</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('') : '<div class="card" style="text-align:center;color:var(--muted);padding:30px">아직 검색한 결과가 없습니다.</div>';
+
+  $('#resultsBodyTable').innerHTML = resultHistory.length ? resultHistory.map((h,hi)=>{
+    const { count, avgScore, hasSuccess } = computeKwStats(h);
     return `<tr data-row-kw="${esc(h.kw)}">
       <td><input type="checkbox" class="result-chk" data-hidx="${hi}" /></td>
       <td><span class="badge blue">${esc(h.kw)}</span></td>
@@ -1340,6 +1944,8 @@ function viewResultsDetail(hidx){
 function renderResultsDetail(){
   const hidx = currentResultsDetailHidx;
   const h = hidx!==null ? resultHistory[hidx] : null;
+  userSuppliedLinks = [];
+  renderUserLinkList();
   if(!h){
     $('#resultsDetailTitle').textContent = '결과를 찾을 수 없습니다';
     $('#resultsDetailSub').textContent = '';
@@ -1369,13 +1975,56 @@ function renderResultsDetail(){
 function getSelectedDetailDocs(){
   return $$('.detail-chk:checked').map(c=>displayedDocs[+c.dataset.gi]).filter(Boolean);
 }
+
+// ── 사용자 선정 자료 (직접 찾은 뉴스 기사 링크) ──
+let userSuppliedLinks = []; // {url, title}
+function renderUserLinkList(){
+  const box = $('#userLinkList'); if(!box) return;
+  if(!userSuppliedLinks.length){ box.innerHTML = ''; return; }
+  box.innerHTML = userSuppliedLinks.map((u,i)=>`
+    <div class="list-item" style="cursor:default">
+      <div class="list-icon">🔗</div>
+      <div style="flex:1;min-width:0">
+        <h4 style="margin:0 0 2px;font-size:14px">${esc(u.title || u.url)}</h4>
+        <p style="margin:0;font-size:12px;color:var(--muted);word-break:break-all">${esc(u.url)}</p>
+      </div>
+      <button class="btn line" type="button" onclick="removeUserLink(${i})" style="flex-shrink:0;min-height:34px;padding:0 12px;font-size:13px">삭제</button>
+    </div>`).join('');
+}
+function addUserLink(){
+  const urlInput = $('#userLinkUrlInput');
+  const titleInput = $('#userLinkTitleInput');
+  let url = (urlInput?.value || '').trim();
+  const title = (titleInput?.value || '').trim();
+  if(!url){ showToast('링크를 입력해주세요.'); return; }
+  if(!/^https?:\/\//i.test(url)) url = 'https://' + url;
+  try { new URL(url); } catch(e){ showToast('올바른 링크 형식이 아닙니다.'); return; }
+  if(userSuppliedLinks.some(u=>u.url===url)){ showToast('이미 추가한 링크입니다.'); return; }
+  if(userSuppliedLinks.length >= 5){ showToast('사용자 선정 자료는 최대 5건까지 추가할 수 있습니다.'); return; }
+  userSuppliedLinks.push({ url, title });
+  if(urlInput) urlInput.value = '';
+  if(titleInput) titleInput.value = '';
+  renderUserLinkList();
+  showToast('자료가 추가되었습니다.');
+}
+function removeUserLink(i){
+  userSuppliedLinks.splice(i,1);
+  renderUserLinkList();
+}
 let insightHistory = [];
 async function deriveInsight(){
   const selected = getSelectedDetailDocs();
-  if(!selected.length){ showToast('인사이트를 도출할 기사를 먼저 선택해주세요.'); return; }
   const withUrl = selected.filter(d=>d.url);
-  if(!withUrl.length){ showToast('선택한 기사에 원문 URL이 없어 인사이트를 도출할 수 없습니다.'); return; }
-  if(selected.length > 10) showToast('최대 10건까지만 분석에 반영됩니다.');
+  if(!withUrl.length && !userSuppliedLinks.length){ showToast('인사이트를 도출할 기사를 선택하거나, 사용자 선정 자료를 추가해주세요.'); return; }
+
+  // n8n이 찾은 선택 기사 + 사용자가 직접 추가한 자료를 하나의 목록으로 합친다.
+  // (원문 본문은 n8n [뉴스 크롤링 2단계] 워크플로우가 URL 기준으로 다시 추출하므로,
+  //  사용자 자료는 summary/score 없이 url·title만 있어도 동일하게 처리된다.)
+  const combined = [
+    ...withUrl.map((d,i)=>({ url:d.url, title:d.title, summary:d.desc, score:d.score, rank:i+1, source:'n8n' })),
+    ...userSuppliedLinks.map((u,i)=>({ url:u.url, title:u.title || u.url, summary:'', score:null, rank: withUrl.length+i+1, source:'user' }))
+  ];
+  if(combined.length > 10) showToast('최대 10건까지만 분석에 반영됩니다.');
 
   const h = currentResultsDetailHidx!==null ? resultHistory[currentResultsDetailHidx] : null;
   const kw = h?.kw || '';
@@ -1404,7 +2053,7 @@ async function deriveInsight(){
         report_depth: insightSettings.depth,
         action_orientation: actionOrientation,
         risk_sensitivity: insightSettings.risk,
-        selected_results: withUrl.slice(0,10).map((d,i)=>({ url:d.url, title:d.title, summary:d.desc, score:d.score, rank:i+1 }))
+        selected_results: combined.slice(0,10)
       })
     });
     const data = await resp.json();
@@ -1417,8 +2066,8 @@ async function deriveInsight(){
   clearInterval(timer);
   if(bar) bar.style.width = '100%';
 
-  insightHistory.unshift({ kw, articleCount: withUrl.length, report, createdAt: new Date() });
-  saveInsightSession(kw, withUrl.length, report);
+  insightHistory.unshift({ kw, articleCount: combined.length, report, createdAt: new Date() });
+  saveInsightSession(kw, combined.length, report);
   insightLoading = false; currentReport = report;
   renderInsightDetail();
   showToast('인사이트가 도출되었습니다.');
@@ -1622,6 +2271,18 @@ let insightLoading = false;
 function renderInsightHistoryPage(){
   const tbody = $('#insightHistoryBody'); if(!tbody) return;
   tbody.innerHTML = insightHistory.length ? insightHistory.map((ins,i)=>`
+    <div class="insight-card">
+      <div class="insight-card-top">
+        <span class="badge blue">${esc(ins.kw||'(키워드 없음)')}</span>
+        <span class="insight-card-date">${esc(ins.createdAt.toLocaleString('ko-KR'))}</span>
+      </div>
+      <div class="insight-card-mid">선택 자료 ${Number(ins.articleCount)||0}건</div>
+      <button class="btn soft" type="button" onclick="viewInsightHistory(${i})">리포트 확인</button>
+    </div>
+  `).join('') : '<div class="card" style="text-align:center;color:var(--muted);padding:30px">아직 도출한 리포트가 없습니다. "리서치 결과"에서 자료를 선택하고 인사이트를 도출해보세요.</div>';
+
+  const tbodyTable = $('#insightHistoryBodyTable'); if(!tbodyTable) return;
+  tbodyTable.innerHTML = insightHistory.length ? insightHistory.map((ins,i)=>`
     <tr>
       <td><span class="badge blue">${esc(ins.kw||'(키워드 없음)')}</span></td>
       <td style="color:var(--muted);font-size:13px">${esc(ins.createdAt.toLocaleString('ko-KR'))}</td>
@@ -1716,7 +2377,7 @@ function computeNextNewsletterSchedule(){
   const now = new Date();
   const daysUntilMonday = (8 - now.getDay()) % 7 || 7;
   const next = new Date(now); next.setDate(now.getDate() + daysUntilMonday);
-  return next.toLocaleDateString('ko-KR') + ' (월요일 발송 예정)';
+  return next.toLocaleDateString('ko-KR') + ' <span style="white-space:nowrap">(월요일 발송 예정)</span>';
 }
 async function renderNewsletterPage(){
   $('#newsletterDetailView').style.display = 'none';
@@ -1728,7 +2389,7 @@ async function renderNewsletterPage(){
   // 내 대시보드 통계
   $('#nlSubscribedSince').textContent = (subscribed && subscribedAt) ? new Date(subscribedAt).toLocaleDateString('ko-KR') : '구독 전';
   $('#nlLastIssue').textContent = (subscribed && latest) ? latest.issueDate : '-';
-  $('#nlNextSchedule').textContent = computeNextNewsletterSchedule();
+  $('#nlNextSchedule').innerHTML = computeNextNewsletterSchedule();
 
   const latestCard = $('#newsletterLatestCard');
   if(!latest){
@@ -1741,11 +2402,16 @@ async function renderNewsletterPage(){
       <p style="color:var(--muted)">${esc(latest.summary||'')}</p>
       <div class="insight-box" style="margin-top:14px">구독하면 이 호의 전체 내용과 뉴스레터 히스토리를 모두 볼 수 있어요. <a href="#" onclick="event.preventDefault();showPage('newsletter-subscribe')" style="color:var(--primary2);font-weight:800">구독 신청하기 →</a></div>`;
   } else {
-    latestCard.innerHTML = `
-      <span class="badge green">최신 발행</span>
-      <h3 style="margin:10px 0 4px">${esc(latest.title)}</h3>
-      <p style="color:var(--muted);font-size:13px;margin:0 0 12px">${esc(latest.issueDate)}</p>
-      <div style="white-space:pre-line">${esc(latest.body || latest.summary || '')}</div>`;
+    latestCard.innerHTML = latest.html
+      ? `<span class="badge green">최신 발행</span>
+         <h3 style="margin:10px 0 4px">${esc(latest.title)}</h3>
+         <p style="color:var(--muted);font-size:13px;margin:0 0 12px">${esc(latest.issueDate)}</p>
+         <p style="color:var(--muted)">${esc(latest.summary||'')}</p>
+         <button class="btn dark" type="button" onclick="viewNewsletterIssue(0)" style="margin-top:10px">전체 내용 보기 →</button>`
+      : `<span class="badge green">최신 발행</span>
+         <h3 style="margin:10px 0 4px">${esc(latest.title)}</h3>
+         <p style="color:var(--muted);font-size:13px;margin:0 0 12px">${esc(latest.issueDate)}</p>
+         <div style="white-space:pre-line">${esc(latest.body || latest.summary || '')}</div>`;
   }
 
   const archiveSection = $('#newsletterArchiveSection');
@@ -1756,6 +2422,17 @@ async function renderNewsletterPage(){
     const rest = NEWSLETTER_ISSUES.slice(1);
     const total = NEWSLETTER_ISSUES.length;
     $('#newsletterArchiveList').innerHTML = rest.length ? rest.map((iss,i)=>{
+      const issueNo = total - (i+1);
+      return `<div class="nl-archive-card">
+        <div class="nl-archive-top">
+          <span class="badge blue">${issueNo}호</span>
+          <span class="nl-archive-date">${esc(iss.issueDate)}</span>
+        </div>
+        <div class="nl-archive-title">${esc(iss.title)}</div>
+        <button class="btn line nl-archive-btn" type="button" onclick="viewNewsletterIssue(${i+1})">상세 보기</button>
+      </div>`;
+    }).join('') : '<div class="card" style="color:var(--muted);text-align:center;padding:24px">지난 발행 기록이 없어요</div>';
+    $('#newsletterArchiveListTable').innerHTML = rest.length ? rest.map((iss,i)=>{
       const issueNo = total - (i+1);
       return `<tr>
         <td>${issueNo}호</td>
@@ -1773,11 +2450,298 @@ function viewNewsletterIssue(idx){
   $('#newsletterDetailView').style.display = 'block';
   $('#newsletterDetailTitle').textContent = issue.title;
   $('#newsletterDetailMeta').textContent = issue.issueDate;
-  $('#newsletterDetailBody').innerHTML = esc(issue.body || issue.summary || '').replace(/\n/g,'<br>');
+  const bodyEl = $('#newsletterDetailBody');
+  if(issue.html){
+    bodyEl.style.padding = '0'; bodyEl.style.overflow = 'hidden';
+    bodyEl.innerHTML = '';
+    const frame = document.createElement('iframe');
+    frame.style.cssText = 'width:100%;height:900px;border:0;background:#fff;display:block';
+    bodyEl.appendChild(frame);
+    frame.srcdoc = issue.html;
+  } else {
+    bodyEl.style.padding = ''; bodyEl.style.overflow = '';
+    bodyEl.innerHTML = esc(issue.body || issue.summary || '').replace(/\n/g,'<br>');
+  }
 }
 function backToNewsletterList(){
   $('#newsletterDetailView').style.display = 'none';
   $('#newsletterListView').style.display = 'block';
+}
+
+// ══════════════════════════════════════════
+// 뉴스레터 관리자 모드 (작성 · 미리보기 · 발송)
+// ══════════════════════════════════════════
+let newsletterDraft = {
+  issue_title: 'Research-On 주간 뉴스레터', period: '', period_start: '', period_end: '',
+  executive_brief: { headline: '', summary: '' },
+  editor_note: '',
+  sections: { client_watch: [], research_on_insight: [], business_work: [], people_culture: [], people_culture_view: '' }
+};
+const NL_SECTION_META = {
+  client_watch:         { hasImplication:true },
+  research_on_insight:  { hasImplication:true },
+  business_work:        { hasImplication:true },
+  people_culture:       { hasImplication:false }
+};
+function renderNewsletterAdminPage(){
+  $('#nlIssueTitle').value = newsletterDraft.issue_title;
+  $('#nlPeriodStart').value = newsletterDraft.period_start || '';
+  $('#nlPeriodEnd').value = newsletterDraft.period_end;
+  updateNlPeriodHint();
+  $('#nlHeadline').value = newsletterDraft.executive_brief.headline;
+  $('#nlSummary').value = newsletterDraft.executive_brief.summary;
+  $('#nlEditorNote').value = newsletterDraft.editor_note;
+  $('#nlCultureView').value = newsletterDraft.sections.people_culture_view;
+  Object.keys(NL_SECTION_META).forEach(renderNewsletterSectionItems);
+  $('#nlPreviewCard').style.display = 'none';
+  loadNewsletterAdminStats();
+}
+// 시작일 변경 시 자동으로 일주일 뒤 날짜를 마감일로 채우고, "기간 표기" 문자열을 자동 생성한다
+function updateNlPeriodHint(){
+  const hint = $('#nlPeriodHint'); if(!hint) return;
+  hint.textContent = newsletterDraft.period ? ('발행 기간: ' + newsletterDraft.period) : '시작일을 선택하면 마감일(1주일 후)이 자동으로 채워집니다.';
+}
+function applyNlPeriodStart(startStr){
+  newsletterDraft.period_start = startStr;
+  if(startStr){
+    const start = new Date(startStr + 'T00:00:00');
+    const end = new Date(start); end.setDate(end.getDate() + 7);
+    const endStr = end.toISOString().slice(0, 10);
+    newsletterDraft.period_end = endStr;
+    const endInput = $('#nlPeriodEnd'); if(endInput) endInput.value = endStr;
+    newsletterDraft.period = startStr + ' ~ ' + endStr;
+  } else {
+    newsletterDraft.period = '';
+  }
+  updateNlPeriodHint();
+}
+async function loadNewsletterAdminStats(){
+  try {
+    const { count } = await _sb.from('profiles').select('id', { count:'exact', head:true }).eq('newsletter_subscribed', true);
+    $('#nlSubscriberCount').textContent = (typeof count === 'number') ? count : '-';
+  } catch(e){ $('#nlSubscriberCount').textContent = '-'; }
+  $('#nlIssueCount').textContent = NEWSLETTER_ISSUES.length;
+  $('#nlLastSentAt').textContent = NEWSLETTER_ISSUES[0] ? NEWSLETTER_ISSUES[0].issueDate : '발송 이력 없음';
+}
+function renderNewsletterSectionItems(sectionKey){
+  const el = $('#nlItems-'+sectionKey); if(!el) return;
+  const meta = NL_SECTION_META[sectionKey];
+  const items = newsletterDraft.sections[sectionKey];
+  el.innerHTML = items.length ? items.map((item,idx)=>`
+    <div style="border:1px solid var(--line);border-radius:14px;padding:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <b style="font-size:12px;color:var(--muted)">항목 ${idx+1}</b>
+        <button class="btn line" type="button" onclick="removeNewsletterItem('${sectionKey}',${idx})">삭제</button>
+      </div>
+      <div class="field"><label>제목</label><input class="nl-field" data-section="${sectionKey}" data-idx="${idx}" data-key="title" value="${esc(item.title||'')}" /></div>
+      <div class="field"><label>요약 (**굵게** 지원)</label><textarea class="nl-field" data-section="${sectionKey}" data-idx="${idx}" data-key="summary" style="min-height:60px">${esc(item.summary||'')}</textarea></div>
+      ${meta.hasImplication ? `
+      <div class="grid cols-2">
+        <div class="field"><label>시사점 라벨</label><input class="nl-field" data-section="${sectionKey}" data-idx="${idx}" data-key="implication_label" value="${esc(item.implication_label||'시사점')}" /></div>
+        <div class="field"><label>시사점 내용</label><input class="nl-field" data-section="${sectionKey}" data-idx="${idx}" data-key="implication" value="${esc(item.implication||'')}" /></div>
+      </div>` : ''}
+      <div class="field"><label>원문 URL (줄마다 하나씩, 최대 4개)</label><textarea class="nl-field" data-section="${sectionKey}" data-idx="${idx}" data-key="source_urls" style="min-height:50px">${(item.source_urls||[]).join('\n')}</textarea></div>
+    </div>
+  `).join('') : '<p style="color:var(--muted);font-size:13px">아직 추가된 항목이 없습니다.</p>';
+}
+function addNewsletterItem(sectionKey){
+  newsletterDraft.sections[sectionKey].push({ title:'', summary:'', implication_label:'시사점', implication:'', source_urls:[] });
+  renderNewsletterSectionItems(sectionKey);
+}
+function removeNewsletterItem(sectionKey, idx){
+  newsletterDraft.sections[sectionKey].splice(idx,1);
+  renderNewsletterSectionItems(sectionKey);
+}
+
+// ── n8n 뉴스레터 2단계 워크플로우에서 AI 초안 가져오기 ──
+// 워크플로우 노드 "6. Code - AI JSON 정리"가 반환하는 구조를 그대로 매핑한다:
+// { period_end, newsletter:{ issue_title, period, executive_brief:{headline,summary},
+//   sections:{ client_watch[], research_on_insight[], business_work[], people_culture[], people_culture_view }, editor_note } }
+async function fetchNewsletterDraft(){
+  const btn = $('#nlFetchDraftBtn');
+  const statusEl = $('#nlDraftFetchStatus');
+  if(btn){ btn.disabled = true; btn.textContent = '불러오는 중...'; }
+  if(statusEl){ statusEl.className = 'auth-status loading'; statusEl.style.display = 'block'; statusEl.textContent = 'n8n에서 최근 7일 자료를 가공한 초안을 가져오는 중입니다...'; }
+
+  try {
+    const resp = await fetch(N8N_NEWSLETTER_DRAFT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:'{}' });
+    if(!resp.ok) throw new Error('n8n 응답 오류 (상태코드 ' + resp.status + ')');
+    const data = await resp.json();
+    const nl = data.newsletter || data; // 워크플로우가 배열로 감싸서 줄 수도 있어 최대한 유연하게 처리
+    if(!nl || !nl.sections) throw new Error('초안 데이터 형식이 올바르지 않습니다.');
+
+    newsletterDraft = {
+      issue_title: nl.issue_title || 'Research-On 주간 뉴스레터',
+      period: nl.period || '',
+      period_start: data.period_start || '',
+      period_end: data.period_end || '',
+      executive_brief: {
+        headline: nl.executive_brief?.headline || '',
+        summary: nl.executive_brief?.summary || ''
+      },
+      editor_note: nl.editor_note || '',
+      sections: {
+        client_watch: (nl.sections.client_watch || []).map(x=>({ title:x.title||'', summary:x.summary||'', implication_label:x.implication_label||'시사점', implication:x.implication||'', source_urls:(x.source_urls||[]).slice(0,4) })),
+        research_on_insight: (nl.sections.research_on_insight || []).map(x=>({ title:x.title||'', summary:x.summary||'', implication_label:x.implication_label||'시사점', implication:x.implication||'', source_urls:(x.source_urls||[]).slice(0,4) })),
+        business_work: (nl.sections.business_work || []).map(x=>({ title:x.title||'', summary:x.summary||'', implication_label:x.implication_label||'시사점', implication:x.implication||'', source_urls:(x.source_urls||[]).slice(0,4) })),
+        people_culture: (nl.sections.people_culture || []).map(x=>({ title:x.title||'', summary:x.summary||'', implication_label:x.implication_label||'조직 관점', implication:x.implication||'', source_urls:(x.source_urls||[]).slice(0,4) })),
+        people_culture_view: nl.sections.people_culture_view || ''
+      }
+    };
+
+    renderNewsletterAdminPage();
+    if(statusEl){ statusEl.className = 'auth-status success'; statusEl.textContent = '✅ AI 초안을 불러왔습니다. 아래 내용을 확인하고 필요한 부분을 수정·추가해주세요.'; }
+  } catch(e){
+    if(statusEl){ statusEl.className = 'auth-status error'; statusEl.textContent = '초안을 가져오지 못했습니다: ' + e.message + ' (n8n 워크플로우에 Webhook 트리거가 연결되어 있는지, 계정 설정의 초안 Webhook 주소가 맞는지 확인해주세요.)'; }
+  }
+  if(btn){ btn.disabled = false; btn.textContent = '✨ AI 초안 가져오기'; }
+}
+
+// ── n8n 코드 노드와 동일한 로직으로 이식한 HTML 템플릿 빌더 ──
+function nlP(v){ return esc(v||'').replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>'); }
+function nlSourceLinks(urls){
+  const safe = Array.isArray(urls) ? urls.filter(Boolean).slice(0,4) : [];
+  if(!safe.length) return '';
+  const links = safe.map((url,i)=>`<a href="${esc(url)}" style="color:#64748B;text-decoration:underline;">원문 ${i+1}</a>`).join('&nbsp;&nbsp;');
+  return `<div style="margin-top:13px;font-size:12px;line-height:19px;color:#64748B;">${links}</div>`;
+}
+function nlDivider(){
+  return `<tr><td style="padding:0 40px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="border-top:1px solid #E5E7EB;font-size:1px;line-height:1px;">&nbsp;</td></tr></table></td></tr>`;
+}
+function nlItemBlock(item, culture, last){
+  const bg = culture ? '#F2F7F4' : '#EEF3FF';
+  const labelColor = culture ? '#2F6B4F' : '#274690';
+  const textColor = culture ? '#3F5B4C' : '#35415E';
+  const implicationHtml = culture ? '' : `
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:16px;border-collapse:collapse;">
+      <tr><td style="padding:15px 17px;background-color:${bg};">
+        <div style="font-size:12px;line-height:18px;font-weight:bold;color:${labelColor};">${esc(item.implication_label)}</div>
+        <div style="margin-top:5px;font-size:14px;line-height:24px;color:${textColor};">${nlP(item.implication)}</div>
+      </td></tr>
+    </table>`;
+  const block = `
+    <tr><td style="padding:26px 40px ${last?'32px':'26px'};">
+      <div style="font-size:20px;line-height:30px;font-weight:bold;color:#111827;">${esc(item.title)}</div>
+      <div style="margin-top:12px;font-size:15px;line-height:26px;color:#3F4652;">${nlP(item.summary)}</div>
+      ${implicationHtml}
+      ${nlSourceLinks(item.source_urls)}
+    </td></tr>`;
+  return block + (last ? '' : nlDivider());
+}
+function nlCultureViewBlock(view){
+  if(!view) return '';
+  return `
+    <tr><td style="padding:0 40px 32px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+        <tr><td style="padding:15px 17px;background-color:#F2F7F4;">
+          <div style="font-size:12px;line-height:18px;font-weight:bold;color:#2F6B4F;">종합 코멘트</div>
+          <div style="margin-top:5px;font-size:14px;line-height:24px;color:#3F5B4C;">${nlP(view)}</div>
+        </td></tr>
+      </table>
+    </td></tr>`;
+}
+function nlSectionBlock(no, code, title, description, items, culture, trailingView){
+  if(!Array.isArray(items) || !items.length) return '';
+  const hasTrailing = culture && !!trailingView;
+  const lastIdx = items.length-1;
+  const itemsHtml = items.map((x,i)=>nlItemBlock(x, culture, hasTrailing?false:i===lastIdx)).join('');
+  const trailingHtml = hasTrailing ? nlCultureViewBlock(trailingView) : '';
+  return `
+    <tr><td style="padding:26px 40px 12px;background-color:#F8FAFC;border-top:1px solid #E5E7EB;">
+      <div style="font-size:12px;line-height:18px;letter-spacing:1.2px;font-weight:bold;color:#274690;">${no} · ${esc(code)}</div>
+      <div style="margin-top:7px;font-size:22px;line-height:32px;font-weight:bold;color:#111827;">${esc(title)}</div>
+      <div style="margin-top:8px;font-size:14px;line-height:23px;color:#6B7280;">${esc(description)}</div>
+    </td></tr>
+    ${itemsHtml}${trailingHtml}`;
+}
+function buildNewsletterHtml(nl){
+  const sections = nl.sections || {};
+  const sectionHtml = [
+    nlSectionBlock('01','CLIENT WATCH','주요 클라이언트와 고객 산업 동향','핵심 고객사의 사업·조직·AI·운영 변화를 중심으로 정리했습니다.', sections.client_watch||[], false),
+    nlSectionBlock('02','RESEARCH ON INSIGHT','지난주 내부 리서치에서 발견한 핵심 흐름','사용자들이 직접 수행한 리서치에서 반복적으로 나타난 관심사를 정리했습니다.', sections.research_on_insight||[], false),
+    nlSectionBlock('03','BUSINESS & WORK','BPO·AI·조직 운영의 주요 변화','본부 사업과 운영에 영향을 줄 수 있는 외부 변화를 정리했습니다.', sections.business_work||[], false),
+    nlSectionBlock('04','PEOPLE & CULTURE','요즘 구성원은 무엇에 반응하는가','젊은 세대의 행동과 가치관을 조직 운영 관점에서 해석했습니다.', sections.people_culture||[], true, sections.people_culture_view||'')
+  ].join('');
+  const subject = `[Research On Weekly] ${nl.period_end||''} 주간 뉴스레터`;
+  const html = `<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>${esc(subject)}</title></head>
+<body style="margin:0;padding:0;background-color:#F3F4F6;font-family:Arial,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:#111827;">
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;line-height:1px;font-size:1px;">클라이언트 동향, 내부 리서치 인사이트, BPO·AI 변화, 구성원 문화 트렌드를 정리했습니다.</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;margin:0;padding:0;background-color:#F3F4F6;border-collapse:collapse;">
+    <tr><td align="center" style="padding:24px 12px;">
+      <table role="presentation" width="680" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:680px;background-color:#FFFFFF;border-collapse:collapse;">
+        <tr><td style="padding:34px 40px 30px;background-color:#111827;">
+          <div style="font-size:12px;line-height:18px;letter-spacing:1.4px;font-weight:bold;color:#AAB4C4;">RESEARCH ON WEEKLY</div>
+          <div style="margin-top:12px;font-size:30px;line-height:41px;font-weight:bold;color:#FFFFFF;">${esc(nl.issue_title)}</div>
+          <div style="margin-top:14px;font-size:13px;line-height:20px;color:#C9D1DD;">${esc(nl.period)}</div>
+        </td></tr>
+        <tr><td style="padding:34px 40px 30px;">
+          <div style="font-size:12px;line-height:18px;letter-spacing:1.2px;font-weight:bold;color:#274690;">EXECUTIVE BRIEF</div>
+          <div style="margin-top:10px;font-size:23px;line-height:34px;font-weight:bold;color:#111827;">${esc(nl.executive_brief?.headline||'')}</div>
+          <div style="margin-top:14px;font-size:15px;line-height:26px;color:#3F4652;">${nlP(nl.executive_brief?.summary||'')}</div>
+        </td></tr>
+        ${sectionHtml}
+        <tr><td style="padding:28px 40px;background-color:#111827;">
+          <div style="font-size:13px;line-height:20px;font-weight:bold;color:#FFFFFF;">Research On</div>
+          <div style="margin-top:8px;font-size:12px;line-height:20px;color:#AAB4C4;">본 뉴스레터는 내부 리서치 결과와 뉴스레터 전용 모니터링 자료를 바탕으로 작성되었습니다.</div>
+          <div style="margin-top:12px;font-size:11px;line-height:18px;color:#7F8A9B;">AI가 생성한 시사점은 제공된 자료를 기반으로 한 해석이며, 주요 의사결정 전 원문 확인이 필요합니다.</div>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`;
+  return { subject, html };
+}
+function previewNewsletter(){
+  const card = $('#nlPreviewCard');
+  // 이미 열려있는 상태에서 "미리보기"를 다시 누르면 닫는다
+  if(card.style.display === 'block'){
+    card.style.display = 'none';
+    return;
+  }
+  refreshNewsletterPreview();
+  card.style.display = 'block';
+  card.scrollIntoView({behavior:'smooth', block:'start'});
+}
+// 미리보기 iframe 내용만 최신 입력값 기준으로 다시 그린다 (열림/닫힘 상태는 건드리지 않음)
+function refreshNewsletterPreview(){
+  const { subject, html } = buildNewsletterHtml(newsletterDraft);
+  $('#nlPreviewSubject').textContent = subject;
+  $('#nlPreviewFrame').srcdoc = html;
+}
+async function sendNewsletter(){
+  if(!newsletterDraft.issue_title.trim()){ showToast('발행 회차 제목을 입력해주세요.'); return; }
+  if(!confirm('정말 이 뉴스레터를 발송하시겠어요? 발송 후에는 되돌릴 수 없습니다.')) return;
+  const { subject, html } = buildNewsletterHtml(newsletterDraft);
+  const btn = $('#nlSendBtn'); btn.disabled=true; btn.textContent='발송 중...';
+
+  // n8n으로 실제 발송 트리거 (best-effort — 연동 안 돼있어도 히스토리 저장은 계속 진행)
+  try {
+    await fetch(N8N_NEWSLETTER_QUEUE_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ newsletter: newsletterDraft, period_end: newsletterDraft.period_end, subject, newsletter_html: html })
+    });
+  } catch(e){ /* n8n 미연동이어도 계속 진행 */ }
+
+  // Supabase 발송 이력 저장 (테이블: newsletter_send_history)
+  let saved = false;
+  try {
+    const { data } = await _sb.from('newsletter_send_history').insert({ issue_label: newsletterDraft.issue_title, subject, newsletter_html: html }).select().single();
+    if(data) saved = true;
+  } catch(e){ /* 테이블이 아직 없어도 구독자 화면에는 즉시 반영됨 */ }
+
+  // 구독자 화면(뉴스레터 탭)에 즉시 반영
+  NEWSLETTER_ISSUES.unshift({
+    title: newsletterDraft.issue_title,
+    issueDate: newsletterDraft.period_end || newsletterDraft.period,
+    summary: newsletterDraft.executive_brief.summary,
+    html
+  });
+
+  btn.disabled=false; btn.textContent='📮 발송하기';
+  showToast(saved ? '뉴스레터가 발송되었습니다.' : '발송 요청은 전달됐지만 히스토리 저장에는 실패했어요 (테이블 확인 필요).');
+  loadNewsletterAdminStats();
 }
 async function renderNewsletterSubscribePage(){
   const subBtn = $('#newsletterSubscribeBtn');
@@ -1818,6 +2782,37 @@ async function unsubscribeNewsletter(){
   await _sb.from('profiles').update({ newsletter_subscribed: false }).eq('id', uid);
   showToast('뉴스레터 구독이 해지되었습니다.');
   renderNewsletterSubscribePage();
+}
+
+// ── 타인 대신 구독 신청 (임원/보직자 대리, 타 본부, 한시적 구독 등) ──
+async function submitProxySubscribe(){
+  const name = $('#proxySubName').value.trim();
+  const email = $('#proxySubEmail').value.trim().toLowerCase();
+  if(!name || !email){ showAuthStatus('proxySubStatus','error','이름과 이메일을 모두 입력해주세요.'); return; }
+  const btn = $('#proxySubBtn'); btn.disabled = true;
+  showAuthStatus('proxySubStatus','loading','처리 중...');
+  try{
+    // 1) 이미 Research On 계정이 있는 사람이면 → 바로 구독 처리
+    const { data:existing, error:findErr } = await _sb.from('profiles').select('id,name').eq('email', email).maybeSingle();
+    if(findErr) throw findErr;
+    if(existing){
+      const { error } = await _sb.from('profiles').update({ newsletter_subscribed:true, newsletter_subscribed_at: new Date().toISOString() }).eq('id', existing.id);
+      if(error) throw error;
+      showAuthStatus('proxySubStatus','success', `${existing.name || name}님을 구독자로 등록했습니다.`);
+    } else {
+      // 2) 계정이 없는 외부/타본부 인원 → 별도 외부 구독자 명단에 등록
+      const { error } = await _sb.from('newsletter_guest_subscribers').insert({
+        email, name, requested_by: currentUserId, requested_by_name: currentUserProfile.name, status:'active'
+      });
+      if(error) throw error;
+      showAuthStatus('proxySubStatus','success', `${name}님은 Research On 계정이 없어 외부 구독자 명단에 등록했습니다.`);
+    }
+    $('#proxySubName').value=''; $('#proxySubEmail').value='';
+  } catch(e){
+    showAuthStatus('proxySubStatus','error','등록에 실패했습니다: ' + e.message);
+  } finally {
+    btn.disabled = false;
+  }
 }
 // ══════════════════════════════════════════
 // 검색 히스토리 + Google Sheets 연동
@@ -1877,43 +2872,138 @@ function renderHistoryPage(){
   renderKeywordsPage();
 }
 // ══════════════════════════════════════════
-// 계정 설정 (n8n URL 저장)
+// 계정 설정 — 프로필 표시/수정
 // ══════════════════════════════════════════
 function renderAccountPage(){
-  $('#cfgNewsSearchUrl').value = N8N_NEWS_SEARCH_URL;
-  $('#cfgNewsUrl').value = N8N_NEWS_URL;
-  $('#cfgHistoryUrl').value = N8N_HISTORY_URL;
-  $('#cfgInsightUrl').value = N8N_INSIGHT_URL;
-  $('#cfgNewsletterDraftUrl').value = N8N_NEWSLETTER_DRAFT_URL;
-  $('#cfgNewsletterQueueUrl').value = N8N_NEWSLETTER_QUEUE_URL;
-  $('#cfgNewsletterSubUrl').value = N8N_NEWSLETTER_SUB_URL;
+  // 페이지에 들어올 때마다 수정 모드는 항상 초기화(보기 모드)
+  profileEditing = false;
+  setProfileEditUI(false);
+  renderProfileDisplay();
 }
-function saveAccountSettings(){
-  N8N_NEWS_SEARCH_URL = $('#cfgNewsSearchUrl').value.trim() || N8N_NEWS_SEARCH_URL;
-  N8N_NEWS_URL = $('#cfgNewsUrl').value.trim() || N8N_NEWS_URL;
-  N8N_HISTORY_URL = $('#cfgHistoryUrl').value.trim() || N8N_HISTORY_URL;
-  N8N_INSIGHT_URL = $('#cfgInsightUrl').value.trim() || N8N_INSIGHT_URL;
-  N8N_NEWSLETTER_DRAFT_URL = $('#cfgNewsletterDraftUrl').value.trim() || N8N_NEWSLETTER_DRAFT_URL;
-  N8N_NEWSLETTER_QUEUE_URL = $('#cfgNewsletterQueueUrl').value.trim() || N8N_NEWSLETTER_QUEUE_URL;
-  N8N_NEWSLETTER_SUB_URL = $('#cfgNewsletterSubUrl').value.trim() || N8N_NEWSLETTER_SUB_URL;
-  localStorage.setItem('ro_news_search_url', N8N_NEWS_SEARCH_URL);
-  localStorage.setItem('ro_news_url', N8N_NEWS_URL);
-  localStorage.setItem('ro_history_url', N8N_HISTORY_URL);
-  localStorage.setItem('ro_insight_url', N8N_INSIGHT_URL);
-  localStorage.setItem('ro_newsletter_draft_url', N8N_NEWSLETTER_DRAFT_URL);
-  localStorage.setItem('ro_newsletter_queue_url', N8N_NEWSLETTER_QUEUE_URL);
-  localStorage.setItem('ro_newsletter_sub_url', N8N_NEWSLETTER_SUB_URL);
-  showToast('설정이 저장되었습니다.');
+function renderProfileDisplay(){
+  $('#profileNameStatic').textContent = currentUserProfile.name || '—';
+  $('#profileDeptStatic').textContent = currentUserProfile.affiliation || '—';
+  $('#profilePositionStatic').textContent = currentUserProfile.position || '—';
+  $('#profileEmailStatic').textContent = currentUserProfile.email || '—';
+}
+function setProfileEditUI(editing){
+  $$('.profile-static[data-field]').forEach(el=>el.style.display = editing ? 'none' : 'block');
+  $$('.profile-input[data-field]').forEach(el=>el.style.display = editing ? 'block' : 'none');
+  const btn = $('#profileEditBtn');
+  if(btn){ btn.textContent = editing ? '저장' : '수정'; btn.classList.toggle('dark', editing); btn.classList.toggle('line', !editing); }
+}
+async function handleProfileEditClick(){
+  if(!profileEditing){
+    // 보기 → 수정 모드 전환: 현재 값을 드롭다운에 채워넣는다 (이름·이메일은 항상 읽기전용이라 건드리지 않음)
+    $('#acctDept').value = currentUserProfile.affiliation || '';
+    $('#acctPosition').value = currentUserProfile.position || '';
+    profileEditing = true;
+    setProfileEditUI(true);
+    return;
+  }
+  // 수정 → 저장
+  const dept = $('#acctDept').value;
+  const position = $('#acctPosition').value;
+  if(!dept){ showToast('부서를 선택해주세요.'); return; }
+  const btn = $('#profileEditBtn'); btn.disabled = true;
+  try{
+    const { error } = await _sb.from('profiles').update({ affiliation: dept, position }).eq('id', currentUserId);
+    if(error) throw error;
+    currentUserProfile.affiliation = dept;
+    currentUserProfile.position = position;
+    renderProfileDisplay();
+    profileEditing = false;
+    setProfileEditUI(false);
+    showToast('프로필이 저장되었습니다.');
+  } catch(e){
+    showToast('저장에 실패했습니다: ' + e.message);
+  } finally {
+    btn.disabled = false;
+  }
 }
 
 // ══════════════════════════════════════════
-// 사용자 메뉴 팝업 (사이드바 하단)
+// 계정 설정 — 로그인 및 보안(비밀번호 변경)
 // ══════════════════════════════════════════
-function toggleUserPopup(e){ e.stopPropagation(); $('#userPopup').classList.toggle('open'); }
-function closeUserPopup(){ $('#userPopup')?.classList.remove('open'); }
-document.addEventListener('click', e=>{
-  if(!e.target.closest('#sidebarFooter')) closeUserPopup();
-});
+function checkPwStrength(){
+  const el = $('#pwNew'); if(!el) return;
+  const val = el.value;
+  if(!val){ el.style.borderColor=''; return; }
+  const hasNum = /[0-9]/.test(val);
+  const hasSpecial = /[^A-Za-z0-9가-힣]/.test(val);
+  el.style.borderColor = (hasNum && hasSpecial) ? 'var(--green)' : 'var(--red)';
+}
+async function handlePasswordChange(){
+  const cur = $('#pwCurrent').value;
+  const next = $('#pwNew').value;
+  const confirmPw = $('#pwConfirm').value;
+  if(!cur || !next || !confirmPw){ showAuthStatus('pwStatus','error','모든 항목을 입력해주세요.'); return; }
+  if(next.length < 8){ showAuthStatus('pwStatus','error','새 비밀번호는 8자 이상이어야 합니다.'); return; }
+  const hasNum = /[0-9]/.test(next);
+  const hasSpecial = /[^A-Za-z0-9가-힣]/.test(next);
+  if(!hasNum || !hasSpecial){ showAuthStatus('pwStatus','error','새 비밀번호는 숫자와 특수문자를 모두 포함해야 합니다.'); return; }
+  if(next !== confirmPw){ showAuthStatus('pwStatus','error','새 비밀번호가 서로 일치하지 않습니다.'); return; }
+  if(next === cur){ showAuthStatus('pwStatus','error','현재 사용 중인 비밀번호와 동일하게는 설정할 수 없습니다.'); return; }
+  const btn = $('#pwChangeBtn'); btn.disabled = true;
+  showAuthStatus('pwStatus','loading','변경 중...');
+  try{
+    const { error: signInErr } = await _sb.auth.signInWithPassword({ email: currentUserEmail, password: cur });
+    if(signInErr) throw new Error('현재 비밀번호가 올바르지 않습니다.');
+    const { error: updateErr } = await _sb.auth.updateUser({ password: next });
+    if(updateErr) throw updateErr;
+    showAuthStatus('pwStatus','success','비밀번호가 변경되었습니다.');
+    $('#pwCurrent').value=''; $('#pwNew').value=''; $('#pwConfirm').value='';
+    $('#pwNew').style.borderColor='';
+  } catch(e){
+    showAuthStatus('pwStatus','error', e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ══════════════════════════════════════════
+// 계정 설정 — 지원 및 문의 모달
+// ══════════════════════════════════════════
+const SUPPORT_TITLES = { account:'계정 관련 문의', bug:'오류 신고' };
+let currentSupportType = 'account';
+function openSupportModal(type){
+  currentSupportType = type;
+  $('#supportModalTitle').textContent = SUPPORT_TITLES[type] || '문의하기';
+  $('#supportTitleInput').value = '';
+  $('#supportContentInput').value = '';
+  $('#supportModalStatus').className = 'auth-status';
+  $('#supportModalStatus').textContent = '';
+  $('#supportModalOverlay').classList.add('open');
+}
+function closeSupportModal(){ $('#supportModalOverlay')?.classList.remove('open'); }
+async function submitSupportRequest(){
+  const title = $('#supportTitleInput').value.trim();
+  const content = $('#supportContentInput').value.trim();
+  if(!title || !content){ showAuthStatus('supportModalStatus','error','제목과 내용을 모두 입력해주세요.'); return; }
+  const btn = $('#supportSubmitBtn'); btn.disabled = true;
+  showAuthStatus('supportModalStatus','loading','제출 중...');
+  try{
+    const { error } = await _sb.from('support_requests').insert({
+      user_id: currentUserId, type: currentSupportType, title, content,
+      requester_name: currentUserProfile.name, requester_email: currentUserEmail
+    });
+    if(error) throw error;
+    showAuthStatus('supportModalStatus','success','접수되었습니다. 확인 후 조치하겠습니다.');
+    setTimeout(closeSupportModal, 1200);
+  } catch(e){
+    showAuthStatus('supportModalStatus','error','제출에 실패했습니다: ' + e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+function openInfoModal(type){
+  $('#infoModalTitle').textContent = type==='privacy' ? '개인정보 처리방침' : '이용 가이드';
+  $('#infoGuideBody').style.display = type==='guide' ? 'block' : 'none';
+  $('#infoPrivacyBody').style.display = type==='privacy' ? 'block' : 'none';
+  $('#infoModalOverlay').classList.add('open');
+}
+function closeInfoModal(){ $('#infoModalOverlay')?.classList.remove('open'); }
+
 // handleLogout()은 하단 Supabase 인증 스크립트에서 정의됩니다.
 
 // ══════════════════════════════════════════
@@ -1922,7 +3012,9 @@ document.addEventListener('click', e=>{
 function bindEvents(){
   $$('.nav-item[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
   $$('[data-go]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.go)));
-  $('#mobileMenu')?.addEventListener('click',()=>$('#sidebar')?.classList.toggle('open'));
+  $('#mobileMenu')?.addEventListener('click',()=>{$('#sidebar')?.classList.toggle('open');$('#sidebarBackdrop')?.classList.toggle('open');});
+  $('#sidebarBackdrop')?.addEventListener('click',()=>{$('#sidebar')?.classList.remove('open');$('#sidebarBackdrop')?.classList.remove('open');});
+  $$('#sidebar .nav-item').forEach(el=>el.addEventListener('click',()=>{ if(window.innerWidth<=840){ $('#sidebar')?.classList.remove('open'); $('#sidebarBackdrop')?.classList.remove('open'); } }));
   $$('.tab[data-mode]').forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.mode)));
   $$('[data-mode-go]').forEach(b=>b.addEventListener('click',()=>switchMode(b.dataset.modeGo)));
   $('#prevStep')?.addEventListener('click',()=>setStep(step-1));
@@ -1976,34 +3068,59 @@ function bindEvents(){
   // 검색 히스토리
   $$('.tab[data-hist-filter]').forEach(b=>b.addEventListener('click', ()=>{ $$('.tab[data-hist-filter]').forEach(x=>x.classList.toggle('active',x===b)); histFilterMode=b.dataset.histFilter; renderHistoryPage(); }));
   $$('.tab[data-saved-filter]').forEach(b=>b.addEventListener('click', ()=>{ $$('.tab[data-saved-filter]').forEach(x=>x.classList.toggle('active',x===b)); savedFilterMode=b.dataset.savedFilter; renderSavedPage(); }));
+  $$('.tab[data-acct-filter]').forEach(b=>b.addEventListener('click', ()=>{ $$('.tab[data-acct-filter]').forEach(x=>x.classList.toggle('active',x===b)); acctFilterMode=b.dataset.acctFilter; filterAccountsTable(); }));
 
   // 계정 설정 / 사용자 팝업
-  $('#saveAccountBtn')?.addEventListener('click', saveAccountSettings);
-  $('#sidebarFooter')?.addEventListener('click', e=>{ if(!e.target.closest('button')) toggleUserPopup(e); });
-  $('#userPopup')?.addEventListener('click', e=>{ const b=e.target.closest('[data-page]'); if(b){ closeUserPopup(); showPage(b.dataset.page); } });
+  $('#sidebarSettingsBtn')?.addEventListener('click', ()=>showPage('account'));
   $('#logoutBtn')?.addEventListener('click', e=>{ e.stopPropagation(); handleLogout(); });
 
-  // 상단 사용자 칩 → 계정 설정
-  $('#topUserChip')?.addEventListener('click', ()=>showPage('account'));
+  // 계정 설정 — 프로필 수정/저장
+  $('#profileEditBtn')?.addEventListener('click', handleProfileEditClick);
+
+  // 계정 설정 — 비밀번호 변경
+  $('#pwNew')?.addEventListener('input', checkPwStrength);
+  $('#pwChangeBtn')?.addEventListener('click', handlePasswordChange);
+
+  // 계정 설정 — 지원 및 문의 모달
+  $$('.support-trigger').forEach(el=>el.addEventListener('click', ()=>openSupportModal(el.dataset.support)));
+  $$('.info-trigger').forEach(el=>el.addEventListener('click', ()=>openInfoModal(el.dataset.info)));
+  $('#supportModalClose')?.addEventListener('click', closeSupportModal);
+  $('#supportSubmitBtn')?.addEventListener('click', submitSupportRequest);
+  $('#supportModalOverlay')?.addEventListener('click', e=>{ if(e.target.id==='supportModalOverlay') closeSupportModal(); });
+  $('#infoModalClose')?.addEventListener('click', closeInfoModal);
+  $('#infoModalOverlay')?.addEventListener('click', e=>{ if(e.target.id==='infoModalOverlay') closeInfoModal(); });
+
+  // 관리자 — 계정 관리
+  $('#acctMgmtSearch')?.addEventListener('input', filterAccountsTable);
+  $('#createAccountBtn')?.addEventListener('click', openCreateAccountModal);
+  $('#createAccountModalClose')?.addEventListener('click', closeCreateAccountModal);
+  $('#createAccountModalOverlay')?.addEventListener('click', e=>{ if(e.target.id==='createAccountModalOverlay') closeCreateAccountModal(); });
+  $('#createAccountSubmitBtn')?.addEventListener('click', submitCreateAccount);
+  $('#nlSubMgmtSearch')?.addEventListener('input', filterSubscribersTable);
 
   // 대시보드 히스토리 행 클릭 → 재검색
-  $('#dashSearchBtn')?.addEventListener('click', ()=>{ const v=$('#dashSearchInput').value.trim(); if(v){ doGlobalSearch(v); $('#dashSearchInput').value=''; } });
-  $('#dashSearchInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter' && e.target.value.trim()){ doGlobalSearch(e.target.value.trim()); e.target.value=''; }});
+  $('#dashSearchBtn')?.addEventListener('click', ()=>{ const v=$('#dashSearchInput').value.trim(); if(v){ useSearchKeywordForBuilder(v); $('#dashSearchInput').value=''; } });
+  $('#dashSearchInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter' && e.target.value.trim()){ useSearchKeywordForBuilder(e.target.value.trim()); e.target.value=''; }});
   $('#dashRecentCard')?.addEventListener('click', e=>{ if(e.target.closest('#dashRecentBtn') && resultHistory.length) viewResearchKeyword(resultHistory[0].kw); });
   $('#dashSuggestChips')?.addEventListener('click', e=>{ const c=e.target.closest('[data-suggest-kw]'); if(c) useSuggestedKeyword(c.dataset.suggestKw); });
 
   // 리서치 결과
   $('#saveAllResultsBtn')?.addEventListener('click', saveAllResults);
   $('#deleteSelectedResultsBtn')?.addEventListener('click', deleteSelectedResults);
-  $('#selectAllResults')?.addEventListener('change', e=>{
-    $$('.result-chk').forEach(c=>{ c.checked=e.target.checked; });
-    updateExportBtnLabel();
+  $$('.select-all-results').forEach(el=>{
+    el.addEventListener('change', e=>{
+      $$('.select-all-results').forEach(o=>{ o.checked = e.target.checked; o.indeterminate = false; });
+      $$('.result-chk').forEach(c=>{ c.checked=e.target.checked; });
+      updateExportBtnLabel();
+    });
   });
-  $('#resultsBody')?.addEventListener('change', e=>{
+  $('#results')?.addEventListener('change', e=>{
     if(e.target.classList.contains('result-chk')){
       const all = $$('.result-chk'); const checked = $$('.result-chk:checked');
-      const selectAll = $('#selectAllResults');
-      if(selectAll){ selectAll.indeterminate = checked.length>0 && checked.length<all.length; selectAll.checked = checked.length===all.length; }
+      $$('.select-all-results').forEach(selectAll=>{
+        selectAll.indeterminate = checked.length>0 && checked.length<all.length;
+        selectAll.checked = all.length>0 && checked.length===all.length;
+      });
       updateExportBtnLabel();
     }
   });
@@ -2228,11 +3345,21 @@ function bindEvents(){
   // 리서치 결과 상세 페이지
   $('#resultsDetailBackBtn')?.addEventListener('click', ()=>showPage('results'));
   $('#newssumDetailBackBtn')?.addEventListener('click', ()=>showPage('newssum'));
-  $('#sidebarToggleBtn')?.addEventListener('click', toggleSidebarCollapsed);
+  $('#sidebarToggleBtn')?.addEventListener('click', ()=>{
+    if(window.innerWidth<=840){
+      $('#sidebar')?.classList.remove('open');
+      $('#sidebarBackdrop')?.classList.remove('open');
+    } else {
+      toggleSidebarCollapsed();
+    }
+  });
   $('#selectAllDetail')?.addEventListener('change', e=>{
     $$('.detail-chk').forEach(c=>{ c.checked = e.target.checked; });
   });
   $('#generateInsightBtn')?.addEventListener('click', deriveInsight);
+  $('#userLinkAddBtn')?.addEventListener('click', addUserLink);
+  $('#userLinkUrlInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addUserLink(); } });
+  $('#userLinkTitleInput')?.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); addUserLink(); } });
 
   // 새 키워드 세트 만들기 버튼 (고급 옵션 JSON으로부터 세트 자동 생성)
   $('#newResearchBtn')?.addEventListener('click', ()=>{ showToast('새 리서치 만들기에서 키워드를 검색해보세요.'); });
@@ -2241,7 +3368,31 @@ function bindEvents(){
   $('#newsletterSubModalCancel')?.addEventListener('click', closeNewsletterSubModal);
   $('#newsletterSubModalConfirm')?.addEventListener('click', confirmNewsletterSub);
   $('#newsletterSubModalOverlay')?.addEventListener('click', e=>{ if(e.target.id==='newsletterSubModalOverlay') closeNewsletterSubModal(); });
+
+  // 뉴스레터 관리자 모드
+  $('#nlIssueTitle')?.addEventListener('input', e=>newsletterDraft.issue_title=e.target.value);
+  $('#nlPeriodStart')?.addEventListener('change', e=>applyNlPeriodStart(e.target.value));
+  $('#nlPeriodEnd')?.addEventListener('input', e=>{
+    newsletterDraft.period_end = e.target.value;
+    if(newsletterDraft.period_start) newsletterDraft.period = newsletterDraft.period_start + ' ~ ' + newsletterDraft.period_end;
+    updateNlPeriodHint();
+  });
+  $('#nlHeadline')?.addEventListener('input', e=>newsletterDraft.executive_brief.headline=e.target.value);
+  $('#nlSummary')?.addEventListener('input', e=>newsletterDraft.executive_brief.summary=e.target.value);
+  $('#nlEditorNote')?.addEventListener('input', e=>newsletterDraft.editor_note=e.target.value);
+  $('#nlCultureView')?.addEventListener('input', e=>newsletterDraft.sections.people_culture_view=e.target.value);
+  document.addEventListener('input', e=>{
+    const f = e.target.closest('.nl-field'); if(!f) return;
+    const { section, idx, key } = f.dataset; if(!section) return;
+    const item = newsletterDraft.sections[section]?.[+idx]; if(!item) return;
+    item[key] = key==='source_urls' ? f.value.split('\n').map(s=>s.trim()).filter(Boolean) : f.value;
+  });
+  $('#nlPreviewBtn')?.addEventListener('click', previewNewsletter);
+  $('#nlPreviewRefreshBtn')?.addEventListener('click', refreshNewsletterPreview);
+  $('#nlSendBtn')?.addEventListener('click', sendNewsletter);
+  $('#nlFetchDraftBtn')?.addEventListener('click', fetchNewsletterDraft);
   $('#newsletterUnsubscribeBtn')?.addEventListener('click', unsubscribeNewsletter);
+  $('#proxySubBtn')?.addEventListener('click', submitProxySubscribe);
 }
 
 async function init(){
@@ -2344,33 +3495,20 @@ async function enterApp(user){
     const roleLabel   = affiliation + ' · ' + (role==='admin' ? 'Admin' : 'Standard');
     currentUserEmail = profile.email || user.email || '';
     currentUserRole  = role;
-    // 사이드바 하단 footer
-    const footerNameEl   = document.getElementById('footerName');
-    const footerStatusEl = document.getElementById('footerStatus');
-    if(footerNameEl)   footerNameEl.textContent   = name;
-    if(footerStatusEl) footerStatusEl.textContent = roleLabel;
-    // 상단 user-chip
-    const topChip = document.getElementById('topUserChip');
-    if(topChip){
-      const av = topChip.querySelector('.avatar');
-      const nb = topChip.querySelector('b');
-      const sm = topChip.querySelector('small');
-      if(av) av.textContent = name.slice(0,1).toUpperCase();
-      if(nb) nb.textContent = name;
-      if(sm){ sm.textContent = roleLabel; sm.style.color = role==='admin'?'#2563eb':''; sm.style.fontWeight = role==='admin'?'900':''; }
-    }
-    // 계정 설정 입력칸 동기화
-    const acctNameEl = document.getElementById('acctName');
-    const acctDeptEl = document.getElementById('acctDept');
-    if(acctNameEl) acctNameEl.value = name;
-    if(acctDeptEl) acctDeptEl.value = affiliation;
+    currentUserId    = user.id;
+    currentUserProfile = { name, affiliation, position: profile.position || '', email: currentUserEmail };
+    // 사이드바 상단 환영 문구
+    const sidebarNameEl = document.getElementById('sidebarUserName');
+    if(sidebarNameEl) sidebarNameEl.textContent = name;
+    // 계정 설정 페이지(프로필 읽기전용 표시) 동기화
+    renderProfileDisplay();
     // 역할별 사이드바 분기
+    const navReqSection = document.getElementById('nav-section-account-request');
     if(role==='admin'){
       showAdminNav();
-      document.getElementById('nav-admin-request')?.style.setProperty('display','none');
+      if(navReqSection) navReqSection.style.display='none';
     } else {
-      const navReq = document.getElementById('nav-admin-request');
-      if(navReq) navReq.style.display='';
+      if(navReqSection) navReqSection.style.display='';
       loadMyRequestStatus(profile.user_id);
     }
     // 오버레이 숨기기
@@ -2395,16 +3533,16 @@ async function handleLogout(){
 // ── 사이드바 접기/펼치기 (PC 전용) ──
 let sidebarCollapsed = localStorage.getItem('ro_sidebar_collapsed') === '1';
 function applySidebarCollapsed(){
-  document.querySelector('.app')?.classList.toggle('sidebar-collapsed', sidebarCollapsed);
-  document.getElementById('sidebar')?.classList.toggle('collapsed', sidebarCollapsed);
+  const isMobile = window.innerWidth<=840;
+  document.querySelector('.app')?.classList.toggle('sidebar-collapsed', sidebarCollapsed && !isMobile);
+  document.getElementById('sidebar')?.classList.toggle('collapsed', sidebarCollapsed && !isMobile);
   const icon = document.getElementById('sidebarToggleIcon');
-  if(icon) icon.textContent = sidebarCollapsed ? '▶' : '◀';
+  if(icon) icon.textContent = isMobile ? '✕' : (sidebarCollapsed ? '▶' : '◀');
 }
 function toggleSidebarCollapsed(){
   sidebarCollapsed = !sidebarCollapsed;
   localStorage.setItem('ro_sidebar_collapsed', sidebarCollapsed ? '1' : '0');
   applySidebarCollapsed();
-  closeUserPopup();
   const tip = document.getElementById('sidebarTooltip'); if(tip) tip.style.display='none';
 }
 // 접힌 상태에서 아이콘에 마우스를 올렸을 때 보여줄 메뉴명을 각 버튼의 텍스트에서 추출해둔다.
@@ -2436,7 +3574,9 @@ function showAdminNav(){
   const sec = document.createElement('div');
   sec.id='admin-nav'; sec.className='nav-section';
   sec.innerHTML=`<div class="nav-title" style="color:#2563eb">관리자 메뉴</div>
-    <button class="nav-item" data-page="admin-approve" type="button"><span class="nav-icon">✅</span><span class="nav-label">계정 승인 관리</span></button>`;
+    <button class="nav-item" data-page="admin-approve" type="button"><span class="nav-icon">👥</span><span class="nav-label">계정 관리</span></button>
+    <button class="nav-item" data-page="newsletter-manage" type="button"><span class="nav-icon">📰</span><span class="nav-label">뉴스레터 관리</span></button>
+    <button class="nav-item" data-page="newsletter-subscribers" type="button"><span class="nav-icon">📬</span><span class="nav-label">뉴스레터 구독 관리</span></button>`;
   nav.appendChild(sec);
   sec.querySelectorAll('.nav-item[data-page]').forEach(btn=>{
     btn.addEventListener('click',()=>showPage(btn.dataset.page));
@@ -2479,20 +3619,16 @@ async function loadMyRequestStatus(userId){
   el.innerHTML=`<div class="list-item"><div class="list-icon">🔐</div><div><h4>관리자 권한 신청 ${badge}</h4><p>신청일시: ${date}</p><p style="margin-top:4px">소속: ${data.affiliation} · ID: ${data.user_id}</p></div></div>`;
 }
 
-// ── 관리자: 신청 목록 ──
+// ── 관리자: 대기 중인 신청 목록 ──
 async function loadAdminRequests(){
   const tbody = document.getElementById('admin-requests-tbody'); if(!tbody) return;
-  tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">불러오는 중...</td></tr>';
-  const { data, error } = await _sb.from('admin_requests').select('*').order('requested_at',{ascending:false});
-  if(error){ tbody.innerHTML=`<tr><td colspan="6" style="text-align:center;color:var(--red);padding:30px">오류: ${error.message}</td></tr>`; return; }
-  if(!data||!data.length){ tbody.innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">신청 내역이 없습니다.</td></tr>'; return; }
+  const card = document.getElementById('pendingAdminRequestsCard');
+  const { data, error } = await _sb.from('admin_requests').select('*').or('status.is.null,status.eq.pending').order('requested_at',{ascending:false});
+  if(error || !data || !data.length){ if(card) card.style.display='none'; return; }
+  if(card) card.style.display='block';
   tbody.innerHTML = data.map(req=>{
     const date = new Date(req.requested_at).toLocaleString('ko-KR');
-    const badge = req.status==='approved'?'<span class="badge green">승인됨</span>':req.status==='rejected'?'<span class="badge red">거절됨</span>':'<span class="badge orange">검토 중</span>';
-    const btns = (!req.status||req.status==='pending')
-      ?`<div style="display:flex;gap:6px"><button class="btn green" style="min-height:34px;padding:0 12px;font-size:13px" onclick="handleApprove('${req.id}','${req.user_id}')">승인</button><button class="btn red" style="min-height:34px;padding:0 12px;font-size:13px" onclick="handleReject('${req.id}')">거절</button></div>`
-      :badge;
-    return `<tr><td style="font-size:13px;color:var(--muted)">${date}</td><td><b>${req.name}</b></td><td>${req.affiliation}</td><td><code style="background:#f1f5f9;padding:2px 7px;border-radius:6px;font-size:13px">${req.user_id}</code></td><td style="font-size:13px">${req.email}</td><td>${btns}</td></tr>`;
+    return `<tr><td style="font-size:13px;color:var(--muted)">${date}</td><td><b>${req.name}</b></td><td>${req.affiliation}</td><td><code style="background:#f1f5f9;padding:2px 7px;border-radius:6px;font-size:13px">${req.user_id}</code></td><td style="font-size:13px">${req.email}</td><td><div style="display:flex;gap:6px"><button class="btn green" style="min-height:34px;padding:0 12px;font-size:13px" onclick="handleApprove('${req.id}','${req.user_id}')">승인</button><button class="btn red" style="min-height:34px;padding:0 12px;font-size:13px" onclick="handleReject('${req.id}')">거절</button></div></td></tr>`;
   }).join('');
 }
 
@@ -2504,7 +3640,7 @@ async function handleApprove(requestId, userId){
     if(e1) throw new Error(e1.message);
     const { error:e2 } = await _sb.from('admin_requests').update({status:'approved'}).eq('id',requestId);
     if(e2) throw new Error(e2.message);
-    alert('✅ 승인 완료되었습니다.'); loadAdminRequests();
+    alert('✅ 승인 완료되었습니다.'); loadAdminRequests(); loadAllAccounts();
   } catch(e){ alert('오류: '+e.message); }
 }
 
@@ -2516,6 +3652,270 @@ async function handleReject(requestId){
     if(error) throw new Error(error.message);
     alert('거절 처리되었습니다.'); loadAdminRequests();
   } catch(e){ alert('오류: '+e.message); }
+}
+
+// ══════════════════════════════════════════
+// 관리자: 계정 관리 (전체 계정 목록)
+// ══════════════════════════════════════════
+let allAccountsCache = [];
+let acctFilterMode = 'all';
+async function loadAllAccounts(){
+  const tbody = document.getElementById('acctMgmtTbody'); if(!tbody) return;
+  const cardsWrap = document.getElementById('acctMgmtCards');
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">불러오는 중...</td></tr>';
+  if(cardsWrap) cardsWrap.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);padding:30px">불러오는 중...</div>';
+  const { data, error } = await _sb.from('profiles').select('*').order('name');
+  if(error){
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--red);padding:30px">오류: ${error.message}</td></tr>`;
+    if(cardsWrap) cardsWrap.innerHTML = `<div class="card" style="text-align:center;color:var(--red);padding:30px">오류: ${error.message}</div>`;
+    return;
+  }
+  allAccountsCache = data || [];
+  renderAccountsTable(allAccountsCache);
+}
+function renderAccountsTable(list){
+  const cardsWrap = document.getElementById('acctMgmtCards');
+  const tbody = document.getElementById('acctMgmtTbody'); if(!tbody) return;
+  if(!list.length){
+    if(cardsWrap) cardsWrap.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);padding:30px">계정이 없습니다.</div>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">계정이 없습니다.</td></tr>';
+    return;
+  }
+  const rows = list.map((p,i)=>{
+    const roleBadge = p.role==='admin' ? '<span class="badge blue">관리자</span>' : '<span class="badge gray">사용자</span>';
+    const safeName = (p.name||'').replace(/'/g,"\\'");
+    return { i, p, roleBadge, safeName };
+  });
+
+  if(cardsWrap){
+    cardsWrap.innerHTML = rows.map(({p,roleBadge,safeName})=>`
+      <div class="result-card">
+        <div class="result-card-head">
+          <div class="result-card-title"><span>${p.name||'-'}</span>${roleBadge}</div>
+        </div>
+        <div style="color:var(--muted);font-size:13px;margin:8px 0 2px"><code style="background:#f1f5f9;padding:2px 7px;border-radius:6px;font-size:12px">${p.user_id||'-'}</code></div>
+        <div style="color:var(--muted);font-size:13px;margin-bottom:10px">${p.email||'-'}</div>
+        <div class="result-card-actions">
+          <button class="btn line" type="button" onclick="handleRoleChange('${p.id}','${p.role==='admin'?'user':'admin'}','${safeName}')">권한 변경</button>
+          <button class="btn line" type="button" onclick="handlePwReset('${p.email}','${safeName}')">비밀번호 초기화</button>
+          <button class="btn red" type="button" onclick="handleDeleteAccount('${p.id}','${safeName}')">삭제</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  tbody.innerHTML = rows.map(({i,p,roleBadge,safeName})=>`<tr>
+      <td>${i+1}</td>
+      <td><code style="background:#f1f5f9;padding:2px 7px;border-radius:6px;font-size:13px">${p.user_id||'-'}</code></td>
+      <td><b>${p.name||'-'}</b></td>
+      <td>${roleBadge}</td>
+      <td style="font-size:13px">${p.email||'-'}</td>
+      <td>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn line" style="min-height:32px;padding:0 10px;font-size:12.5px" onclick="handleRoleChange('${p.id}','${p.role==='admin'?'user':'admin'}','${safeName}')">권한 변경</button>
+          <button class="btn line" style="min-height:32px;padding:0 10px;font-size:12.5px" onclick="handlePwReset('${p.email}','${safeName}')">비밀번호 초기화</button>
+          <button class="btn red" style="min-height:32px;padding:0 10px;font-size:12.5px" onclick="handleDeleteAccount('${p.id}','${safeName}')">삭제</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+function filterAccountsTable(){
+  const q = ($('#acctMgmtSearch')?.value || '').trim().toLowerCase();
+  let list = allAccountsCache;
+  if(acctFilterMode==='user') list = list.filter(p => p.role!=='admin');
+  else if(acctFilterMode==='admin') list = list.filter(p => p.role==='admin');
+  if(q){
+    list = list.filter(p =>
+      (p.user_id||'').toLowerCase().includes(q) ||
+      (p.name||'').toLowerCase().includes(q) ||
+      (p.email||'').toLowerCase().includes(q)
+    );
+  }
+  renderAccountsTable(list);
+}
+async function handleRoleChange(id, newRole, name){
+  const label = newRole==='admin' ? '관리자' : '사용자';
+  if(!confirm(`${name}님의 권한을 "${label}"(으)로 변경하시겠습니까?`)) return;
+  try{
+    const { error } = await _sb.from('profiles').update({ role:newRole }).eq('id', id);
+    if(error) throw error;
+    showToast('권한이 변경되었습니다.');
+    loadAllAccounts();
+  } catch(e){ alert('오류: ' + e.message); }
+}
+async function handlePwReset(email, name){
+  if(!email){ alert('이메일 정보가 없습니다.'); return; }
+  if(!confirm(`${name||email}님의 비밀번호를 기본 비밀번호(dlxmsjtm1!)로 초기화하시겠습니까?`)) return;
+  // profiles 테이블에는 비밀번호가 저장되어 있지 않습니다 — 실제 로그인 비밀번호는
+  // Supabase Auth(auth.users)가 별도로 관리하며, 클라이언트(anon key)로는 "본인 것"만 바꿀 수 있고
+  // 관리자가 "다른 사람의" 비밀번호를 직접 지정하려면 service role key가 필요합니다.
+  // service role key는 프론트엔드에 절대 넣으면 안 되므로, service role key를 보관하는
+  // n8n 웹훅(또는 Supabase Edge Function)에서 auth.admin.updateUserById(id, {password:'dlxmsjtm1!'})를
+  // 호출하는 방식으로 구현해야 합니다. 아래는 그 웹훅이 준비되면 바로 연결할 수 있도록 만든 자리입니다.
+  // TODO: N8N_ADMIN_RESET_PW_URL 웹훅이 준비되면 아래 주석을 해제하고 실제 URL로 연결하세요.
+  // await fetch(N8N_ADMIN_RESET_PW_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email }) });
+  showToast('비밀번호 초기화는 아직 백엔드(n8n/service role) 연동이 필요합니다. 담당자에게 문의해주세요.');
+}
+async function handleDeleteAccount(id, name){
+  if(!confirm(`${name}님의 계정을 삭제하시겠습니까?\n(프로필 정보가 삭제되어 더 이상 로그인할 수 없게 됩니다. 이 작업은 되돌릴 수 없습니다.)`)) return;
+  try{
+    const { error } = await _sb.from('profiles').delete().eq('id', id);
+    if(error) throw error;
+    showToast('계정이 삭제되었습니다.');
+    loadAllAccounts();
+  } catch(e){ alert('오류: ' + e.message); }
+}
+
+// ── 관리자: 새 계정 발급 ──
+function openCreateAccountModal(){
+  $('#newAcctId').value = '';
+  $('#newAcctName').value = '';
+  $('#newAcctEmailLocal').value = '';
+  $('#newAcctRole').value = 'user';
+  $('#newAcctPw').value = 'dlxmsjtm1!';
+  $('#createAccountStatus').className = 'auth-status';
+  $('#createAccountStatus').textContent = '';
+  $('#createAccountModalOverlay').classList.add('open');
+}
+function closeCreateAccountModal(){ $('#createAccountModalOverlay')?.classList.remove('open'); }
+async function submitCreateAccount(){
+  const userId = $('#newAcctId').value.trim();
+  const name = $('#newAcctName').value.trim();
+  const emailLocal = $('#newAcctEmailLocal').value.trim();
+  const email = emailLocal ? (emailLocal + '@' + $('#newAcctEmailDomain').value) : '';
+  const role = $('#newAcctRole').value;
+  const pw = $('#newAcctPw').value;
+  if(!userId || !name || !emailLocal || !pw){ showAuthStatus('createAccountStatus','error','모든 항목을 입력해주세요.'); return; }
+  if(!/^[a-zA-Z0-9]{4,}$/.test(userId)){ showAuthStatus('createAccountStatus','error','아이디는 영문/숫자 4자 이상이어야 합니다.'); return; }
+  if(pw.length < 8){ showAuthStatus('createAccountStatus','error','초기 비밀번호는 8자 이상이어야 합니다.'); return; }
+  const btn = $('#createAccountSubmitBtn'); btn.disabled = true;
+  showAuthStatus('createAccountStatus','loading','발급 중...');
+  try{
+    const { data:existId } = await _sb.from('profiles').select('user_id').eq('user_id',userId).maybeSingle();
+    if(existId) throw new Error('이미 사용 중인 아이디입니다.');
+    const { data:existEmail } = await _sb.from('profiles').select('email').eq('email',email).maybeSingle();
+    if(existEmail) throw new Error('이미 가입된 이메일입니다.');
+    // 관리자의 현재 로그인 세션을 건드리지 않는 격리된 클라이언트로 계정을 생성합니다.
+    const { data:authData, error:authErr } = await _sbAdmin.auth.signUp({ email, password: pw });
+    if(authErr) throw authErr;
+    if(!authData.user) throw new Error('계정 생성에 실패했습니다.');
+    const { error:insertErr } = await _sb.from('profiles').insert({ id:authData.user.id, email, name, user_id:userId, role, affiliation:'', position:'' });
+    if(insertErr) throw insertErr;
+    await _sbAdmin.auth.signOut(); // 격리 클라이언트 세션 정리 (관리자의 실제 세션과는 무관)
+    showAuthStatus('createAccountStatus','success','계정이 발급되었습니다.');
+    showToast(`${name}님 계정이 발급되었습니다.`);
+    loadAllAccounts();
+    setTimeout(closeCreateAccountModal, 1200);
+  } catch(e){
+    showAuthStatus('createAccountStatus','error', e.message);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ══════════════════════════════════════════
+// 관리자: 뉴스레터 구독 관리
+// ══════════════════════════════════════════
+let allSubscribersCache = [];
+async function loadNewsletterSubscribers(){
+  const tbody = document.getElementById('nlSubMgmtTbody'); if(!tbody) return;
+  const cardsWrap = document.getElementById('nlSubMgmtCards');
+  tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">불러오는 중...</td></tr>';
+  if(cardsWrap) cardsWrap.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);padding:30px">불러오는 중...</div>';
+  const { data, error } = await _sb.from('profiles').select('*').eq('newsletter_subscribed', true).order('newsletter_subscribed_at', {ascending:false});
+  if(error){
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--red);padding:30px">오류: ${error.message}</td></tr>`;
+    if(cardsWrap) cardsWrap.innerHTML = `<div class="card" style="text-align:center;color:var(--red);padding:30px">오류: ${error.message}</div>`;
+    return;
+  }
+  allSubscribersCache = data || [];
+  renderSubscribersTable(allSubscribersCache);
+}
+function renderSubscribersTable(list){
+  const cardsWrap = document.getElementById('nlSubMgmtCards');
+  const tbody = document.getElementById('nlSubMgmtTbody');
+  if(!tbody) return;
+  if(!list.length){
+    if(cardsWrap) cardsWrap.innerHTML = '<div class="card" style="text-align:center;color:var(--muted);padding:30px">구독 중인 계정이 없습니다.</div>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:30px">구독 중인 계정이 없습니다.</td></tr>';
+    return;
+  }
+  const rows = list.map((p,i)=>{
+    const date = p.newsletter_subscribed_at ? new Date(p.newsletter_subscribed_at).toLocaleDateString('ko-KR') : '-';
+    let statusBadge;
+    if(p.newsletter_paused) statusBadge = '<span class="badge orange">일시정지</span>';
+    else if(p.newsletter_last_send_status==='success') statusBadge = '<span class="badge green">발송 성공</span>';
+    else if(p.newsletter_last_send_status==='failed') statusBadge = '<span class="badge red">발송 실패</span>';
+    else statusBadge = '<span class="badge gray">발송 이력 없음</span>';
+    const safeName = (p.name||'').replace(/'/g,"\\'");
+    const pauseLabel = p.newsletter_paused ? '정지 해제' : '일시 정지';
+    return { i, p, date, statusBadge, safeName, pauseLabel };
+  });
+
+  if(cardsWrap){
+    cardsWrap.innerHTML = rows.map(({i,p,date,statusBadge,safeName,pauseLabel})=>`
+      <div class="result-card">
+        <div class="result-card-head">
+          <div class="result-card-title"><span>${p.name||'-'}</span>${statusBadge}</div>
+        </div>
+        <div style="color:var(--muted);font-size:13px;margin:8px 0 2px">${p.email||'-'}</div>
+        <div style="color:var(--muted);font-size:12px;margin-bottom:10px">구독일 ${date}</div>
+        <div class="result-card-actions">
+          <button class="btn line" type="button" onclick="handleForceSend('${p.email}','${safeName}')">뉴스레터 발송</button>
+          <button class="btn line" type="button" onclick="handleTogglePause('${p.id}',${!p.newsletter_paused},'${safeName}')">${pauseLabel}</button>
+          <button class="btn red" type="button" onclick="handleAdminUnsubscribe('${p.id}','${safeName}')">구독 취소</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  tbody.innerHTML = rows.map(({i,p,date,statusBadge,safeName,pauseLabel})=>`<tr>
+      <td>${i+1}</td>
+      <td><b>${p.name||'-'}</b></td>
+      <td style="font-size:13px">${p.email||'-'}</td>
+      <td style="font-size:13px;color:var(--muted)">${date}</td>
+      <td>${statusBadge}</td>
+      <td>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn line" style="min-height:32px;padding:0 10px;font-size:12.5px" onclick="handleForceSend('${p.email}','${safeName}')">뉴스레터 발송</button>
+          <button class="btn line" style="min-height:32px;padding:0 10px;font-size:12.5px" onclick="handleTogglePause('${p.id}',${!p.newsletter_paused},'${safeName}')">${pauseLabel}</button>
+          <button class="btn red" style="min-height:32px;padding:0 10px;font-size:12.5px" onclick="handleAdminUnsubscribe('${p.id}','${safeName}')">구독 취소</button>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+function filterSubscribersTable(){
+  const q = ($('#nlSubMgmtSearch')?.value || '').trim().toLowerCase();
+  if(!q){ renderSubscribersTable(allSubscribersCache); return; }
+  const filtered = allSubscribersCache.filter(p =>
+    (p.name||'').toLowerCase().includes(q) || (p.email||'').toLowerCase().includes(q)
+  );
+  renderSubscribersTable(filtered);
+}
+async function handleForceSend(email, name){
+  if(!confirm(`${name}님(${email})에게 최신 뉴스레터를 즉시 발송하시겠습니까?`)) return;
+  // TODO: 특정 1인에게만 강제 발송하는 n8n 웹훅이 아직 없습니다.
+  // 이 웹훅이 준비되면 아래 fetch를 실제 URL로 연결해주세요.
+  showToast('강제 발송 기능은 아직 백엔드(n8n) 연동이 필요합니다. 담당자에게 문의해주세요.');
+}
+async function handleTogglePause(id, pause, name){
+  const label = pause ? '일시 정지' : '정지 해제';
+  if(!confirm(`${name}님의 뉴스레터 수신을 ${label}하시겠습니까?`)) return;
+  try{
+    const { error } = await _sb.from('profiles').update({ newsletter_paused: pause }).eq('id', id);
+    if(error) throw error;
+    showToast(`${label}되었습니다.`);
+    loadNewsletterSubscribers();
+  } catch(e){ alert('오류: ' + e.message); }
+}
+async function handleAdminUnsubscribe(id, name){
+  if(!confirm(`${name}님의 뉴스레터 구독을 취소하시겠습니까?`)) return;
+  try{
+    const { error } = await _sb.from('profiles').update({ newsletter_subscribed: false }).eq('id', id);
+    if(error) throw error;
+    showToast('구독이 취소되었습니다.');
+    loadNewsletterSubscribers();
+  } catch(e){ alert('오류: ' + e.message); }
 }
 
 // ── 세션 복원 ──
